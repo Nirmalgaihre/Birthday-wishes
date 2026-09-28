@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Surprise - Happy Birthday!</title>
+  <meta name="description" content="A handcrafted, emotional, and interactive birthday surprise celebration website with music, photo memories, interactive cake, letters, and gift reveal." />
+  <meta property="og:title" content="Birthday Surprise - Happy Birthday!" />
+  <meta property="og:description" content="A handcrafted, emotional, and interactive birthday surprise celebration website with music, photo memories, interactive cake, letters, and gift reveal." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body class="surprise-locked">
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Ambient Floating Heart/Star Particles -->
+  <div class="floating-background-decor" id="floating-background-decor" aria-hidden="true"></div>
+
+  <!-- =========================================================================
+       1. INTRO / SURPRISE SCREEN (FULLSCREEN OVERLAY)
+       ========================================================================= -->
+  <div class="intro-overlay" id="intro-overlay">
+    <div class="intro-card">
+      <div class="intro-decor-dots"></div>
+      <span class="intro-badge">Special Delivery 💌</span>
+      <h1 class="intro-title">Hey <span data-bind="nickname">Sophia</span> 👀</h1>
+      <p class="intro-subtitle">I made something special just for you...</p>
+      <button type="button" class="btn-primary" id="open-surprise-btn" aria-label="Open your birthday surprise">
+        Open Your Surprise <span aria-hidden="true">🎁</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       10. FLOATING MUSIC CONTROLLER
+       ========================================================================= -->
+  <button type="button" class="floating-music-btn" id="floating-music-btn" aria-label="Toggle background music">
+    <div class="music-waves" aria-hidden="true">
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+    </div>
+    <span class="music-label">Music On</span>
+  </button>
+
+  <!-- =========================================================================
+       NAVIGATION BAR
+       ========================================================================= -->
+  <header class="top-header">
+    <div class="header-inner">
+      <a href="#" class="header-brand">
+        <i class="fa-solid fa-cake-candles" aria-hidden="true"></i>
+        <span>Celebrate You</span>
+      </a>
+      <nav class="header-nav">
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#age-section" class="nav-link">Milestone</a>
+        <a href="#letter-section" class="nav-link">Letter</a>
+        <a href="#gallery-section" class="nav-link">Memories</a>
+        <a href="#timeline-section" class="nav-link">Timeline</a>
+        <a href="#wishes-section" class="nav-link">Make a Wish</a>
+      </nav>
+      <div class="header-action">
+        <a href="#gift-section" class="btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">
+          Open Gift 🎁
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =======================================================================
+         2. HERO SECTION
+         ======================================================================= -->
+    <section class="hero-section" id="hero">
+      <div class="hero-container">
+        <div class="hero-text-content">
+          <div class="hero-kicker">
+            <i class="fa-solid fa-sparkles" aria-hidden="true"></i>
+            <span>Today is All About You</span>
+          </div>
+          <h1 class="hero-title">
+            HAPPY BIRTHDAY 🎂<br />
+            <span class="hero-name-highlight easter-egg-trigger" data-bind="name" title="Click me!">Sophia</span>
+          </h1>
+          <p class="hero-subtitle">
+            Today isn't just another day. It's the day someone amazing, kind-hearted, and truly irreplaceable came into this world. ❤️
+          </p>
+          <div class="hero-cta-group">
+            <a href="#letter-section" class="btn-primary">
+              Read Your Letter <i class="fa-solid fa-envelope-open" aria-hidden="true"></i>
+            </a>
+            <a href="#wishes-section" class="btn-secondary">
+              Blow Candles <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-image-wrapper">
+          <div class="photo-frame-polaroid">
+            <div class="washi-tape" aria-hidden="true"></div>
+            <img src="images/birthday-person.jpg" alt="Photo of birthday person" />
+            <div class="photo-polaroid-caption">
+              The birthday star ✨
+            </div>
+            <div class="hero-floating-badge">
+              <i class="fa-solid fa-crown" style="color: var(--color-accent);" aria-hidden="true"></i>
+              <span>Deserving of the World</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         3. BIRTHDAY COUNT / AGE (LEVEL UNLOCKED)
+         ======================================================================= -->
+    <section class="section section-alt" id="age-section">
+      <div class="section-container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">Life's Beautiful Journey</span>
+          <h2 class="section-title">
+            Level <span id="age-level-num">24</span> Unlocked 🎉
+          </h2>
+          <p class="section-subtitle">
+            Every second of your existence has made the world a warmer, brighter place.
+          </p>
+        </div>
+
+        <div class="age-counter-grid reveal-on-scroll">
+          <div class="age-stat-card">
+            <div class="age-num" id="age-years">24</div>
+            <div class="age-label">Years of Joy</div>
+          </div>
+          <div class="age-stat-card">
+            <div class="age-num" id="age-months">0</div>
+            <div class="age-label">Months</div>
+          </div>
+          <div class="age-stat-card">
+            <div class="age-num" id="age-days">0</div>
+            <div class="age-label">Days</div>
+          </div>
+          <div class="age-stat-card">
+            <div class="age-num" id="age-hours">0</div>
+            <div class="age-label">Hours</div>
+          </div>
+        </div>
+
+        <p class="age-footer-note reveal-on-scroll">
+          <i class="fa-regular fa-clock" style="color: var(--color-accent);" aria-hidden="true"></i>
+          <span>Counting every cherished moment with you.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         4. PERSONAL BIRTHDAY MESSAGE (LETTER STYLE)
+         ======================================================================= -->
+    <section class="section" id="letter-section">
+      <div class="section-container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">From the Heart</span>
+          <h2 class="section-title">A Little Message For You 💌</h2>
+          <p class="section-subtitle">A few words to remind you of how deeply appreciated you are.</p>
+        </div>
+
+        <div class="letter-wrapper reveal-on-scroll">
+          <div class="letter-wax-seal" aria-hidden="true">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+
+          <h3 class="letter-salutation">
+            Happy Birthday, <span data-bind="name">Sophia</span>!
+          </h3>
+
+          <div class="letter-body">
+            <p>
+              I don't know exactly how to put everything into words, but I hope this new chapter of your life brings you more happiness, inner peace, beautiful memories, and everything you have been patiently working for.
+            </p>
+            <p>
+              Thank you for being such an extraordinary person. Thank you for your spontaneous laughter, for listening when things get tough, and for bringing pure genuine energy into every room you enter. You make life so much more fun and meaningful simply by existing.
+            </p>
+            <p>
+              As you blow out your candles today, know that you are celebrated, admired, and deeply loved. May this year shower you with endless adventures, good health, and sweet surprises.
+            </p>
+          </div>
+
+          <div class="letter-signoff">
+            With all my love & warmest hugs ❤️
+          </div>
+          <div class="letter-date-stamp">
+            Always & Forever
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         5. PHOTO MEMORIES (POLAROID GALLERY)
+         ======================================================================= -->
+    <section class="section section-alt" id="gallery-section">
+      <div class="section-container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">Treasured Snapshots</span>
+          <h2 class="section-title">Some Beautiful Memories 📸</h2>
+          <p class="section-subtitle">A glimpse into the laughs, trips, and spontaneous adventures we've shared.</p>
+        </div>
+
+        <div class="gallery-grid">
+          <!-- Photo 1 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="1">
+            <div class="polaroid-img-box">
+              <img src="images/memory-1.jpg" alt="Our first photo memory" loading="lazy" />
+              <span class="polaroid-view-hint" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="polaroid-caption">Our first photo</div>
+          </div>
+
+          <!-- Photo 2 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="2">
+            <div class="polaroid-img-box">
+              <img src="images/memory-2.jpg" alt="Picnic in the park memory" loading="lazy" />
+              <span class="polaroid-view-hint" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="polaroid-caption">That random day 😂</div>
+          </div>
+
+          <!-- Photo 3 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="3">
+            <div class="polaroid-img-box">
+              <img src="images/memory-3.jpg" alt="Road trip sunset memory" loading="lazy" />
+              <span class="polaroid-view-hint" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="polaroid-caption">The road trip sunset 🌅</div>
+          </div>
+
+          <!-- Photo 4 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="4">
+            <div class="polaroid-img-box">
+              <img src="images/memory-4.jpg" alt="Celebration evening memory" loading="lazy" />
+              <span class="polaroid-view-hint" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="polaroid-caption">Celebration night 🎂</div>
+          </div>
+
+          <!-- Photo 5 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="5">
+            <div class="polaroid-img-box">
+              <img src="images/memory-5.jpg" alt="Beach sunset walk memory" loading="lazy" />
+              <span class="polaroid-view-hint" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="polaroid-caption">Good times ❤️</div>
+          </div>
+
+          <!-- Photo 6 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="6">
+            <div class="polaroid-img-box">
+              <img src="images/memory-6.jpg" alt="Cozy evening memory" loading="lazy" />
+              <span class="polaroid-view-hint" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="polaroid-caption">One of my favorites ✨</div>
+          </div>
+        </div>
+
+        <!-- 12. Random Memory Button -->
+        <div class="random-memory-bar reveal-on-scroll">
+          <button type="button" class="btn-secondary" id="random-memory-btn">
+            Show Me a Memory <i class="fa-solid fa-dice" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         6. MEMORY TIMELINE
+         ======================================================================= -->
+    <section class="section" id="timeline-section">
+      <div class="section-container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">Chapter by Chapter</span>
+          <h2 class="section-title">Our Little Timeline ✨</h2>
+          <p class="section-subtitle">How a simple hello turned into one of the greatest blessings.</p>
+        </div>
+
+        <div class="timeline-container">
+          <!-- Timeline Entry 1 -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <span class="timeline-date">The Beginning</span>
+              <h3 class="timeline-title">The Day Our Paths Crossed</h3>
+              <p class="timeline-desc">
+                Neither of us knew that an ordinary day would mark the beginning of so many shared laughs and unforgettable memories.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Entry 2 -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <span class="timeline-date">Unfiltered Laughter</span>
+              <h3 class="timeline-title">Our First Proper Conversation</h3>
+              <p class="timeline-desc">
+                From polite small talk to laughing until our stomachs hurt. That was the moment I realized what a gem of a human you are.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Entry 3 -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <span class="timeline-date">Wild Adventures</span>
+              <h3 class="timeline-title">That Unforgettable Day</h3>
+              <p class="timeline-desc">
+                Getting slightly lost, singing along at the top of our lungs, and agreeing that wrong turns often lead to the greatest stories.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Entry 4 -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <span class="timeline-date">Unshakable Bond</span>
+              <h3 class="timeline-title">Through Highs and Lows</h3>
+              <p class="timeline-desc">
+                Having someone who celebrates your victories and stands firmly by your side during quiet rainy days. That is what you represent.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Entry 5 -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <span class="timeline-date">Today & Beyond</span>
+              <h3 class="timeline-title">Celebrating The Best Person!</h3>
+              <p class="timeline-desc">
+                Here we are today, honoring you and eagerly cheering for every dazzling chapter still waiting to unfold in your life.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         7. THINGS I APPRECIATE ABOUT YOU
+         ======================================================================= -->
+    <section class="section section-alt" id="appreciation-section">
+      <div class="section-container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">Reasons You Shine</span>
+          <h2 class="section-title">A Few Things That Make You Special</h2>
+          <p class="section-subtitle">Just a handful of the countless reasons why having you around is a true gift.</p>
+        </div>
+
+        <div class="appreciation-grid">
+          <div class="appreciation-card reveal-on-scroll">
+            <div class="appreciation-icon-box">
+              <i class="fa-regular fa-face-smile-beam" aria-hidden="true"></i>
+            </div>
+            <h3 class="appreciation-title">Your Smile 😊</h3>
+            <p class="appreciation-desc">
+              It instantly brightens any room and can turn around the gloomiest of moods without even trying.
+            </p>
+          </div>
+
+          <div class="appreciation-card reveal-on-scroll">
+            <div class="appreciation-icon-box">
+              <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            </div>
+            <h3 class="appreciation-title">Your Kindness ❤️</h3>
+            <p class="appreciation-desc">
+              You possess a rare and gentle empathy that makes people feel heard, appreciated, and safe.
+            </p>
+          </div>
+
+          <div class="appreciation-card reveal-on-scroll">
+            <div class="appreciation-icon-box">
+              <i class="fa-solid fa-comments" aria-hidden="true"></i>
+            </div>
+            <h3 class="appreciation-title">Your Random Talks 😂</h3>
+            <p class="appreciation-desc">
+              From midnight philosophical theories to the most absurd memes, our conversations never get boring.
+            </p>
+          </div>
+
+          <div class="appreciation-card reveal-on-scroll">
+            <div class="appreciation-icon-box">
+              <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+            </div>
+            <h3 class="appreciation-title">Your Energy ✨</h3>
+            <p class="appreciation-desc">
+              You radiate a vibrant spark that inspires everyone around you to be a little bolder and happier.
+            </p>
+          </div>
+
+          <div class="appreciation-card reveal-on-scroll">
+            <div class="appreciation-icon-box">
+              <i class="fa-solid fa-hands-holding-child" aria-hidden="true"></i>
+            </div>
+            <h3 class="appreciation-title">Your Support 🫶</h3>
+            <p class="appreciation-desc">
+              Always dependable, always encouraging, and forever cheering for the people you hold close.
+            </p>
+          </div>
+
+          <div class="appreciation-card reveal-on-scroll">
+            <div class="appreciation-icon-box">
+              <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+            </div>
+            <h3 class="appreciation-title">Just Being You 🌷</h3>
+            <p class="appreciation-desc">
+              Never change. Your uniqueness, authenticity, and gentle spirit are what make you completely irreplaceable.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         8. OPEN WHEN... LETTERS
+         ======================================================================= -->
+    <section class="section" id="letters-section">
+      <div class="section-container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">Little Envelopes</span>
+          <h2 class="section-title">Open When... 💌</h2>
+          <p class="section-subtitle">Click any letter whenever you need a little reminder or comforting word.</p>
+        </div>
+
+        <div class="letters-grid">
+          <div class="envelope-card reveal-on-scroll" data-letter-type="happy">
+            <div class="envelope-icon-wrap"><i class="fa-regular fa-envelope" aria-hidden="true"></i></div>
+            <div class="envelope-tag">Celebration</div>
+            <h3 class="envelope-title">Open when you're happy</h3>
+            <span class="envelope-action-hint">Open letter <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+
+          <div class="envelope-card reveal-on-scroll" data-letter-type="sad">
+            <div class="envelope-icon-wrap"><i class="fa-regular fa-envelope" aria-hidden="true"></i></div>
+            <div class="envelope-tag">Comfort</div>
+            <h3 class="envelope-title">Open when you're sad</h3>
+            <span class="envelope-action-hint">Open letter <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+
+          <div class="envelope-card reveal-on-scroll" data-letter-type="miss">
+            <div class="envelope-icon-wrap"><i class="fa-regular fa-envelope" aria-hidden="true"></i></div>
+            <div class="envelope-tag">Affection</div>
+            <h3 class="envelope-title">Open when you miss me</h3>
+            <span class="envelope-action-hint">Open letter <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+
+          <div class="envelope-card reveal-on-scroll" data-letter-type="motivation">
+            <div class="envelope-icon-wrap"><i class="fa-regular fa-envelope" aria-hidden="true"></i></div>
+            <div class="envelope-tag">Encouragement</div>
+            <h3 class="envelope-title">Open when you need motivation</h3>
+            <span class="envelope-action-hint">Open letter <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+
+          <div class="envelope-card reveal-on-scroll" data-letter-type="overthinking">
+            <div class="envelope-icon-wrap"><i class="fa-regular fa-envelope" aria-hidden="true"></i></div>
+            <div class="envelope-tag">Calm</div>
+            <h3 class="envelope-title">Open when you're overthinking</h3>
+            <span class="envelope-action-hint">Open letter <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+
+          <div class="envelope-card reveal-on-scroll" data-letter-type="smile">
+            <div class="envelope-icon-wrap"><i class="fa-regular fa-envelope" aria-hidden="true"></i></div>
+            <div class="envelope-tag">Sunshine</div>
+            <h3 class="envelope-title">Open when you need to smile</h3>
+            <span class="envelope-action-hint">Open letter <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         11. BIRTHDAY WISH / CANDLE INTERACTION
+         ======================================================================= -->
+    <section class="section section-alt" id="wishes-section">
+      <div class="section-container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">Interactive Celebration</span>
+          <h2 class="section-title">Make a Wish 🎂</h2>
+          <p class="section-subtitle">Close your eyes, think of your biggest dream for the year ahead, and blow out the candles!</p>
+        </div>
+
+        <div class="cake-interactive-box reveal-on-scroll">
+          <div class="cake-scene">
+            <div class="candles-row">
+              <div class="candle">
+                <div class="candle-wick"></div>
+                <div class="flame"></div>
+                <div class="smoke"></div>
+              </div>
+              <div class="candle">
+                <div class="candle-wick"></div>
+                <div class="flame"></div>
+                <div class="smoke"></div>
+              </div>
+              <div class="candle">
+                <div class="candle-wick"></div>
+                <div class="flame"></div>
+                <div class="smoke"></div>
+              </div>
+            </div>
+
+            <div class="cake-tier-top"></div>
+            <div class="cake-tier-bottom"></div>
+            <div class="cake-plate"></div>
+          </div>
+
+          <button type="button" class="btn-primary" id="blow-candles-btn">
+            Blow the Candles <span aria-hidden="true">🕯️</span>
+          </button>
+
+          <div class="wish-result-message" id="wish-result-message">
+            May your wish come true ❤️
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         9. SURPRISE GIFT SECTION
+         ======================================================================= -->
+    <section class="section" id="gift-section">
+      <div class="section-container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">The Mystery Package</span>
+          <h2 class="section-title">Wait... there's one more thing 👀</h2>
+          <p class="section-subtitle">Every birthday deserves a grand finale gift.</p>
+        </div>
+
+        <div class="gift-interactive-box reveal-on-scroll">
+          <div class="gift-box-wrapper" id="gift-box-wrapper" title="Click to open your gift!">
+            <div class="gift-lid">
+              <div class="gift-bow"></div>
+              <div class="gift-lid-ribbon"></div>
+            </div>
+            <div class="gift-body">
+              <div class="gift-body-ribbon-v"></div>
+              <div class="gift-body-ribbon-h"></div>
+            </div>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--color-text-muted); margin-bottom: 2rem;">
+            Tap to open 🎁
+          </p>
+
+          <div class="gift-revealed-content" id="gift-revealed-content">
+            <span class="gift-revealed-badge">Birthday Pass</span>
+            <h3 class="gift-revealed-title">
+              Happy Birthday, <span data-bind="name">Sophia</span>! 🎉❤️
+            </h3>
+            <p class="gift-revealed-text">
+              My gift to you isn't just this website. It's a promise to always be in your corner, celebrating your achievements, sharing good coffee, and cheering you on. Plus, a little celebratory voucher for you!
+            </p>
+
+            <div class="gift-coupon-box">
+              <div class="coupon-details">
+                <h4>VIP Birthday Treat 🍰☕</h4>
+                <p>Valid for dinner, coffee, or dessert anywhere you pick — on me!</p>
+              </div>
+              <div class="coupon-stamp">No Expiry Date</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         14. FINAL SECTION
+         ======================================================================= -->
+    <section class="final-section">
+      <div class="final-container">
+        <div class="final-quote-mark" aria-hidden="true">“</div>
+        <h2 class="final-title">And that's it...</h2>
+        <p class="final-message">
+          Just a small website for someone who deserves a very big birthday celebration.<br />
+          Happy Birthday Once Again, <span class="easter-egg-trigger" data-bind="name" style="cursor: pointer; color: var(--color-primary); font-weight: 700;">Sophia</span> ❤️
+        </p>
+
+        <div class="replay-button-wrap">
+          <button type="button" class="btn-secondary" id="replay-surprise-btn">
+            Replay the Surprise <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <footer class="footer-credits">
+          <span>Made with</span>
+          <span class="heart-icon" aria-hidden="true">❤️</span>
+          <span>especially for you</span>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       MODALS: LIGHTBOX, ENVELOPE LETTER & SECRET EASTER EGG
+       ========================================================================= -->
+
+  <!-- Fullscreen Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo gallery preview">
+    <div class="lightbox-container">
+      <button type="button" class="lightbox-close-btn" id="lightbox-close-btn" aria-label="Close modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <button type="button" class="lightbox-nav-btn lightbox-prev" id="lightbox-prev" aria-label="Previous photo">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button type="button" class="lightbox-nav-btn lightbox-next" id="lightbox-next" aria-label="Next photo">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <div class="lightbox-img-wrapper">
+        <img id="lightbox-img" src="" alt="Memory preview" />
+      </div>
+
+      <div class="lightbox-caption-bar">
+        <div class="lightbox-caption-text" id="lightbox-caption-text"></div>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Open When Letter Modal -->
+  <div class="letter-modal" id="letter-modal" role="dialog" aria-modal="true" aria-label="Letter message">
+    <div class="letter-modal-card">
+      <button type="button" class="letter-modal-close-btn" id="letter-modal-close-btn" aria-label="Close letter">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="letter-modal-header">
+        <div class="letter-modal-kicker" id="letter-modal-kicker">Open When</div>
+        <h3 class="letter-modal-title" id="letter-modal-title">Letter Title</h3>
+      </div>
+      <div class="letter-modal-content" id="letter-modal-content"></div>
+      <div style="text-align: right;">
+        <button type="button" class="btn-primary" onclick="document.getElementById('letter-modal').classList.remove('active')">
+          Close Letter ❤️
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13. Secret Easter Egg Modal -->
+  <div class="easter-egg-modal" id="easter-egg-modal" role="dialog" aria-modal="true" aria-label="Easter egg surprise">
+    <div class="easter-egg-card">
+      <span class="easter-egg-emoji">🎉🦆✨</span>
+      <h3 class="easter-egg-title">You actually clicked it 5 times? 😂❤️</h3>
+      <p class="easter-egg-desc">
+        Curiosity looks adorable on you! You found the secret hidden easter egg! Here is an extra wish just for you: May your day be packed with endless laughter, sweet treats, and zero worries!
+      </p>
+      <button type="button" class="btn-primary" id="easter-egg-close-btn">
+        You Caught Me! 🥰
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+</html>

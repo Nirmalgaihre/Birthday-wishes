@@ -1,0 +1,245 @@
+/* ==========================================================================
+   BIRTHDAY SURPRISE WEBSITE - RESPONSIVE STYLES
+   Ensures perfection from 320px ultra-compact phones to ultra-wide screens.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   TABLETS & MEDIUM SCREENS (<= 992px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 992px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 3rem;
+  }
+
+  .hero-text-content {
+    text-align: center;
+  }
+
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-cta-group {
+    justify-content: center;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .appreciation-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .letters-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lightbox-prev { left: 10px; }
+  .lightbox-next { right: 10px; }
+}
+
+/* --------------------------------------------------------------------------
+   TABLETS & MOBILE PHONES (<= 768px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+  :root {
+    --nav-height: 60px;
+  }
+
+  .section {
+    padding: 4rem 1.25rem;
+  }
+
+  .header-nav {
+    display: none; /* Keep top bar clean and lightweight on mobile */
+  }
+
+  .hero-section {
+    padding: 3rem 1.25rem 4rem;
+  }
+
+  .hero-title {
+    font-size: 2.35rem;
+  }
+
+  .photo-frame-polaroid {
+    max-width: 300px;
+  }
+
+  .photo-frame-polaroid img {
+    height: 320px;
+  }
+
+  /* Age counter grid on mobile */
+  .age-counter-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .age-stat-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .age-num {
+    font-size: 2.2rem;
+  }
+
+  /* Timeline shifts to clean vertical single column */
+  .timeline-container::before {
+    left: 20px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    left: 0 !important;
+    padding-left: 50px !important;
+    padding-right: 0 !important;
+    text-align: left !important;
+    margin-bottom: 2.5rem;
+  }
+
+  .timeline-dot {
+    left: 12px !important;
+    right: auto !important;
+  }
+
+  .timeline-card {
+    padding: 1.25rem 1.5rem;
+  }
+
+  /* Letter container padding */
+  .letter-wrapper {
+    padding: 2.5rem 1.75rem;
+  }
+
+  .letter-wax-seal {
+    top: -20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.05rem;
+  }
+
+  .letter-body {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  /* Modals */
+  .letter-modal-card {
+    padding: 2.25rem 1.5rem;
+  }
+
+  .lightbox-img-wrapper {
+    max-height: 60vh;
+  }
+
+  .lightbox-close-btn {
+    top: -40px;
+  }
+
+  /* Floating music player mobile placement */
+  .floating-music-btn {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   SMALL PHONES (<= 540px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 540px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .appreciation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .letters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-card {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .intro-title {
+    font-size: 1.85rem;
+  }
+
+  .intro-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .section-title {
+    font-size: 1.85rem;
+  }
+
+  .cake-interactive-box {
+    padding: 2.25rem 1.25rem 2rem;
+  }
+
+  .gift-revealed-content {
+    padding: 2rem 1.25rem;
+  }
+
+  .gift-coupon-box {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .letter-signoff {
+    font-size: 1.5rem;
+  }
+
+  .polaroid-card {
+    padding: 0.75rem 0.75rem 1.5rem;
+  }
+
+  .polaroid-img-box {
+    height: 220px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ULTRA-COMPACT PHONES (<= 360px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 360px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .age-num {
+    font-size: 1.8rem;
+  }
+
+  .btn-primary {
+    padding: 0.85rem 1.6rem;
+    font-size: 0.95rem;
+  }
+
+  .photo-frame-polaroid {
+    max-width: 260px;
+  }
+
+  .photo-frame-polaroid img {
+    height: 270px;
+  }
+
+  .cake-scene {
+    transform: scale(0.9);
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Birthday Surprise",
+  "description": "A handcrafted, emotional, and interactive birthday surprise celebration website with music, photo memories, interactive cake, letters, and gift reveal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
