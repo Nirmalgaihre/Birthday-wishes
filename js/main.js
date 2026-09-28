@@ -9,10 +9,10 @@
    EDIT BIRTHDAY DETAILS HERE
 ================================ */
 const birthdayConfig = {
-  name: "Sophia",
-  nickname: "Soph",
-  birthday: "2000-09-28", // YYYY-MM-DD
-  relationship: "Best Friend",
+  name: "Syanu",
+  nickname: "Syanu",
+  birthday: "2025-09-28", // 1st Birthday milestone
+  relationship: "Our Little Angel",
   music: "music/birthday-music.mp3",
   easterEggClicks: 5
 };
@@ -30,44 +30,9 @@ const appState = {
   giftOpened: false,
   photos: [
     {
-      src: "images/birthday-person.jpg",
-      caption: "The birthday star ✨",
-      note: "Radiating joy and warmth as always."
-    },
-    {
-      src: "images/memory-1.jpg",
-      caption: "Our first photo",
-      note: "That sunny afternoon cafe where hours felt like minutes."
-    },
-    {
-      src: "images/memory-2.jpg",
-      caption: "That random day 😂",
-      note: "Spontaneous laughs, picnic blankets, and zero worries."
-    },
-    {
-      src: "images/memory-3.jpg",
-      caption: "Road trip sunset 🌅",
-      note: "Golden hour skies, favorite songs, and the best company."
-    },
-    {
-      src: "images/memory-4.jpg",
-      caption: "Celebration night 🎂",
-      note: "Surrounded by fairy lights and unforgettable moments."
-    },
-    {
-      src: "images/memory-5.jpg",
-      caption: "Beach sunset walk 🌊",
-      note: "Carefree steps along the water and endless talks."
-    },
-    {
-      src: "images/memory-6.jpg",
-      caption: "One of my favorites ❤️",
-      note: "Cozy evenings filled with heartfelt conversations."
-    },
-    {
-      src: "images/chiya-memory.jpg",
-      caption: "Chiya + random talks ☕",
-      note: "Some memories are just infinitely better with a warm cup of chiya."
+      src: "images/birthday-girl-frame.jpg",
+      caption: "Happy 1st Birthday Syanu 🥹❤️",
+      note: "May God always bless you with happiness and lots of smiles. ❤️🎂"
     }
   ],
   chiyaEasterEggCounter: 0,
@@ -120,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initMusicPlayer();
   initParallaxAndHearts();
   initPhotoGallery();
-  initRandomMemory();
+  initGoogleFrameShowcase();
   initOpenWhenLetters();
   initCandleInteraction();
   initGiftBox();
@@ -396,6 +361,7 @@ function initParallaxAndHearts() {
    -------------------------------------------------------------------------- */
 function initPhotoGallery() {
   const galleryCards = document.querySelectorAll(".polaroid-card");
+  const framedArt = document.getElementById("physical-art-frame");
   const lightbox = document.getElementById("lightbox-modal");
   const lightboxImg = document.getElementById("lightbox-img");
   const lightboxCaption = document.getElementById("lightbox-caption-text");
@@ -415,6 +381,14 @@ function initPhotoGallery() {
     }
     if (lightboxCaption) lightboxCaption.textContent = current.caption;
     if (lightboxCounter) lightboxCounter.textContent = `${appState.currentLightboxIndex + 1} / ${appState.photos.length}`;
+  }
+
+  // Open on physical art frame click
+  if (framedArt) {
+    framedArt.addEventListener("click", () => {
+      updateLightbox(0);
+      lightbox.classList.add("active");
+    });
   }
 
   galleryCards.forEach(card => {
@@ -468,46 +442,53 @@ function initPhotoGallery() {
   lightbox.addEventListener("touchend", e => {
     touchEndX = e.changedTouches[0].screenX;
     if (touchEndX < touchStartX - 50) {
-      // Swiped left -> next
       updateLightbox(appState.currentLightboxIndex + 1);
     } else if (touchEndX > touchStartX + 50) {
-      // Swiped right -> prev
       updateLightbox(appState.currentLightboxIndex - 1);
     }
   }, { passive: true });
 }
 
 /* --------------------------------------------------------------------------
-   7. RANDOM MEMORY BUTTON
+   7. GOOGLE SEARCH BIRTHDAY FRAME SHOWCASE
    -------------------------------------------------------------------------- */
-function initRandomMemory() {
-  const randomBtn = document.getElementById("random-memory-btn");
-  const lightbox = document.getElementById("lightbox-modal");
-  const lightboxImg = document.getElementById("lightbox-img");
-  const lightboxCaption = document.getElementById("lightbox-caption-text");
-  const lightboxCounter = document.getElementById("lightbox-counter");
+function initGoogleFrameShowcase() {
+  const searchInput = document.getElementById("google-search-display-text");
+  const pills = document.querySelectorAll(".search-pill-btn");
+  const tabs = document.querySelectorAll(".google-tab-item");
+  const metaStat = document.getElementById("google-meta-stat-text");
 
-  if (!randomBtn || !lightbox) return;
+  if (pills && searchInput) {
+    pills.forEach(pill => {
+      pill.addEventListener("click", () => {
+        const term = pill.getAttribute("data-search-term");
+        searchInput.textContent = term;
+        triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.5, 30, ["✨", "❤️", "🌸", "🍼"]);
+      });
+    });
+  }
 
-  randomBtn.addEventListener("click", () => {
-    const randomIndex = Math.floor(Math.random() * appState.photos.length);
-    appState.currentLightboxIndex = randomIndex;
-    const current = appState.photos[randomIndex];
+  if (tabs) {
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        const tabType = tab.getAttribute("data-tab");
 
-    if (lightboxImg) {
-      lightboxImg.src = current.src;
-      lightboxImg.alt = current.caption;
-    }
-    if (lightboxCaption) {
-      lightboxCaption.innerHTML = `<strong>${current.caption}</strong><div style="font-size: 0.95rem; font-weight: 400; color: #CBD5E1; margin-top: 4px;">${current.note}</div>`;
-    }
-    if (lightboxCounter) {
-      lightboxCounter.textContent = `Random Memory 🎲 (${randomIndex + 1} / ${appState.photos.length})`;
-    }
-
-    lightbox.classList.add("active");
-    triggerConfettiBurst(window.innerWidth / 2, window.innerHeight / 2, 40);
-  });
+        if (metaStat) {
+          if (tabType === "images") {
+            metaStat.textContent = "About 365 days of unconditional love, giggles, and cuteness (0.01 seconds)";
+          } else if (tabType === "milestone") {
+            metaStat.textContent = "Result: Level 1 officially unlocked! 12 months of pure milestones. 🎉";
+          } else if (tabType === "chiya") {
+            metaStat.textContent = "Official verdict: Certified Chiya Lover in the making ☕❤️";
+          } else if (tabType === "blessings") {
+            metaStat.textContent = "May God always bless Syanu with infinite happiness, health, and sweet smiles. 🥹❤️";
+          }
+        }
+      });
+    });
+  }
 }
 
 /* --------------------------------------------------------------------------
