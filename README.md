@@ -19,6 +19,7 @@ birthday-website/
 │
 ├── images/
 │   ├── birthday-person.jpg     # Main hero polaroid photo
+│   ├── chiya-memory.jpg        # "Chiya + random talks ☕" memory photo
 │   ├── memory-1.jpg            # "Our first photo"
 │   ├── memory-2.jpg            # "That random day 😂"
 │   ├── memory-3.jpg            # "Road trip sunset 🌅"

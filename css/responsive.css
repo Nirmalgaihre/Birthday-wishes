@@ -35,6 +35,11 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .chiya-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
   .letters-grid {
     grid-template-columns: repeat(2, 1fr);
   }

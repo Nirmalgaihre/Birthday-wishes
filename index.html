@@ -72,6 +72,7 @@
         <a href="#age-section" class="nav-link">Milestone</a>
         <a href="#letter-section" class="nav-link">Letter</a>
         <a href="#gallery-section" class="nav-link">Memories</a>
+        <a href="#chiya-section" class="nav-link">Chiya Lover ☕</a>
         <a href="#timeline-section" class="nav-link">Timeline</a>
         <a href="#wishes-section" class="nav-link">Make a Wish</a>
       </nav>
@@ -91,8 +92,8 @@
       <div class="hero-container">
         <div class="hero-text-content">
           <div class="hero-kicker">
-            <i class="fa-solid fa-sparkles" aria-hidden="true"></i>
-            <span>Today is All About You</span>
+            <i class="fa-solid fa-mug-hot" aria-hidden="true"></i>
+            <span>Best viewed with a warm cup of chiya nearby ☕</span>
           </div>
           <h1 class="hero-title">
             HAPPY BIRTHDAY 🎂<br />
@@ -204,7 +205,7 @@
             With all my love & warmest hugs ❤️
           </div>
           <div class="letter-date-stamp">
-            Always & Forever
+            Made with ❤️, memories, and probably too much chiya ☕
           </div>
         </div>
       </div>
@@ -274,6 +275,15 @@
               <span class="polaroid-view-hint" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
             </div>
             <div class="polaroid-caption">One of my favorites ✨</div>
+          </div>
+
+          <!-- Photo 7 (Chiya Memory) -->
+          <div class="polaroid-card reveal-on-scroll" data-index="7">
+            <div class="polaroid-img-box">
+              <img src="images/chiya-memory.jpg" alt="Chiya memory" loading="lazy" onerror="this.onerror=null; this.src='images/memory-1.jpg';" />
+              <span class="polaroid-view-hint" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="polaroid-caption">Chiya + random talks ☕</div>
           </div>
         </div>
 
@@ -432,6 +442,115 @@
               Never change. Your uniqueness, authenticity, and gentle spirit are what make you completely irreplaceable.
             </p>
           </div>
+
+          <div class="appreciation-card reveal-on-scroll">
+            <div class="appreciation-icon-box" style="background: #FEF3C7; color: #B45309;">
+              <i class="fa-solid fa-mug-hot" aria-hidden="true"></i>
+            </div>
+            <h3 class="appreciation-title">Your Love for Chiya ☕</h3>
+            <p class="appreciation-desc">
+              At this point, I'm pretty sure chiya is part of your personality. 😂
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SPECIAL CHIYA LOVER SECTION
+         ======================================================================= -->
+    <section class="section chiya-section" id="chiya-section">
+      <div class="section-container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag" style="color: #B45309;">A Warm Sip of Love</span>
+          <h2 class="section-title">For the Chiya Lover ☕❤️</h2>
+          <p class="section-subtitle">
+            Because apparently, some problems can only be solved with a cup of chiya.
+          </p>
+        </div>
+
+        <div class="chiya-container">
+          <!-- Left Column: Personal Note & Interactive Cup -->
+          <div class="chiya-card reveal-on-scroll">
+            <div class="chiya-note-box">
+              <span class="chiya-note-quote">“Some people need motivation. Some people need sleep. And then there's you... you just need chiya. ☕😂”</span>
+              <p>
+                So here's a virtual cup of chiya, because a birthday surprise for you would feel incomplete without one. ❤️
+              </p>
+            </div>
+
+            <div class="chiya-maker-wrapper">
+              <!-- Teacup with steam & heart (Tap 5 times for Easter Egg) -->
+              <div class="teacup-scene" id="teacup-scene" title="Tap to interact (or tap 5 times for a secret!)">
+                <div class="teacup-steam-group" aria-hidden="true">
+                  <div class="steam-wisp"></div>
+                  <div class="steam-wisp"></div>
+                  <div class="steam-wisp"></div>
+                  <div class="steam-heart">❤️</div>
+                </div>
+                <div class="teacup-body">
+                  <div class="teacup-tea-liquid" id="teacup-tea-liquid"></div>
+                </div>
+                <div class="teacup-handle" aria-hidden="true"></div>
+                <div class="teacup-saucer" aria-hidden="true"></div>
+              </div>
+
+              <button type="button" class="btn-primary" id="make-chiya-btn" style="background: #B45309; box-shadow: 0 6px 18px rgba(180, 83, 9, 0.35);">
+                Make Some Chiya <span aria-hidden="true">☕</span>
+              </button>
+
+              <div class="chiya-status-log" id="chiya-status-log">
+                Click the button above to brew your birthday cup!
+              </div>
+            </div>
+
+            <!-- Chiya Meter -->
+            <div class="chiya-meter-box">
+              <div class="chiya-meter-label">
+                <span>How much do you love chiya?</span>
+                <span aria-hidden="true">☕</span>
+              </div>
+              <input type="range" min="1" max="5" value="3" class="chiya-meter-slider" id="chiya-meter-slider" aria-label="Chiya love level" />
+              <div style="text-align: center;">
+                <span class="chiya-level-feedback" id="chiya-level-feedback">A Lot! ☕☕</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Today's Chiya Wisdom & Chiya Date Coupon -->
+          <div class="chiya-card reveal-on-scroll">
+            <!-- Today's Chiya Wisdom -->
+            <div class="chiya-wisdom-box">
+              <span class="section-tag" style="color: #B45309; margin-bottom: 0.4rem;">Today's Chiya Wisdom ☕</span>
+              <div class="chiya-wisdom-quote" id="chiya-wisdom-quote">
+                “Bad mood? Chiya. Good mood? Chiya. Birthday? Definitely chiya.”
+              </div>
+              <button type="button" class="btn-secondary" id="another-chiya-wisdom-btn" style="padding: 0.5rem 1.25rem; font-size: 0.85rem; border-color: #EADBCE; color: #78350F;">
+                Another One <span aria-hidden="true">☕</span>
+              </button>
+            </div>
+
+            <!-- Birthday Chiya Coupon -->
+            <div class="chiya-coupon-card" id="chiya-coupon-card">
+              <span class="chiya-coupon-badge">BIRTHDAY COUPON 🎟️</span>
+              <h3 class="chiya-coupon-title">ONE CHIYA ☕</h3>
+              <p class="chiya-coupon-subtext" id="chiya-coupon-subtext">
+                Redeemable for one cup of chiya + one good conversation.
+              </p>
+              <div class="chiya-coupon-meta">
+                <span style="font-size: 0.8rem; color: #92400E; font-weight: 600;">Expiry Date: Never ❤️</span>
+                <button type="button" class="btn-primary" id="claim-chiya-btn" style="padding: 0.6rem 1.4rem; font-size: 0.9rem; background: #B45309;">
+                  Claim My Chiya ☕
+                </button>
+                <span class="chiya-coupon-status" id="chiya-coupon-status">VALID</span>
+              </div>
+            </div>
+
+            <div class="chiya-divider-badge">
+              <i class="fa-solid fa-mug-hot" aria-hidden="true"></i>
+              <span>Unlimited refills guaranteed on your birthday.</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -453,6 +572,13 @@
             <div class="envelope-tag">Celebration</div>
             <h3 class="envelope-title">Open when you're happy</h3>
             <span class="envelope-action-hint">Open letter <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+
+          <div class="envelope-card reveal-on-scroll" data-letter-type="chiya">
+            <div class="envelope-icon-wrap" style="color: #B45309;"><i class="fa-solid fa-mug-hot" aria-hidden="true"></i></div>
+            <div class="envelope-tag" style="color: #B45309;">Tea Time</div>
+            <h3 class="envelope-title">Open when you need chiya ☕</h3>
+            <span class="envelope-action-hint" style="color: #B45309;">Open letter <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
           </div>
 
           <div class="envelope-card reveal-on-scroll" data-letter-type="sad">
@@ -608,7 +734,7 @@
         <footer class="footer-credits">
           <span>Made with</span>
           <span class="heart-icon" aria-hidden="true">❤️</span>
-          <span>especially for you</span>
+          <span>for a certified chiya lover ☕</span>
         </footer>
       </div>
     </section>
@@ -671,6 +797,26 @@
       </p>
       <button type="button" class="btn-primary" id="easter-egg-close-btn">
         You Caught Me! 🥰
+      </button>
+    </div>
+  </div>
+
+  <!-- Secret Chiya Easter Egg Modal -->
+  <div class="easter-egg-modal" id="chiya-easter-egg-modal" role="dialog" aria-modal="true" aria-label="Chiya easter egg">
+    <div class="easter-egg-card" style="border: 2px solid #EADBCE; background: #FFFDF9;">
+      <span class="easter-egg-emoji">☕🏆❤️</span>
+      <div style="font-size: 0.85rem; font-weight: 800; color: #B45309; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem;">
+        Achievement Unlocked 🏆
+      </div>
+      <h3 class="easter-egg-title" style="color: #78350F; font-size: 1.8rem; margin-bottom: 0.5rem;">
+        Certified Chiya Lover ☕
+      </h3>
+      <p class="easter-egg-desc" style="color: #451A03;">
+        Birthday Girl + Chiya = Perfect Combination 😂❤️<br/><br/>
+        You actually tapped the tea cup 5 times! You officially hold the title of the undisputed Chiya Queen. May your cup always be full, warm, and sweet!
+      </p>
+      <button type="button" class="btn-primary" id="chiya-easter-close-btn" style="background: #B45309;">
+        Proud Chiya Lover! ☕🥰
       </button>
     </div>
   </div>

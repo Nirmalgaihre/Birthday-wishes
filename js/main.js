@@ -63,13 +63,24 @@ const appState = {
       src: "images/memory-6.jpg",
       caption: "One of my favorites ❤️",
       note: "Cozy evenings filled with heartfelt conversations."
+    },
+    {
+      src: "images/chiya-memory.jpg",
+      caption: "Chiya + random talks ☕",
+      note: "Some memories are just infinitely better with a warm cup of chiya."
     }
   ],
+  chiyaEasterEggCounter: 0,
   openWhenMessages: {
     happy: {
       kicker: "Open When You're Happy",
       title: "Keep That Glow ✨",
       text: "Whenever you feel happy, take a deep breath and soak it all in. You have worked so hard for your peace and smiles, and you deserve every single ounce of joy in your life. Remember this feeling whenever things get hectic!"
+    },
+    chiya: {
+      kicker: "Open When You Need Chiya ☕",
+      title: "Go Boil That Water First! 😂",
+      text: "You opened this instead of actually making chiya? 😂 Go make yourself a cup first. And while you're drinking it, remember that somewhere there's someone who already knew you would open this one. ☕❤️"
     },
     sad: {
       kicker: "Open When You're Sad",
@@ -114,6 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCandleInteraction();
   initGiftBox();
   initEasterEgg();
+  initChiyaSection();
   initScrollAnimations();
   initReplayButton();
 });
@@ -642,6 +654,226 @@ function initEasterEgg() {
   });
 }
 
+// =====================================
+// CHIYA INTERACTIONS
+// =====================================
+const chiyaWisdomQuotes = [
+  "Life happens. Chiya helps. ☕",
+  "Bad mood? Chiya. Good mood? Chiya. Birthday? Definitely chiya.",
+  "Some conversations just need a cup of chiya.",
+  "Chiya first. Decisions later.",
+  "Happiness is sometimes just a warm cup and a peaceful conversation.",
+  "One cup of chiya = approximately 37% fewer problems. 😂",
+  "Keep calm and let the chiya do its job.",
+  "Birthday calories don't count. Neither does birthday chiya. ☕",
+  "Tea tastes better when the conversation is good.",
+  "There is always time for one more cup.",
+  "Behind every brilliant idea is an empty cup of chiya. 💡☕",
+  "A cup of hot chiya is a warm hug in liquid form. ❤️"
+];
+
+function initChiyaSection() {
+  initChiyaMaker();
+  initChiyaMeter();
+  initChiyaWisdom();
+  initChiyaCoupon();
+  initChiyaEasterEgg();
+}
+
+/**
+ * 1. Interactive Make Her Chiya Feature
+ */
+function initChiyaMaker() {
+  const brewBtn = document.getElementById("make-chiya-btn");
+  const teacupScene = document.getElementById("teacup-scene");
+  const teaLiquid = document.getElementById("teacup-tea-liquid");
+  const statusLog = document.getElementById("chiya-status-log");
+
+  if (!brewBtn || !teacupScene || !teaLiquid || !statusLog) return;
+
+  let isBrewing = false;
+
+  brewBtn.addEventListener("click", () => {
+    if (isBrewing) return;
+    isBrewing = true;
+    brewBtn.disabled = true;
+
+    // Step 1: Empty cup reset
+    teaLiquid.style.height = "0%";
+    teacupScene.classList.remove("steaming");
+    statusLog.textContent = "Getting the clean cup ready...";
+
+    // Step 2: Pouring tea (liquid rising)
+    setTimeout(() => {
+      statusLog.textContent = "Pouring freshly brewed spiced chiya... ☕";
+      teaLiquid.style.height = "75%";
+    }, 600);
+
+    // Step 3: Steam rising
+    setTimeout(() => {
+      teacupScene.classList.add("steaming");
+      statusLog.textContent = "Adding a little happiness...";
+    }, 2200);
+
+    // Step 4: Adding extra love
+    setTimeout(() => {
+      statusLog.textContent = "Adding extra love... ❤️";
+      triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.5, 40, ["☕", "❤️", "✨"]);
+    }, 3500);
+
+    // Step 5: Ready!
+    setTimeout(() => {
+      statusLog.innerHTML = `<strong>Your birthday chiya is ready! ☕</strong><br/><span style="font-size: 0.85rem; font-weight: normal; color: #92400E;">Warning: This is virtual chiya. Real chiya is still pending. 😂</span>`;
+      brewBtn.disabled = false;
+      brewBtn.innerHTML = `Make Another Cup <span aria-hidden="true">☕</span>`;
+      isBrewing = false;
+    }, 5000);
+  });
+}
+
+/**
+ * 2. Chiya Meter
+ */
+function initChiyaMeter() {
+  const slider = document.getElementById("chiya-meter-slider");
+  const feedback = document.getElementById("chiya-level-feedback");
+
+  if (!slider || !feedback) return;
+
+  const levels = [
+    "Not Much (Is that even possible? 🤨)",
+    "A Little ☕",
+    "A Lot! ☕☕",
+    "Can't Live Without It ☕❤️",
+    "Chiya is basically my personality."
+  ];
+
+  slider.addEventListener("input", () => {
+    const val = parseInt(slider.value, 10);
+    const text = levels[val - 1] || levels[2];
+    feedback.textContent = text;
+
+    if (val === 5) {
+      feedback.innerHTML = `<strong>I knew it. 😂☕</strong> Chiya is basically my personality.`;
+      triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.6, 35, ["☕", "✨", "❤️"]);
+    }
+  });
+}
+
+/**
+ * 3. Random Chiya Wisdom
+ */
+function initChiyaWisdom() {
+  const quoteEl = document.getElementById("chiya-wisdom-quote");
+  const nextBtn = document.getElementById("another-chiya-wisdom-btn");
+
+  if (!quoteEl || !nextBtn) return;
+
+  let lastIndex = -1;
+
+  function showRandomWisdom() {
+    let nextIndex;
+    do {
+      nextIndex = Math.floor(Math.random() * chiyaWisdomQuotes.length);
+    } while (nextIndex === lastIndex && chiyaWisdomQuotes.length > 1);
+
+    lastIndex = nextIndex;
+    quoteEl.style.opacity = "0";
+    setTimeout(() => {
+      quoteEl.textContent = `“${chiyaWisdomQuotes[nextIndex]}”`;
+      quoteEl.style.opacity = "1";
+    }, 200);
+  }
+
+  nextBtn.addEventListener("click", showRandomWisdom);
+}
+
+/**
+ * 4. Chiya Date / Coupon Card (Persists in localStorage)
+ */
+function initChiyaCoupon() {
+  const couponCard = document.getElementById("chiya-coupon-card");
+  const claimBtn = document.getElementById("claim-chiya-btn");
+  const statusEl = document.getElementById("chiya-coupon-status");
+  const subtextEl = document.getElementById("chiya-coupon-subtext");
+
+  if (!couponCard || !claimBtn || !statusEl || !subtextEl) return;
+
+  const STORAGE_KEY = "birthday_chiya_coupon_claimed";
+
+  function applyClaimedState() {
+    couponCard.classList.add("is-claimed");
+    statusEl.textContent = "CLAIMED ✓";
+    subtextEl.innerHTML = `<strong>Okay okay... now I actually owe you one chiya. 😂☕</strong><br/>Let me know when and where!`;
+    claimBtn.textContent = "Chiya Date Locked In! ☕❤️";
+    claimBtn.disabled = true;
+    claimBtn.style.opacity = "0.85";
+    claimBtn.style.cursor = "default";
+  }
+
+  if (localStorage.getItem(STORAGE_KEY) === "true") {
+    applyClaimedState();
+  }
+
+  claimBtn.addEventListener("click", () => {
+    localStorage.setItem(STORAGE_KEY, "true");
+    applyClaimedState();
+    triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.7, 75, ["☕", "❤️", "✨"]);
+  });
+
+  // Developer / testing reset function available in console
+  window.resetChiyaCoupon = function () {
+    localStorage.removeItem(STORAGE_KEY);
+    couponCard.classList.remove("is-claimed");
+    statusEl.textContent = "VALID";
+    subtextEl.textContent = "Redeemable for one cup of chiya + one good conversation.";
+    claimBtn.textContent = "Claim My Chiya ☕";
+    claimBtn.disabled = false;
+    claimBtn.style.opacity = "1";
+    claimBtn.style.cursor = "pointer";
+    console.log("Chiya coupon has been reset for testing!");
+  };
+}
+
+/**
+ * 5. Secret Chiya Easter Egg (Click teacup 5 times)
+ */
+function initChiyaEasterEgg() {
+  const teacup = document.getElementById("teacup-scene");
+  const modal = document.getElementById("chiya-easter-egg-modal");
+  const closeBtn = document.getElementById("chiya-easter-close-btn");
+
+  if (!teacup || !modal) return;
+
+  teacup.addEventListener("click", () => {
+    appState.chiyaEasterEggCounter++;
+
+    // Wiggle feedback
+    teacup.style.transform = `scale(1.08) rotate(${appState.chiyaEasterEggCounter % 2 === 0 ? -4 : 4}deg)`;
+    setTimeout(() => {
+      teacup.style.transform = "";
+    }, 200);
+
+    if (appState.chiyaEasterEggCounter >= 5) {
+      modal.classList.add("active");
+      triggerConfettiBurst(window.innerWidth / 2, window.innerHeight / 2, 90, ["☕", "❤️", "✨", "☕", "❤️"]);
+      appState.chiyaEasterEggCounter = 0; // Reset counter
+    }
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      modal.classList.remove("active");
+    });
+  }
+
+  modal.addEventListener("click", e => {
+    if (e.target === modal) {
+      modal.classList.remove("active");
+    }
+  });
+}
+
 /* --------------------------------------------------------------------------
    12. INTERSECTION OBSERVER SCROLL REVEAL & LETTER TYPEWRITER
    -------------------------------------------------------------------------- */
@@ -685,7 +917,7 @@ function initReplayButton() {
 let confettiParticles = [];
 let confettiAnimationId = null;
 
-function triggerConfettiBurst(originX, originY, particleCount = 70) {
+function triggerConfettiBurst(originX, originY, particleCount = 70, emojis = null) {
   const canvas = document.getElementById("confetti-canvas");
   if (!canvas) return;
 
@@ -705,8 +937,9 @@ function triggerConfettiBurst(originX, originY, particleCount = 70) {
       y: originY,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed - 3,
-      size: 6 + Math.random() * 6,
+      size: emojis ? (18 + Math.random() * 10) : (6 + Math.random() * 6),
       color: colors[Math.floor(Math.random() * colors.length)],
+      emoji: emojis ? emojis[Math.floor(Math.random() * emojis.length)] : null,
       rotation: Math.random() * 360,
       rotationSpeed: (Math.random() - 0.5) * 12,
       gravity: 0.18 + Math.random() * 0.1,
@@ -740,8 +973,17 @@ function runConfettiLoop(canvas, ctx) {
     ctx.translate(p.x, p.y);
     ctx.rotate((p.rotation * Math.PI) / 180);
     ctx.globalAlpha = p.opacity;
-    ctx.fillStyle = p.color;
-    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+
+    if (p.emoji) {
+      ctx.font = `${p.size}px serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(p.emoji, 0, 0);
+    } else {
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+    }
+
     ctx.restore();
   }
 

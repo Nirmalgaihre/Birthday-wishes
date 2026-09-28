@@ -1823,6 +1823,351 @@ a {
 }
 
 /* --------------------------------------------------------------------------
+   22. CHIYA (TEA) LOVER SECTION & INTERACTIONS
+   ========================================================================== */
+.chiya-section {
+  background: linear-gradient(180deg, #FBF6F0 0%, #F5ECE3 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.chiya-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Chiya Card Common */
+.chiya-card {
+  background: var(--color-card-bg);
+  border: 1px solid #EADBCE;
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  box-shadow: 0 10px 30px rgba(138, 77, 36, 0.08);
+  position: relative;
+}
+
+/* Personal Chiya Note */
+.chiya-note-box {
+  background: #FFFDF9;
+  border-left: 4px solid var(--color-accent);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: 2rem;
+  font-size: 1.02rem;
+  color: #4B382A;
+  line-height: 1.7;
+}
+
+.chiya-note-quote {
+  font-family: var(--font-handwriting);
+  font-size: 1.5rem;
+  color: #8D4925;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Interactive Teacup Illustration */
+.chiya-maker-wrapper {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.teacup-scene {
+  position: relative;
+  width: 190px;
+  height: 160px;
+  margin: 0 auto 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition: transform var(--transition-fast);
+}
+
+.teacup-scene:hover {
+  transform: scale(1.03);
+}
+
+.teacup-saucer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 170px;
+  height: 12px;
+  background: #E6D7CB;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(90, 50, 20, 0.1);
+}
+
+.teacup-body {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 85px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5EFEB 100%);
+  border: 2px solid #E0CEBE;
+  border-radius: 0 0 55px 55px;
+  overflow: hidden;
+  box-shadow: inset 0 -6px 12px rgba(100, 60, 30, 0.08), 0 6px 14px rgba(90, 50, 20, 0.08);
+}
+
+.teacup-tea-liquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(180deg, #D4935F 0%, #A8602E 100%);
+  transition: height 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 0 0 50px 50px;
+}
+
+.teacup-handle {
+  position: absolute;
+  right: 14px;
+  top: 60px;
+  width: 36px;
+  height: 48px;
+  border: 6px solid #E0CEBE;
+  border-radius: 0 24px 24px 0;
+  background: transparent;
+}
+
+/* Steam Wisps */
+.teacup-steam-group {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.teacup-scene.steaming .teacup-steam-group {
+  opacity: 1;
+}
+
+.steam-wisp {
+  width: 8px;
+  height: 40px;
+  background: linear-gradient(180deg, transparent 0%, rgba(217, 119, 6, 0.35) 50%, transparent 100%);
+  border-radius: 50%;
+  filter: blur(2px);
+  animation: steamRise 2.2s infinite ease-in-out;
+}
+
+.steam-wisp:nth-child(2) {
+  height: 52px;
+  animation-delay: 0.4s;
+}
+
+.steam-wisp:nth-child(3) {
+  height: 42px;
+  animation-delay: 0.8s;
+}
+
+.steam-heart {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  color: var(--color-primary);
+  opacity: 0;
+  animation: steamHeartFloat 2.6s infinite ease-in-out;
+}
+
+.teacup-scene.steaming .steam-heart {
+  opacity: 0.85;
+}
+
+@keyframes steamRise {
+  0% { transform: translateY(10px) scaleX(0.8); opacity: 0; }
+  50% { opacity: 0.8; transform: translateY(-10px) scaleX(1.2); }
+  100% { transform: translateY(-30px) scaleX(1.6); opacity: 0; }
+}
+
+@keyframes steamHeartFloat {
+  0% { transform: translateX(-50%) translateY(5px) scale(0.6); opacity: 0; }
+  50% { opacity: 0.9; transform: translateX(-50%) translateY(-15px) scale(1.1); }
+  100% { transform: translateX(-50%) translateY(-35px) scale(1.3); opacity: 0; }
+}
+
+.chiya-status-log {
+  min-height: 50px;
+  margin-top: 1rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #78350F;
+  transition: opacity 0.3s ease;
+}
+
+/* Chiya Meter */
+.chiya-meter-box {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed #E5D5C6;
+}
+
+.chiya-meter-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #451A03;
+  margin-bottom: 0.75rem;
+}
+
+.chiya-meter-slider {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #EAD9CB;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.chiya-meter-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #B45309;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 6px rgba(180, 83, 9, 0.4);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.chiya-meter-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.chiya-level-feedback {
+  margin-top: 0.75rem;
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: #B45309;
+  background: #FEF3C7;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+}
+
+/* Chiya Wisdom Card */
+.chiya-wisdom-box {
+  background: #FFFDF9;
+  border: 1px solid #EADBCE;
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.chiya-wisdom-quote {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: #451A03;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+}
+
+/* Chiya Ticket Coupon */
+.chiya-coupon-card {
+  background: linear-gradient(135deg, #FFFDF8 0%, #FDF7EE 100%);
+  border: 2px dashed #B45309;
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(180, 83, 9, 0.08);
+}
+
+.chiya-coupon-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #B45309;
+  background: #FEF3C7;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  margin-bottom: 0.6rem;
+}
+
+.chiya-coupon-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #78350F;
+  margin-bottom: 0.25rem;
+}
+
+.chiya-coupon-subtext {
+  font-size: 0.95rem;
+  color: #6B4E3D;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.chiya-coupon-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.chiya-coupon-status {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #B45309;
+  background: #FEF3C7;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+}
+
+.chiya-coupon-card.is-claimed {
+  border-color: #059669;
+  background: #F0FDF4;
+}
+
+.chiya-coupon-card.is-claimed .chiya-coupon-status {
+  color: #047857;
+  background: #D1FAE5;
+}
+
+/* Floating tea cup badge near divider */
+.chiya-divider-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1.5rem auto 0;
+  color: #92400E;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #FEF3C7;
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+/* --------------------------------------------------------------------------
    21. ACCESSIBILITY: PREFERS REDUCED MOTION
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
