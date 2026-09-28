@@ -9,10 +9,10 @@
    EDIT BIRTHDAY DETAILS HERE
 ================================ */
 const birthdayConfig = {
-  name: "Syanu",
-  nickname: "Syanu",
-  birthday: "2025-09-28", // 1st Birthday milestone
-  relationship: "Our Little Angel",
+  name: "Sophia",
+  nickname: "Soph",
+  birthday: "2000-09-28", // YYYY-MM-DD
+  relationship: "Best Friend",
   music: "music/birthday-music.mp3",
   easterEggClicks: 5
 };
@@ -31,8 +31,8 @@ const appState = {
   photos: [
     {
       src: "images/birthday-girl-frame.jpg",
-      caption: "Happy 1st Birthday Syanu 🥹❤️",
-      note: "May God always bless you with happiness and lots of smiles. ❤️🎂"
+      caption: "Birthday Girl ❤️",
+      note: "May all your days be filled with happiness, peace, and lots of smiles. ❤️🎂"
     }
   ],
   chiyaEasterEggCounter: 0,
