@@ -162,13 +162,16 @@ a {
 .intro-overlay {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at center, #FFF8F6 0%, #FAEDE8 60%, #F5DFD7 100%);
+  background: radial-gradient(circle at center, #FFF9F7 0%, #FAEDE8 60%, #F5DFD7 100%);
   z-index: 9000;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
+  padding: max(1.5rem, env(safe-area-inset-top, 1.5rem)) max(1.25rem, env(safe-area-inset-right, 1.25rem)) max(1.5rem, env(safe-area-inset-bottom, 1.5rem)) max(1.25rem, env(safe-area-inset-left, 1.25rem));
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .intro-overlay.hidden {
@@ -179,9 +182,9 @@ a {
 
 .intro-card {
   background: var(--color-card-bg);
-  padding: 3.5rem 2.5rem;
+  padding: 3.5rem 2.5rem 3rem;
   border-radius: var(--radius-lg);
-  box-shadow: 0 20px 50px rgba(225, 29, 72, 0.15), 0 4px 12px rgba(31, 41, 55, 0.05);
+  box-shadow: 0 24px 60px rgba(225, 29, 72, 0.16), 0 8px 24px rgba(31, 41, 55, 0.06);
   border: 1px solid var(--color-border);
   text-align: center;
   max-width: 480px;
@@ -189,76 +192,192 @@ a {
   position: relative;
   overflow: hidden;
   animation: introPopIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro-sparkle-accents {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.intro-sparkle {
+  position: absolute;
+  font-size: 1.2rem;
+  opacity: 0.65;
+  user-select: none;
+  animation: sparkleFloat 4s ease-in-out infinite alternate;
+}
+
+.intro-sparkle-1 {
+  top: 18px;
+  left: 20px;
+  animation-delay: 0s;
+}
+
+.intro-sparkle-2 {
+  top: 24px;
+  right: 22px;
+  animation-delay: 1.2s;
+  font-size: 1rem;
+}
+
+.intro-sparkle-3 {
+  bottom: 20px;
+  left: 24px;
+  animation-delay: 2.4s;
+  font-size: 1rem;
+}
+
+@keyframes sparkleFloat {
+  0% { transform: translateY(0) scale(0.9); opacity: 0.4; }
+  100% { transform: translateY(-6px) scale(1.15); opacity: 0.85; }
 }
 
 .intro-badge {
-  display: inline-block;
-  font-size: 0.85rem;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 700;
   color: var(--color-primary);
   background: var(--color-primary-light);
-  padding: 0.35rem 1rem;
+  border: 1px solid rgba(225, 29, 72, 0.15);
+  padding: 0.45rem 1.15rem;
   border-radius: var(--radius-full);
   margin-bottom: 1.25rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+.intro-badge i {
+  font-size: 0.8rem;
+  color: var(--color-primary);
 }
 
 .intro-title {
   font-family: var(--font-serif);
-  font-size: 2.25rem;
+  font-size: clamp(1.85rem, 5.5vw, 2.35rem);
   font-weight: 700;
   color: var(--color-text-main);
   margin-bottom: 0.75rem;
-  line-height: 1.2;
+  line-height: 1.22;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .intro-subtitle {
-  font-size: 1.125rem;
+  font-size: clamp(0.95rem, 3vw, 1.125rem);
   color: var(--color-text-muted);
-  margin-bottom: 2.25rem;
+  margin-bottom: 2rem;
+  line-height: 1.55;
+  max-width: 380px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.intro-action-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.intro-cta-btn {
+  width: auto;
+  max-width: 100%;
+  min-height: 52px;
+  padding: 0.95rem 2.4rem;
+  font-size: 1.05rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.intro-hint {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text-light);
+  letter-spacing: 0.02em;
+  animation: pulseHint 2.5s ease-in-out infinite;
+}
+
+@keyframes pulseHint {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; color: var(--color-primary); }
 }
 
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
+  gap: 0.65rem;
   background: var(--color-primary);
   color: #FFFFFF;
   padding: 0.95rem 2.2rem;
+  min-height: 48px;
+  min-width: 48px;
   border-radius: var(--radius-full);
   font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.01em;
-  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.35);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(225, 29, 72, 0.35);
   transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  text-decoration: none;
+  text-align: center;
+  user-select: none;
 }
 
 .btn-primary:hover {
   background: var(--color-primary-hover);
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 10px 24px rgba(225, 29, 72, 0.42);
+  box-shadow: 0 10px 26px rgba(225, 29, 72, 0.42);
 }
 
 .btn-primary:active {
-  transform: translateY(0) scale(0.99);
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-primary:focus-visible {
+  outline: 3px solid rgba(225, 29, 72, 0.45);
+  outline-offset: 3px;
 }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
   background: #FFFFFF;
   color: var(--color-text-main);
   border: 1px solid var(--color-border);
-  padding: 0.75rem 1.6rem;
+  padding: 0.8rem 1.7rem;
+  min-height: 48px;
+  min-width: 48px;
   border-radius: var(--radius-full);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   font-weight: 600;
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-fast);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  text-decoration: none;
+  text-align: center;
+  user-select: none;
 }
 
 .btn-secondary:hover {
@@ -266,6 +385,15 @@ a {
   color: var(--color-primary);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+}
+
+.btn-secondary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-secondary:focus-visible {
+  outline: 3px solid rgba(225, 29, 72, 0.45);
+  outline-offset: 3px;
 }
 
 .intro-decor-dots {
@@ -294,13 +422,14 @@ a {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(252, 248, 245, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(243, 232, 226, 0.8);
+  background: rgba(255, 252, 249, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(243, 232, 226, 0.85);
   height: var(--nav-height);
   display: flex;
   align-items: center;
+  box-shadow: 0 4px 20px rgba(120, 53, 15, 0.04);
 }
 
 .header-inner {
@@ -320,42 +449,59 @@ a {
   color: var(--color-primary);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
+  transition: transform var(--transition-fast);
+}
+
+.header-brand:hover {
+  transform: scale(1.02);
+}
+
+.header-brand i {
+  color: var(--color-primary);
+  filter: drop-shadow(0 2px 4px rgba(225, 29, 72, 0.3));
 }
 
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 1.75rem;
+  gap: 0.35rem;
+  background: rgba(254, 243, 239, 0.65);
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(243, 232, 226, 0.9);
 }
 
 .nav-link {
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.88rem;
+  font-weight: 600;
   color: var(--color-text-muted);
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast);
   position: relative;
-  padding: 0.25rem 0;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
 }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: var(--color-primary);
-  transition: width var(--transition-fast);
-  border-radius: var(--radius-full);
+.nav-link i {
+  font-size: 0.82rem;
+  opacity: 0.85;
 }
 
 .nav-link:hover {
   color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.08);
 }
 
-.nav-link:hover::after {
-  width: 100%;
+.nav-link.active {
+  color: var(--color-primary);
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.12);
+  font-weight: 700;
 }
 
 .header-action {
@@ -906,6 +1052,42 @@ a {
   color: #94A3B8;
 }
 
+.lightbox-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.lightbox-heart-burst-btn {
+  background: rgba(244, 63, 94, 0.18);
+  color: #FDA4AF;
+  border: 1px solid rgba(244, 63, 94, 0.45);
+  border-radius: var(--radius-full);
+  padding: 0.35rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(6px);
+}
+
+.lightbox-heart-burst-btn:hover {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+  transform: scale(1.06);
+  box-shadow: 0 4px 16px rgba(225, 29, 72, 0.45);
+}
+
+.lightbox-heart-burst-btn:active {
+  transform: scale(0.96);
+}
+
 .lightbox-close-btn {
   position: absolute;
   top: -45px;
@@ -1276,193 +1458,358 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   16. CANDLE & BIRTHDAY CAKE WISH (SECTION 11)
+   16. ARTISANAL PÂTISSERIE CAKE & CANDLE INTERACTION (SECTION 11)
    -------------------------------------------------------------------------- */
 .cake-interactive-box {
-  max-width: 500px;
+  max-width: 560px;
   margin: 0 auto;
-  background: var(--color-card-bg);
-  padding: 3rem 2rem 2.5rem;
+  background: radial-gradient(circle at 50% 20%, #FFFFFF 0%, #FFFDF9 60%, #FAF5EE 100%);
+  padding: 3rem 2.5rem 2.75rem;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--color-border);
+  box-shadow: 0 20px 50px rgba(180, 83, 9, 0.08), 0 4px 16px rgba(31, 41, 55, 0.04);
+  border: 1px solid #EADBCE;
   text-align: center;
   position: relative;
+  overflow: hidden;
+}
+
+.cake-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #B45309;
+  background: #FEF3C7;
+  border: 1px solid #FDE68A;
+  padding: 0.4rem 1.1rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 2rem;
+  letter-spacing: 0.02em;
+}
+
+.status-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #F59E0B;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.8);
+  animation: pulseDot 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
 }
 
 .cake-scene {
   position: relative;
-  width: 220px;
-  height: 190px;
-  margin: 0 auto 2.5rem;
+  width: 260px;
+  height: 230px;
+  margin: 0 auto 2.25rem;
+  perspective: 700px;
 }
 
-/* Cake CSS Illustration */
-.cake-plate {
+/* Warm Candle Ambient Glow Aura */
+.candle-ambient-aura {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 100px;
+  background: radial-gradient(ellipse at center, rgba(253, 230, 138, 0.45) 0%, rgba(245, 158, 11, 0.15) 50%, transparent 80%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(12px);
+  transition: opacity 0.8s ease;
+  z-index: 1;
+}
+
+.candles-blown .candle-ambient-aura {
+  opacity: 0;
+}
+
+/* Porcelain Cake Pedestal Stand */
+.cake-pedestal-stand {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
-  height: 14px;
-  background: #E5E7EB;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  width: 240px;
+  height: 24px;
+  z-index: 2;
 }
 
-.cake-tier-bottom {
+.pedestal-top {
   position: absolute;
-  bottom: 12px;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 170px;
-  height: 60px;
-  background: linear-gradient(180deg, #FDE2E4 0%, #FAD2E1 100%);
-  border-radius: 12px 12px 6px 6px;
-  box-shadow: inset 0 -4px 8px rgba(0, 0, 0, 0.06);
+  width: 236px;
+  height: 14px;
+  background: radial-gradient(ellipse at 50% 30%, #FFFFFF 0%, #F5EFEB 70%, #E2D6CB 100%);
+  border: 1.5px solid #D5C5B5;
+  border-radius: 50% 50% 45% 45% / 100% 100% 40% 40%;
+  box-shadow: 0 6px 16px rgba(120, 53, 15, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.9);
 }
 
-.cake-tier-bottom::before {
-  content: '';
+.pedestal-base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: 12px;
+  background: linear-gradient(180deg, #FAF4EE 0%, #E8DCD1 100%);
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 8px 18px rgba(120, 53, 15, 0.14);
+}
+
+/* Artisanal Cake Tiers with Soft Vanilla-Berry Buttercream */
+.cake-tier-bottom {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 196px;
+  height: 74px;
+  background: linear-gradient(180deg, #FFF5F2 0%, #FFEBE6 30%, #F8D8D3 75%, #F0C4BD 100%);
+  border: 1.5px solid #EED4CF;
+  border-radius: 16px 16px 8px 8px;
+  box-shadow: inset 0 -8px 16px rgba(180, 83, 9, 0.08), 0 8px 20px rgba(0, 0, 0, 0.06);
+  z-index: 3;
+}
+
+.cake-middle-piping {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 16px;
-  background: #FFF0F3;
-  border-radius: 12px 12px 4px 4px;
+  right: 0;
+  height: 14px;
+  background: radial-gradient(circle at 10px 7px, #FFFFFF 6px, transparent 7px);
+  background-size: 16px 14px;
+  opacity: 0.9;
 }
 
 .cake-tier-top {
   position: absolute;
-  bottom: 70px;
+  bottom: 86px;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 50px;
-  background: linear-gradient(180deg, #FFF1E6 0%, #FDE2E4 100%);
-  border-radius: 10px 10px 4px 4px;
-  box-shadow: inset 0 -4px 8px rgba(0, 0, 0, 0.05);
+  width: 140px;
+  height: 60px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF8F5 40%, #FFEBE7 100%);
+  border: 1.5px solid #ECD7D2;
+  border-radius: 14px 14px 6px 6px;
+  box-shadow: inset 0 -6px 12px rgba(180, 83, 9, 0.06), 0 6px 16px rgba(0, 0, 0, 0.05);
+  z-index: 4;
 }
 
-.cake-tier-top::before {
-  content: '';
+/* Creamy Frosting Drips on Top Tier */
+.frosting-drips {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 14px;
+  bottom: -6px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: space-around;
+  pointer-events: none;
+}
+
+.drip {
+  width: 8px;
+  height: 12px;
   background: #FFFFFF;
-  border-radius: 10px 10px 4px 4px;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 2px 4px rgba(180, 83, 9, 0.08);
 }
 
-/* Candles */
-.candles-row {
+.drip-2 { height: 16px; }
+.drip-3 { height: 10px; }
+.drip-4 { height: 14px; }
+
+/* Handcrafted Berries & Gilded Confetti Topper */
+.cake-berries-topper {
   position: absolute;
-  bottom: 118px;
+  top: -12px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 20px;
+  gap: 12px;
+  font-size: 1.1rem;
+  z-index: 6;
+  filter: drop-shadow(0 2px 4px rgba(120, 53, 15, 0.2));
+}
+
+/* Luxury Tapered Birthday Candles */
+.candles-row {
+  position: absolute;
+  bottom: 146px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 28px;
+  z-index: 7;
 }
 
 .candle {
-  width: 8px;
-  height: 32px;
-  background: repeating-linear-gradient(45deg, #F43F5E, #F43F5E 4px, #FFFFFF 4px, #FFFFFF 8px);
+  width: 9px;
+  height: 38px;
+  background: linear-gradient(90deg, #FDE68A 0%, #FFFFFF 30%, #F59E0B 75%, #D97706 100%);
   border-radius: 4px;
   position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
+
+.candle-1 { transform: rotate(-2deg); }
+.candle-2 { height: 42px; transform: translateY(-4px); }
+.candle-3 { transform: rotate(2deg); }
 
 .candle-wick {
   position: absolute;
-  top: -6px;
+  top: -7px;
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
-  height: 6px;
-  background: #374151;
+  height: 7px;
+  background: #292524;
+  border-radius: 1px;
+}
+
+.candle-glow {
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(253, 230, 138, 0.7) 0%, rgba(245, 158, 11, 0.3) 50%, transparent 75%);
+  pointer-events: none;
+  filter: blur(2px);
+  animation: auraFlicker 1.4s infinite alternate ease-in-out;
+}
+
+@keyframes auraFlicker {
+  0% { transform: translateX(-50%) scale(0.9); opacity: 0.8; }
+  100% { transform: translateX(-50%) scale(1.2); opacity: 1; }
 }
 
 .flame {
   position: absolute;
-  top: -22px;
+  top: -24px;
   left: 50%;
   transform: translateX(-50%);
-  width: 12px;
-  height: 18px;
-  background: radial-gradient(ellipse at bottom, #FFED4A 0%, #F59E0B 60%, #EF4444 100%);
+  width: 14px;
+  height: 22px;
+  background: radial-gradient(ellipse at bottom, #FFFFFF 0%, #FEF08A 25%, #F59E0B 65%, #DC2626 100%);
   border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
-  box-shadow: 0 0 14px rgba(245, 158, 11, 0.8), 0 0 24px rgba(239, 68, 68, 0.4);
-  animation: flicker 0.6s infinite alternate ease-in-out;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.9), 0 0 30px rgba(220, 38, 38, 0.45);
+  animation: flameDance 0.5s infinite alternate ease-in-out;
   transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 2;
 }
 
-.candle:nth-child(2) .flame {
-  animation-delay: 0.15s;
+.candle-2 .flame { animation-delay: 0.12s; }
+.candle-3 .flame { animation-delay: 0.25s; }
+
+@keyframes flameDance {
+  0% { transform: translateX(-50%) rotate(-3deg) scale(0.95); opacity: 0.95; }
+  50% { transform: translateX(-48%) rotate(2deg) scale(1.05); }
+  100% { transform: translateX(-52%) rotate(-1deg) scale(1.1); opacity: 1; }
 }
 
-.candle:nth-child(3) .flame {
-  animation-delay: 0.3s;
-}
-
-@keyframes flicker {
-  0% { transform: translateX(-50%) rotate(-2deg) scale(0.95); opacity: 0.9; }
-  100% { transform: translateX(-50%) rotate(2deg) scale(1.08); opacity: 1; }
-}
-
-/* Smoke animation on candle blow */
+/* Realistic Wafting Smoke on Extinguish */
 .smoke {
   position: absolute;
-  top: -14px;
+  top: -16px;
   left: 50%;
   transform: translateX(-50%);
   width: 8px;
   height: 8px;
-  background: rgba(156, 163, 175, 0.6);
+  background: rgba(148, 163, 184, 0.65);
   border-radius: 50%;
   opacity: 0;
   pointer-events: none;
 }
 
-.candles-blown .flame {
+.candles-blown .flame,
+.candles-blown .candle-glow {
   opacity: 0;
-  transform: translateX(-50%) scale(0.3);
+  transform: translateX(-50%) scale(0.2);
 }
 
 .candles-blown .smoke {
-  animation: smokeRise 1.6s forwards ease-out;
+  animation: realisticSmokeRise 2s forwards ease-out;
 }
 
-@keyframes smokeRise {
+@keyframes realisticSmokeRise {
   0% {
-    opacity: 0.8;
+    opacity: 0.9;
     transform: translateX(-50%) scale(1);
+    filter: blur(1px);
   }
-  50% {
-    opacity: 0.4;
-    transform: translateX(-40%) translateY(-25px) scale(2.2);
+  40% {
+    opacity: 0.55;
+    transform: translateX(-35%) translateY(-35px) scale(2.8);
+    filter: blur(3px);
   }
   100% {
     opacity: 0;
-    transform: translateX(-60%) translateY(-50px) scale(3.5);
+    transform: translateX(-70%) translateY(-75px) scale(4.5);
+    filter: blur(6px);
   }
 }
 
-.wish-result-message {
+.cake-action-wrapper {
   margin-top: 1.5rem;
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--color-primary);
+}
+
+.blow-candles-action-btn {
+  font-size: 1.05rem;
+  padding: 0.95rem 2.4rem;
+  box-shadow: 0 8px 24px rgba(225, 29, 72, 0.35);
+}
+
+/* Wish Result Revelation Card */
+.wish-result-message {
+  margin-top: 2rem;
+  background: #FFFDF9;
+  border: 1px solid #FDE68A;
+  border-radius: var(--radius-md);
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 10px 25px rgba(180, 83, 9, 0.08);
   opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.5s ease;
+  transform: translateY(14px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: none;
 }
 
 .wish-result-message.revealed {
+  display: block;
   opacity: 1;
   transform: translateY(0);
+}
+
+.wish-sparkle-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.wish-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #B45309;
+  margin-bottom: 0.4rem;
+  line-height: 1.35;
+}
+
+.wish-subtext {
+  font-size: 0.96rem;
+  color: #78350F;
+  line-height: 1.6;
 }
 
 /* --------------------------------------------------------------------------
@@ -1869,84 +2216,343 @@ a {
 }
 
 /* Interactive Teacup Illustration */
+/* ==========================================================================
+   ENHANCED PHOTOREALISTIC ARTISANAL TEACUP & BREWING EXPERIENCE
+   ========================================================================== */
 .chiya-maker-wrapper {
   text-align: center;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
+  position: relative;
 }
 
 .teacup-scene {
   position: relative;
-  width: 190px;
-  height: 160px;
+  width: 250px;
+  height: 200px;
   margin: 0 auto 1.5rem;
   cursor: pointer;
   user-select: none;
-  transition: transform var(--transition-fast);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 16px 28px rgba(120, 53, 15, 0.16));
 }
 
 .teacup-scene:hover {
-  transform: scale(1.03);
+  transform: translateY(-5px) scale(1.03);
 }
 
+.teacup-scene:active {
+  transform: translateY(2px) scale(0.98);
+}
+
+/* Ambient Ambient Saucer Drop Shadow */
+.teacup-saucer-shadow {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(120, 53, 15, 0.35) 0%, rgba(120, 53, 15, 0.08) 60%, transparent 80%);
+  filter: blur(4px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Photorealistic Ceramic Saucer with Fine Gold Inlay */
 .teacup-saucer {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 170px;
-  height: 12px;
-  background: #E6D7CB;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(90, 50, 20, 0.1);
+  width: 218px;
+  height: 20px;
+  background: radial-gradient(ellipse at 50% 30%, #FFFFFF 0%, #FAF5EE 55%, #E5D5C6 100%);
+  border: 1.5px solid #D8C6B6;
+  border-radius: 50% 50% 45% 45% / 100% 100% 35% 35%;
+  box-shadow: 
+    0 10px 22px rgba(120, 53, 15, 0.2), 
+    inset 0 2px 4px rgba(255, 255, 255, 0.95), 
+    inset 0 -3px 8px rgba(120, 53, 15, 0.15);
+  z-index: 1;
 }
 
-.teacup-body {
+.saucer-inner-ring {
   position: absolute;
-  bottom: 10px;
+  top: 4px;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 85px;
-  background: linear-gradient(180deg, #FFFFFF 0%, #F5EFEB 100%);
-  border: 2px solid #E0CEBE;
-  border-radius: 0 0 55px 55px;
-  overflow: hidden;
-  box-shadow: inset 0 -6px 12px rgba(100, 60, 30, 0.08), 0 6px 14px rgba(90, 50, 20, 0.08);
+  width: 175px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(217, 119, 6, 0.45);
+  box-shadow: inset 0 1px 2px rgba(217, 119, 6, 0.2);
 }
 
+/* Ceramic Porcelain Teacup Body with Fine Bevels */
+.teacup-body {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 148px;
+  height: 110px;
+  background: radial-gradient(circle at 35% 25%, #FFFFFF 0%, #FAF6F0 45%, #E9DDD0 85%, #DDCFC2 100%);
+  border: 2px solid #D5C2B1;
+  border-radius: 0 0 74px 74px;
+  overflow: hidden;
+  box-shadow: 
+    inset 6px 0 14px rgba(255, 255, 255, 0.95),
+    inset -8px 0 18px rgba(120, 53, 15, 0.12),
+    inset 0 -16px 24px rgba(120, 53, 15, 0.16),
+    0 12px 28px rgba(120, 53, 15, 0.16);
+  z-index: 2;
+}
+
+/* Porcelain High-Gloss Specular Sheen */
+.teacup-glaze-sheen {
+  position: absolute;
+  top: 6px;
+  left: 14px;
+  width: 22px;
+  height: 75px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.15) 80%, transparent 100%);
+  transform: rotate(-14deg);
+  pointer-events: none;
+  filter: blur(1.5px);
+  z-index: 5;
+}
+
+/* Interior Cup Shadow (Depth Effect) */
+.teacup-interior-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(85, 45, 18, 0.25) 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Elegant 24K Gold Lip Trim */
+.teacup-gold-rim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #D97706 0%, #FDE68A 25%, #FFFBEB 35%, #F59E0B 65%, #B45309 100%);
+  box-shadow: 0 1px 4px rgba(217, 119, 6, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  z-index: 6;
+}
+
+/* Authentic Spiced Dudh Chiya (Milk Tea) Liquid */
 .teacup-tea-liquid {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 0%;
-  background: linear-gradient(180deg, #D4935F 0%, #A8602E 100%);
-  transition: height 1.8s cubic-bezier(0.16, 1, 0.3, 1);
-  border-radius: 0 0 50px 50px;
+  /* Rich, warm golden-amber spiced milk-tea gradient */
+  background: linear-gradient(180deg, #D99B61 0%, #C47F42 25%, #9E5B2B 60%, #68381A 100%);
+  transition: height 2s cubic-bezier(0.2, 0.8, 0.25, 1);
+  border-radius: 0 0 70px 70px;
+  overflow: hidden;
+  z-index: 3;
 }
 
-.teacup-handle {
+/* Warm Dudh Chiya Surface with Milk Sheen (Malai) */
+.teacup-chiya-surface {
   position: absolute;
-  right: 14px;
-  top: 60px;
-  width: 36px;
-  height: 48px;
-  border: 6px solid #E0CEBE;
-  border-radius: 0 24px 24px 0;
-  background: transparent;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  /* Authentic creamy milk-tea surface: warm spiced beige-caramel with lighter center */
+  background: radial-gradient(ellipse at 48% 45%, #F5DEC7 0%, #E8C19B 40%, #C68953 80%, #9D5A2B 100%);
+  border-radius: 50%;
+  box-shadow: inset 0 2px 5px rgba(255, 245, 235, 0.9), 0 3px 8px rgba(104, 56, 26, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-/* Steam Wisps */
-.teacup-steam-group {
+/* Subtle Natural Milk-Tea Cream Film (Malai Swirl) */
+.chiya-malai-skin {
+  position: absolute;
+  top: 2px;
+  left: 18px;
+  right: 22px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 40% 40%, rgba(255, 250, 242, 0.6) 0%, rgba(245, 222, 199, 0.25) 60%, transparent 80%);
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+/* Fresh Crushed Cardamom, Cloves & Black Tea Leaf Specks */
+.chiya-spice-crush {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.spice-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: #4A2311;
+  opacity: 0.85;
+}
+
+.spice-dot.sd1 { width: 3px; height: 3px; top: 7px; left: 32px; background: #602F13; }
+.spice-dot.sd2 { width: 2.5px; height: 2.5px; top: 12px; left: 48px; background: #7A3F1D; }
+.spice-dot.sd3 { width: 4px; height: 3px; top: 8px; right: 38px; background: #3C1A09; }
+.spice-dot.sd4 { width: 2px; height: 2px; top: 14px; right: 52px; background: #602F13; }
+.spice-dot.sd5 { width: 3px; height: 2px; top: 5px; left: 72px; background: #7A3F1D; }
+
+.tea-leaf-speck {
+  position: absolute;
+  background: #2E150A;
+  border-radius: 1px;
+}
+
+.tea-leaf-speck.tl1 { width: 5px; height: 1.5px; top: 11px; left: 62px; transform: rotate(24deg); }
+.tea-leaf-speck.tl2 { width: 4px; height: 1.5px; top: 13px; right: 32px; transform: rotate(-35deg); }
+
+/* Aromatic Fresh Steam Bubble */
+.chiya-steam-bubble {
+  position: absolute;
+  top: 6px;
+  right: 44px;
+  width: 6px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+/* Interactive Surface Ripple on Tap */
+.teacup-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border: 2px solid rgba(254, 243, 199, 0.95);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.teacup-scene.ripple-active .teacup-ripple {
+  animation: teaRippleWave 0.75s ease-out forwards;
+}
+
+@keyframes teaRippleWave {
+  0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0.95; }
+  100% { transform: translate(-50%, -50%) scale(10); opacity: 0; }
+}
+
+/* Realistic Cinnamon Stick Resting in Cup */
+.cinnamon-stick {
+  position: absolute;
+  top: 24px;
+  right: 68px;
+  width: 14px;
+  height: 82px;
+  background: repeating-linear-gradient(90deg, #78350F, #92400E 3px, #5B270C 6px, #78350F 9px);
+  border-radius: 7px;
+  transform: rotate(26deg);
+  box-shadow: 
+    -3px 4px 10px rgba(0, 0, 0, 0.25), 
+    inset 1px 0 2px rgba(255, 255, 255, 0.2), 
+    inset -1px 0 2px rgba(0, 0, 0, 0.4);
+  z-index: 4;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+.teacup-scene:hover .cinnamon-stick {
+  transform: rotate(28deg) translateY(-2px);
+}
+
+/* Tea Bag String and Hanging Kraft Tag */
+.tea-string-tag {
   position: absolute;
   top: 15px;
+  left: 48px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.tea-string {
+  width: 2px;
+  height: 48px;
+  background: linear-gradient(180deg, #E5D5C6 0%, #D8C5B3 100%);
+  transform: rotate(-18deg);
+  transform-origin: top;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.tea-tag {
+  position: absolute;
+  top: 42px;
+  left: -22px;
+  background: #FDF6EC;
+  border: 1px solid #D8C3AE;
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #78350F;
+  box-shadow: 0 3px 8px rgba(120, 53, 15, 0.18);
+  transform: rotate(-12deg);
+  white-space: nowrap;
+}
+
+/* Sculpted Porcelain Ceramic Handle with Inner Glow */
+.teacup-handle {
+  position: absolute;
+  right: 18px;
+  top: 56px;
+  width: 48px;
+  height: 64px;
+  border: 8px solid #EFE5DB;
+  border-left: none;
+  border-radius: 0 32px 34px 0;
+  background: transparent;
+  box-shadow: 
+    4px 5px 12px rgba(120, 53, 15, 0.18),
+    inset -2px 0 5px rgba(255, 255, 255, 0.95),
+    inset 2px 0 4px rgba(120, 53, 15, 0.12);
+  z-index: 1;
+}
+
+.handle-inner-shadow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 0 30px 32px 0;
+  border-right: 2px solid rgba(217, 119, 6, 0.3);
+  pointer-events: none;
+}
+
+/* Ethereal Volumetric Steam Clouds */
+.teacup-steam-group {
+  position: absolute;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: flex-end;
   opacity: 0;
-  transition: opacity 0.8s ease;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 10;
 }
 
 .teacup-scene.steaming .teacup-steam-group {
@@ -1954,58 +2560,99 @@ a {
 }
 
 .steam-wisp {
-  width: 8px;
-  height: 40px;
-  background: linear-gradient(180deg, transparent 0%, rgba(217, 119, 6, 0.35) 50%, transparent 100%);
+  width: 10px;
+  height: 54px;
+  background: linear-gradient(180deg, transparent 0%, rgba(245, 158, 11, 0.28) 40%, rgba(254, 243, 199, 0.65) 80%, transparent 100%);
   border-radius: 50%;
-  filter: blur(2px);
-  animation: steamRise 2.2s infinite ease-in-out;
+  filter: blur(4px);
+  animation: artisanalSteamRise 2.8s infinite ease-in-out;
 }
 
 .steam-wisp:nth-child(2) {
-  height: 52px;
-  animation-delay: 0.4s;
+  height: 68px;
+  width: 12px;
+  filter: blur(5px);
+  animation-delay: 0.5s;
+  animation-duration: 3.2s;
 }
 
 .steam-wisp:nth-child(3) {
-  height: 42px;
-  animation-delay: 0.8s;
+  height: 58px;
+  width: 9px;
+  filter: blur(4px);
+  animation-delay: 1.1s;
+  animation-duration: 2.6s;
 }
 
+.steam-wisp:nth-child(4) {
+  height: 48px;
+  width: 8px;
+  filter: blur(3.5px);
+  animation-delay: 1.6s;
+  animation-duration: 2.9s;
+}
+
+@keyframes artisanalSteamRise {
+  0% {
+    transform: translateY(14px) translateX(0) scaleX(0.7) scaleY(0.8);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.85;
+    transform: translateY(-8px) translateX(5px) scaleX(1.1) scaleY(1);
+  }
+  70% {
+    opacity: 0.6;
+    transform: translateY(-28px) translateX(-6px) scaleX(1.4) scaleY(1.2);
+  }
+  100% {
+    transform: translateY(-55px) translateX(8px) scaleX(1.8) scaleY(1.4);
+    opacity: 0;
+  }
+}
+
+/* Floating Tea Aroma Particles & Spice Sparkles */
 .steam-heart {
   position: absolute;
-  top: -15px;
+  top: -24px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 1rem;
-  color: var(--color-primary);
+  font-size: 1.15rem;
+  color: #B45309;
+  text-shadow: 0 0 12px rgba(245, 158, 11, 0.65);
   opacity: 0;
-  animation: steamHeartFloat 2.6s infinite ease-in-out;
+  animation: aromaHeartFloat 3s infinite ease-in-out;
 }
 
 .teacup-scene.steaming .steam-heart {
-  opacity: 0.85;
+  opacity: 0.95;
 }
 
-@keyframes steamRise {
-  0% { transform: translateY(10px) scaleX(0.8); opacity: 0; }
-  50% { opacity: 0.8; transform: translateY(-10px) scaleX(1.2); }
-  100% { transform: translateY(-30px) scaleX(1.6); opacity: 0; }
+@keyframes aromaHeartFloat {
+  0% { transform: translateX(-50%) translateY(8px) scale(0.6) rotate(-5deg); opacity: 0; }
+  40% { opacity: 1; transform: translateX(-40%) translateY(-18px) scale(1.15) rotate(6deg); }
+  80% { opacity: 0.7; transform: translateX(-60%) translateY(-38px) scale(1.3) rotate(-8deg); }
+  100% { transform: translateX(-50%) translateY(-60px) scale(0.9) rotate(4deg); opacity: 0; }
 }
 
-@keyframes steamHeartFloat {
-  0% { transform: translateX(-50%) translateY(5px) scale(0.6); opacity: 0; }
-  50% { opacity: 0.9; transform: translateX(-50%) translateY(-15px) scale(1.1); }
-  100% { transform: translateX(-50%) translateY(-35px) scale(1.3); opacity: 0; }
+.teacup-tap-hint {
+  font-size: 0.82rem;
+  color: #92400E;
+  font-weight: 600;
+  margin-top: 0.45rem;
+  letter-spacing: 0.02em;
+  opacity: 0.88;
+  transition: opacity 0.3s ease;
 }
 
 .chiya-status-log {
-  min-height: 50px;
+  min-height: 54px;
   margin-top: 1rem;
-  font-size: 0.98rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #78350F;
   transition: opacity 0.3s ease;
+  line-height: 1.5;
 }
 
 /* Chiya Meter */
@@ -2295,34 +2942,124 @@ a {
   font-family: var(--font-sans);
 }
 
+/* --------------------------------------------------------------------------
+   23. MUSEUM GALLERY SHOWCASE & FLOATING HEARTS ANIMATION
+   ========================================================================== */
+.gallery-showcase-wrapper {
+  position: relative;
+  max-width: 580px;
+  margin: 0 auto;
+  perspective: 1200px;
+}
+
+/* Ambient Overhead Spotlight */
+.gallery-spotlight-cone {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  height: 380px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(254, 243, 199, 0.4) 0%, rgba(254, 240, 138, 0.15) 45%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Brass Picture Hanger Component */
+.gallery-hanger-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-bottom: -10px;
+  z-index: 2;
+  user-select: none;
+}
+
+.gallery-hanger-nail {
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle at 35% 35%, #FDE68A 0%, #D97706 60%, #92400E 100%);
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.gallery-hanger-wires {
+  position: relative;
+  width: 160px;
+  height: 32px;
+}
+
+.gallery-hanger-wires::before,
+.gallery-hanger-wires::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 82px;
+  height: 1px;
+  background: linear-gradient(90deg, #D97706, #92400E);
+  opacity: 0.7;
+}
+
+.gallery-hanger-wires::before {
+  left: 0;
+  transform: rotate(21deg);
+  transform-origin: top right;
+}
+
+.gallery-hanger-wires::after {
+  right: 0;
+  transform: rotate(-21deg);
+  transform-origin: top left;
+}
+
 /* Physical Textured Picture Frame */
 .physical-art-frame {
-  background: #1C1917;
+  background: linear-gradient(145deg, #24201D 0%, #151311 50%, #1F1B18 100%);
   padding: 18px;
-  border-radius: 12px;
+  border-radius: 14px;
   box-shadow: 
-    0 25px 60px rgba(0, 0, 0, 0.25),
-    0 10px 25px rgba(28, 25, 23, 0.3),
-    inset 0 2px 4px rgba(255, 255, 255, 0.15),
-    inset 0 -2px 6px rgba(0, 0, 0, 0.6);
-  border: 1px solid #292524;
+    0 32px 75px -12px rgba(24, 18, 14, 0.4),
+    0 16px 32px -8px rgba(225, 29, 72, 0.16),
+    inset 0 2px 4px rgba(255, 255, 255, 0.18),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.8);
+  border: 1px solid #332B25;
   position: relative;
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  user-select: none;
+  z-index: 1;
 }
 
 .physical-art-frame:hover {
-  transform: translateY(-4px) scale(1.01);
+  transform: translateY(-6px) scale(1.015);
   box-shadow: 
-    0 35px 75px rgba(0, 0, 0, 0.3),
-    0 15px 35px rgba(28, 25, 23, 0.35);
+    0 42px 90px -15px rgba(24, 18, 14, 0.48),
+    0 20px 42px -10px rgba(225, 29, 72, 0.22),
+    0 0 25px rgba(254, 243, 199, 0.25);
 }
 
+.physical-art-frame:active {
+  transform: translateY(-2px) scale(0.995);
+  transition-duration: 0.1s;
+}
+
+/* Inner Gold Fillet Border */
+.art-frame-gold-fillet {
+  border: 2px solid #D4AF37;
+  border-radius: 8px;
+  padding: 4px;
+  background: linear-gradient(135deg, #FDE68A 0%, #D4AF37 35%, #92400E 70%, #F59E0B 100%);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* White Museum Mat Board */
 .art-frame-mount {
-  background: #FFFFFF;
-  padding: 10px;
-  border-radius: 4px;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+  background: #FAF8F5;
+  padding: 14px;
+  border-radius: 6px;
+  box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
 }
@@ -2333,41 +3070,310 @@ a {
   max-height: 820px;
   object-fit: contain;
   display: block;
-  border-radius: 2px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.physical-art-frame:hover .art-frame-mount img {
+  transform: scale(1.02);
+}
+
+/* Realistic Glass Glare Layer */
+.art-frame-glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 30%, transparent 60%);
+  pointer-events: none;
+  border-radius: 6px;
+  mix-blend-mode: overlay;
+  transition: opacity 0.4s ease;
+}
+
+.physical-art-frame:hover .art-frame-glare {
+  opacity: 0.75;
+}
+
+/* Tactile Spring Press on Frame Click */
+.physical-art-frame.is-clicked {
+  animation: frameSpringPress 0.52s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes frameSpringPress {
+  0% { transform: scale(1); }
+  22% { transform: scale(0.985) translateY(2px); }
+  60% { transform: scale(1.018) translateY(-4px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+/* Glass Light Sheen Sweep across Mat Board */
+.art-frame-glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 30%, transparent 60%);
+  pointer-events: none;
+  border-radius: 6px;
+  mix-blend-mode: overlay;
+  transition: opacity 0.4s ease;
+  overflow: hidden;
+}
+
+.art-frame-glare.sweeping::after {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(115deg, transparent 42%, rgba(255, 255, 255, 0.65) 50%, rgba(254, 240, 138, 0.45) 54%, transparent 62%);
+  transform: translateX(-120%) rotate(25deg);
+  animation: glassSheenSweep 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes glassSheenSweep {
+  0% { transform: translateX(-120%) rotate(25deg); opacity: 0; }
+  25% { opacity: 1; }
+  100% { transform: translateX(120%) rotate(25deg); opacity: 0; }
+}
+
+/* Interactive Floating Hearts Container */
+.art-frame-hearts-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10000;
+  overflow: visible;
+}
+
+/* Advanced Floating Vector Heart Particle */
+.floating-frame-heart {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform, opacity, filter;
+  animation: floatHeartRiseMagical var(--float-duration, 2.7s) cubic-bezier(0.25, 1, 0.45, 1) forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+}
+
+.floating-frame-heart svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 4px 12px var(--glow-color, rgba(244, 63, 94, 0.55)));
+}
+
+@keyframes floatHeartRiseMagical {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.2) rotate(0deg);
+    opacity: 0;
+    filter: blur(2px);
+  }
+  14% {
+    transform: translate3d(var(--sway-1, 15px), -38px, 0) scale(var(--target-scale, 1.15)) rotate(var(--rot-deg, -8deg));
+    opacity: 1;
+    filter: blur(0px);
+  }
+  48% {
+    transform: translate3d(calc(var(--sway-1, 15px) * -0.75), -145px, 0) scale(calc(var(--target-scale, 1.15) * 0.98)) rotate(calc(var(--rot-deg, 8deg) * -0.8));
+    opacity: 0.96;
+  }
+  76% {
+    transform: translate3d(var(--sway-2, -22px), -245px, 0) scale(calc(var(--target-scale, 1.15) * 0.88)) rotate(var(--rot-deg, 12deg));
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(calc(var(--sway-2, -22px) * 1.3), var(--rise-dist, -330px), 0) scale(0.45) rotate(calc(var(--rot-deg, 15deg) * 1.6));
+    opacity: 0;
+    filter: blur(1.5px);
+  }
+}
+
+/* Shimmering Stardust Sparkle */
+.floating-frame-sparkle {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform, opacity;
+  animation: floatSparkleRise var(--sparkle-duration, 2.3s) cubic-bezier(0.2, 0.9, 0.4, 1) forwards;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-frame-sparkle svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 8px rgba(254, 240, 138, 0.9));
+}
+
+@keyframes floatSparkleRise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.1) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    transform: translate3d(var(--sparkle-x, 20px), -45px, 0) scale(var(--sparkle-scale, 1.2)) rotate(90deg);
+    opacity: 1;
+  }
+  60% {
+    transform: translate3d(calc(var(--sparkle-x, 20px) * -0.5), -145px, 0) scale(calc(var(--sparkle-scale, 1.2) * 0.8)) rotate(220deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(var(--sparkle-x, 20px), var(--sparkle-rise, -270px), 0) scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Ambient Fairy Dust Micro-Orb */
+.floating-frame-orb {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFF7ED 0%, #F43F5E 65%, transparent 100%);
+  box-shadow: 0 0 10px rgba(244, 63, 94, 0.75);
+  animation: floatOrbRise var(--orb-duration, 2.5s) ease-out forwards;
+  z-index: 10001;
+}
+
+@keyframes floatOrbRise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.2);
+    opacity: 0;
+  }
+  16% {
+    opacity: 0.92;
+    transform: translate3d(var(--orb-x, 10px), -32px, 0) scale(1);
+  }
+  78% {
+    opacity: 0.65;
+    transform: translate3d(calc(var(--orb-x, 10px) * -1.1), -185px, 0) scale(0.75);
+  }
+  100% {
+    transform: translate3d(var(--orb-x, 10px), var(--orb-rise, -290px), 0) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Radial Luminous Aura Pulse on Frame Click */
+.frame-aura-burst {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 25;
+  transform: translate(-50%, -50%) scale(0.2);
+  background: radial-gradient(circle, rgba(254, 205, 211, 0.6) 0%, rgba(244, 63, 94, 0.35) 45%, rgba(251, 191, 36, 0.22) 70%, transparent 100%);
+  animation: auraWaveExpand 1.1s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes auraWaveExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(0.15);
+    opacity: 0.95;
+  }
+  60% {
+    opacity: 0.65;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* Zoom Inspection Badge */
 .art-frame-zoom-badge {
   position: absolute;
   bottom: 25px;
   right: 25px;
-  background: rgba(28, 25, 23, 0.8);
+  background: rgba(28, 25, 23, 0.88);
   color: #FFFFFF;
-  backdrop-filter: blur(8px);
-  padding: 0.45rem 0.95rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.5rem 1.15rem;
   border-radius: var(--radius-full);
   font-size: 0.85rem;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  gap: 0.5rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   transition: all var(--transition-fast);
 }
 
 .physical-art-frame:hover .art-frame-zoom-badge {
   background: var(--color-primary);
+  border-color: rgba(255, 255, 255, 0.45);
   transform: scale(1.06);
+  box-shadow: 0 6px 22px rgba(225, 29, 72, 0.45);
 }
 
-/* Dedicated Blessing Banner below frame */
-.google-frame-blessing-card {
-  margin-top: 2rem;
-  background: #FFFFFF;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 1.75rem 2rem;
-  box-shadow: var(--shadow-sm);
+/* Museum Gallery Brass Plaque */
+.gallery-brass-plaque {
+  margin-top: 1.75rem;
+  background: linear-gradient(180deg, #FFFDF8 0%, #FBF3E4 100%);
+  border: 1px solid #D8C4B0;
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 2rem;
+  box-shadow: 0 6px 20px rgba(78, 52, 33, 0.08);
   text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plaque-screw {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FDE68A 0%, #B45309 100%);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.plaque-screw.top-left { top: 8px; left: 8px; }
+.plaque-screw.top-right { top: 8px; right: 8px; }
+.plaque-screw.bottom-left { bottom: 8px; left: 8px; }
+.plaque-screw.bottom-right { bottom: 8px; right: 8px; }
+
+.plaque-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #451A03;
+  margin-bottom: 0.25rem;
+}
+
+.plaque-subtitle {
+  font-size: 0.88rem;
+  color: #78350F;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.plaque-action-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
+}
+
+.gallery-brass-plaque:hover .plaque-action-hint {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  transform: translateY(-1px);
 }
 
 .blessing-title-text {
@@ -2410,6 +3416,915 @@ a {
   color: #FFFFFF;
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(225, 29, 72, 0.2);
+}
+
+/* ==========================================================================
+   NEW PERSONAL & INTERACTIVE SECTIONS
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   8. TIME-AWARE BIRTHDAY BANNER (HERO)
+   -------------------------------------------------------------------------- */
+.time-aware-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(254, 243, 199, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--radius-full);
+  padding: 0.45rem 1.15rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #78350F;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 12px rgba(180, 83, 9, 0.08);
+  animation: fadeInDown 0.6s ease-out;
+}
+
+.time-aware-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #F59E0B;
+  box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+  animation: bannerPulse 2s infinite;
+}
+
+@keyframes bannerPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+
+/* --------------------------------------------------------------------------
+   2. PERSONAL VOICE MESSAGE PLAYER
+   -------------------------------------------------------------------------- */
+.section-voice-note {
+  background: linear-gradient(180deg, var(--color-bg) 0%, #FFFDF9 50%, var(--color-bg) 100%);
+  position: relative;
+}
+
+.voice-note-card {
+  max-width: 620px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 1px solid #EADBCE;
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  box-shadow: 0 15px 35px rgba(120, 53, 15, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.voice-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.voice-avatar-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FDE68A 0%, #B45309 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 1.35rem;
+  box-shadow: 0 4px 12px rgba(180, 83, 9, 0.25);
+  flex-shrink: 0;
+}
+
+.voice-header-meta h4 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #451A03;
+  margin-bottom: 0.15rem;
+}
+
+.voice-header-meta p {
+  font-size: 0.85rem;
+  color: #78350F;
+}
+
+.voice-player-interactive {
+  background: #FAF6F0;
+  border: 1px solid #EADCCF;
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.voice-play-toggle-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #B45309;
+  color: #FFFFFF;
+  border: none;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(180, 83, 9, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.voice-play-toggle-btn:hover {
+  transform: scale(1.08);
+  background: #92400E;
+}
+
+.voice-play-toggle-btn:active {
+  transform: scale(0.96);
+}
+
+.voice-controls-stack {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.voice-waveform-display {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 34px;
+}
+
+.waveform-bar {
+  flex: 1;
+  min-width: 3px;
+  background: #D8C5B3;
+  border-radius: 2px;
+  height: 8px;
+  transition: height 0.15s ease, background-color 0.2s ease;
+}
+
+.voice-note-card.is-playing .waveform-bar {
+  background: #B45309;
+  animation: waveformDance 0.8s infinite ease-in-out alternate;
+}
+
+.voice-note-card.is-playing .waveform-bar:nth-child(2n) { animation-delay: 0.15s; }
+.voice-note-card.is-playing .waveform-bar:nth-child(3n) { animation-delay: 0.3s; }
+.voice-note-card.is-playing .waveform-bar:nth-child(4n) { animation-delay: 0.45s; }
+.voice-note-card.is-playing .waveform-bar:nth-child(5n) { animation-delay: 0.2s; }
+
+@keyframes waveformDance {
+  0% { height: 6px; }
+  50% { height: 28px; }
+  100% { height: 12px; }
+}
+
+.voice-track-and-time {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.voice-progress-track {
+  flex: 1;
+  height: 6px;
+  background: #E5D5C5;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.voice-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #B45309;
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+.voice-time-label {
+  font-size: 0.8rem;
+  font-family: monospace;
+  font-weight: 600;
+  color: #78350F;
+  white-space: nowrap;
+}
+
+.voice-disclaimer-note {
+  font-size: 0.85rem;
+  color: #8C6A54;
+  font-style: italic;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   6. BLURRED MEMORY REVEAL
+   -------------------------------------------------------------------------- */
+.section-blurred-memory {
+  background: linear-gradient(180deg, var(--color-bg) 0%, #FBF6EF 100%);
+}
+
+.blurred-memory-wrapper {
+  max-width: 580px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.blurred-memory-card {
+  background: #FFFFFF;
+  border: 1px solid #EADBCE;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: 0 15px 35px rgba(120, 53, 15, 0.08);
+  position: relative;
+}
+
+.blurred-memory-img-frame {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #1C1917;
+  cursor: pointer;
+}
+
+.blurred-memory-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(24px) brightness(0.85);
+  transform: scale(1.08);
+  transition: filter 1.3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blurred-memory-card.is-revealed .blurred-memory-img {
+  filter: blur(0px) brightness(1);
+  transform: scale(1);
+}
+
+.blurred-memory-lock-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: rgba(41, 23, 12, 0.35);
+  backdrop-filter: blur(4px);
+  color: #FFFFFF;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  z-index: 5;
+}
+
+.blurred-memory-card.is-revealed .blurred-memory-lock-overlay {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.blurred-lock-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.blurred-reveal-btn {
+  margin-top: 1.25rem;
+}
+
+.blurred-memory-caption-box {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: #FFFDF9;
+  border: 1px dashed #E5D5C5;
+  border-radius: var(--radius-sm);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blurred-memory-card.is-revealed .blurred-memory-caption-box {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.blurred-caption-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #78350F;
+  margin-bottom: 0.35rem;
+}
+
+.blurred-caption-text {
+  font-size: 0.95rem;
+  color: #573319;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   1. MINI QUIZ: "HOW WELL DO I KNOW YOU?"
+   -------------------------------------------------------------------------- */
+.quiz-wrapper {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.quiz-card {
+  background: #FFFFFF;
+  border: 1px solid #EADBCE;
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  box-shadow: 0 16px 36px rgba(120, 53, 15, 0.08);
+  position: relative;
+}
+
+.quiz-step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.quiz-step-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #B45309;
+  background: #FEF3C7;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+}
+
+.quiz-progress-track {
+  width: 120px;
+  height: 6px;
+  background: #EADCCF;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  width: 20%;
+  background: #B45309;
+  transition: width 0.3s ease;
+}
+
+.quiz-question-heading {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #451A03;
+  margin-bottom: 1.5rem;
+  line-height: 1.35;
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #FAF7F2;
+  border: 1.5px solid #EAE0D5;
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.25rem;
+  font-size: 0.98rem;
+  color: #451A03;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  width: 100%;
+}
+
+.quiz-option-btn:hover {
+  background: #FFFDF9;
+  border-color: #B45309;
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(180, 83, 9, 0.1);
+}
+
+.quiz-option-btn.is-selected {
+  background: #FEF3C7;
+  border-color: #B45309;
+  font-weight: 600;
+}
+
+.quiz-option-key {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #EADBCE;
+  color: #78350F;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.quiz-option-btn.is-selected .quiz-option-key {
+  background: #B45309;
+  color: #FFFFFF;
+}
+
+.quiz-feedback-box {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #92400E;
+  margin-bottom: 1rem;
+  transition: opacity 0.3s ease;
+}
+
+/* Quiz Completion Screen */
+.quiz-result-view {
+  text-align: center;
+  padding: 1.5rem 0;
+  display: none;
+}
+
+.quiz-result-view.active {
+  display: block;
+  animation: fadeInDown 0.5s ease;
+}
+
+.quiz-result-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 0.75rem;
+  display: inline-block;
+}
+
+.quiz-result-title {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #78350F;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-result-desc {
+  font-size: 1.1rem;
+  color: #573319;
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. THINGS YOU PROBABLY DON'T REALIZE
+   -------------------------------------------------------------------------- */
+.unrealized-wrapper {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.unrealized-card {
+  background: #FFFFFF;
+  border: 1px solid #EADBCE;
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.25rem;
+  box-shadow: 0 16px 36px rgba(120, 53, 15, 0.08);
+  text-align: center;
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.unrealized-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #B45309;
+  background: #FEF3C7;
+  padding: 0.25rem 0.85rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.5rem;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.unrealized-quote-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  color: #451A03;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.unrealized-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px dashed #E5D5C5;
+  padding-top: 1.5rem;
+}
+
+.unrealized-dots-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.unrealized-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #D8C5B3;
+  transition: all 0.3s ease;
+}
+
+.unrealized-dot.active {
+  background: #B45309;
+  width: 20px;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   7. REAL CHIYA PROMISE / STATUS CARD
+   -------------------------------------------------------------------------- */
+.real-chiya-card {
+  max-width: 600px;
+  margin: 2.5rem auto 0;
+  background: linear-gradient(135deg, #FFFDF9 0%, #FEF8F0 100%);
+  border: 2px dashed #D97706;
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(180, 83, 9, 0.08);
+  text-align: center;
+}
+
+.real-chiya-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #78350F;
+}
+
+.real-chiya-status-table {
+  max-width: 380px;
+  margin: 0 auto 1.5rem;
+  background: #FFFFFF;
+  border: 1px solid #EADBCE;
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  font-family: monospace;
+  font-size: 0.95rem;
+  color: #451A03;
+}
+
+.real-chiya-status-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  border-bottom: 1px dotted #EADCCF;
+}
+
+.real-chiya-status-row:last-child {
+  border-bottom: none;
+}
+
+.real-chiya-subtext {
+  font-size: 0.95rem;
+  color: #6B4E3D;
+  margin-bottom: 1.25rem;
+}
+
+.real-chiya-revealed-status {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: #FEF3C7;
+  border: 1px solid #F59E0B;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #78350F;
+  display: none;
+  animation: fadeInDown 0.4s ease forwards;
+}
+
+.real-chiya-revealed-status.active {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   5. "DO NOT CLICK" BUTTON
+   -------------------------------------------------------------------------- */
+.section-do-not-click {
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+}
+
+.do-not-click-card {
+  max-width: 520px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 1px solid #EADBCE;
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  box-shadow: 0 10px 30px rgba(120, 53, 15, 0.06);
+}
+
+.do-not-click-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #451A03;
+  margin-bottom: 0.5rem;
+}
+
+.do-not-click-desc {
+  font-size: 0.95rem;
+  color: #78350F;
+  margin-bottom: 1.5rem;
+}
+
+.do-not-click-btn {
+  background: #1C1917;
+  color: #FFFFFF;
+  border: 2px solid #292524;
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.do-not-click-btn:hover {
+  background: #292524;
+  transform: scale(1.04);
+}
+
+.do-not-click-btn.shake-btn {
+  animation: buttonWiggle 0.4s ease-in-out;
+}
+
+@keyframes buttonWiggle {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px) rotate(-2deg); }
+  50% { transform: translateX(8px) rotate(2deg); }
+  70% { transform: translateX(-4px) rotate(-1deg); }
+}
+
+.do-not-click-warning-text {
+  min-height: 28px;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #DC2626;
+  transition: opacity 0.2s ease;
+}
+
+/* Secret Revealed Content */
+.secret-revealed-box {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: #FFFDF9;
+  border: 2px dashed #B45309;
+  border-radius: var(--radius-md);
+  display: none;
+  animation: fadeInDown 0.5s ease forwards;
+}
+
+.secret-revealed-box.active {
+  display: block;
+}
+
+.secret-funny-img-wrap {
+  width: 100%;
+  max-height: 280px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.secret-funny-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.secret-point-badge {
+  display: inline-block;
+  background: #FEF3C7;
+  color: #B45309;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-full);
+  margin-top: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   9. ONE QUIET / SERIOUS SECTION
+   -------------------------------------------------------------------------- */
+.section-quiet {
+  background: #FDFBF7;
+  padding: 6rem 1.5rem;
+  position: relative;
+  transition: background-color 0.8s ease;
+}
+
+.quiet-container {
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.quiet-card {
+  background: #FFFFFF;
+  border: 1px solid #EDE4D8;
+  border-radius: var(--radius-md);
+  padding: 3.5rem 2.5rem;
+  box-shadow: 0 10px 30px rgba(120, 53, 15, 0.04);
+}
+
+.quiet-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #A89582;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.quiet-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: #382D24;
+  margin-bottom: 1.75rem;
+  line-height: 1.3;
+}
+
+.quiet-body {
+  font-size: 1.08rem;
+  line-height: 1.9;
+  color: #574B40;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.quiet-body p {
+  margin: 0;
+}
+
+.quiet-signoff {
+  margin-top: 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: #78350F;
+}
+
+/* When in quiet section: dim floating animations for pure focus */
+body.quiet-mode-active .floating-background-decor {
+  opacity: 0.08 !important;
+  transition: opacity 1s ease;
+}
+
+/* --------------------------------------------------------------------------
+   10. FINAL LOCKED ENVELOPE
+   -------------------------------------------------------------------------- */
+.final-envelope-container {
+  max-width: 620px;
+  margin: 3rem auto 0;
+  text-align: center;
+}
+
+.final-envelope-box {
+  background: #FFFFFF;
+  border: 1px solid #EADBCE;
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  box-shadow: 0 15px 35px rgba(120, 53, 15, 0.08);
+}
+
+.final-envelope-graphic {
+  position: relative;
+  width: 140px;
+  height: 95px;
+  background: #FDF6EC;
+  border: 2px solid #D8C3AE;
+  border-radius: 8px;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 8px 20px rgba(120, 53, 15, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.final-envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: #F6EBDE;
+  border-bottom: 2px solid #D8C3AE;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+
+.final-envelope-seal {
+  position: absolute;
+  top: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #B45309;
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(180, 83, 9, 0.4);
+  z-index: 3;
+}
+
+.final-envelope-box.is-opened .final-envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.final-envelope-box.is-opened .final-envelope-seal {
+  opacity: 0;
+}
+
+.final-letter-unfolded {
+  margin-top: 1.75rem;
+  background: #FFFDF9;
+  border: 1px solid #EADBCE;
+  border-radius: var(--radius-md);
+  padding: 2.25rem 2rem;
+  text-align: left;
+  display: none;
+  animation: fadeInDown 0.6s ease forwards;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.final-letter-unfolded.active {
+  display: block;
+}
+
+.final-letter-text {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: #451A03;
+  margin-bottom: 1.5rem;
+  white-space: pre-line;
 }
 
 /* --------------------------------------------------------------------------

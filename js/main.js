@@ -82,15 +82,24 @@ document.addEventListener("DOMContentLoaded", () => {
   initPersonalizedContent();
   initIntroScreen();
   initAgeCalculation();
+  initTimeAwareBanner();
   initMusicPlayer();
+  initVoiceMessagePlayer();
   initParallaxAndHearts();
   initPhotoGallery();
   initGoogleFrameShowcase();
+  initBlurredMemory();
   initOpenWhenLetters();
   initCandleInteraction();
   initGiftBox();
   initEasterEgg();
   initChiyaSection();
+  initMiniQuiz();
+  initUnrealizedObservations();
+  initRealChiyaCard();
+  initDoNotClickButton();
+  initQuietSection();
+  initFinalLockedEnvelope();
   initScrollAnimations();
   initReplayButton();
 });
@@ -357,7 +366,7 @@ function initParallaxAndHearts() {
 }
 
 /* --------------------------------------------------------------------------
-   6. PHOTO GALLERY & LIGHTBOX
+   6. PHOTO GALLERY & LIGHTBOX (WITH MAGICAL FLOATING HEARTS)
    -------------------------------------------------------------------------- */
 function initPhotoGallery() {
   const galleryCards = document.querySelectorAll(".polaroid-card");
@@ -383,11 +392,69 @@ function initPhotoGallery() {
     if (lightboxCounter) lightboxCounter.textContent = `${appState.currentLightboxIndex + 1} / ${appState.photos.length}`;
   }
 
-  // Open on physical art frame click
+  // Handle click on physical art frame with magical floating hearts & chime
   if (framedArt) {
-    framedArt.addEventListener("click", () => {
-      updateLightbox(0);
-      lightbox.classList.add("active");
+    const handleFrameReveal = (e) => {
+      // 1. Tactile spring press feedback on the physical frame
+      framedArt.classList.add("is-clicked");
+      setTimeout(() => framedArt.classList.remove("is-clicked"), 550);
+
+      // 2. Glass light sheen sweep across the photograph mat board
+      const glare = framedArt.querySelector(".art-frame-glare");
+      if (glare) {
+        glare.classList.remove("sweeping");
+        void glare.offsetWidth; // force reflow for smooth re-trigger
+        glare.classList.add("sweeping");
+        setTimeout(() => glare.classList.remove("sweeping"), 900);
+      }
+
+      // 3. Launch rising constellation of vector floating hearts & sparkles
+      launchFloatingHearts(framedArt, e);
+
+      // 4. Play warm, acoustic harmonic dream chime
+      playMagicalChime();
+
+      // 5. Trigger subtle celebratory stardust confetti
+      const rect = framedArt.getBoundingClientRect();
+      const originX = e && e.clientX ? e.clientX : rect.left + rect.width / 2;
+      const originY = e && e.clientY ? e.clientY : rect.top + rect.height / 2;
+      triggerConfettiBurst(originX, originY, 28, ["✨", "💖", "🌸", "⭐"]);
+
+      // 6. Smoothly open fullscreen lightbox after letting user savor the magical floating hearts
+      setTimeout(() => {
+        updateLightbox(0);
+        lightbox.classList.add("active");
+      }, 520);
+    };
+
+    framedArt.addEventListener("click", handleFrameReveal);
+    framedArt.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleFrameReveal(e);
+      }
+    });
+
+    // 3D perspective tilt on desktop
+    initArtFrame3DTilt(framedArt);
+  }
+
+  // Interactive celebrate heart button inside lightbox
+  const lightboxHeartBtn = document.getElementById("lightbox-heart-burst-btn");
+  if (lightboxHeartBtn) {
+    lightboxHeartBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      launchFloatingHearts(lightbox, e);
+      playMagicalChime();
+      triggerConfettiBurst(e.clientX, e.clientY, 25, ["✨", "❤️", "💖"]);
+    });
+  }
+
+  // Clicking image inside lightbox also releases celebration hearts
+  if (lightboxImg) {
+    lightboxImg.addEventListener("click", (e) => {
+      launchFloatingHearts(lightbox, e);
+      playMagicalChime();
     });
   }
 
@@ -447,6 +514,298 @@ function initPhotoGallery() {
       updateLightbox(appState.currentLightboxIndex - 1);
     }
   }, { passive: true });
+}
+
+/**
+ * Advanced Magical Floating Hearts & Stardust Constellation Generator
+ * Architected with vector SVGs, natural sinusoidal air drafts, and multi-tier depth.
+ */
+function launchFloatingHearts(frameEl, e) {
+  let container = document.getElementById("art-frame-hearts-container");
+
+  // If frameEl is the lightbox modal or body, create or use a global floating container
+  if (!container || frameEl.id === "lightbox-modal" || frameEl === document.body) {
+    let globalContainer = document.getElementById("global-floating-hearts-layer");
+    if (!globalContainer) {
+      globalContainer = document.createElement("div");
+      globalContainer.id = "global-floating-hearts-layer";
+      globalContainer.style.cssText = "position:fixed;inset:0;pointer-events:none;z-index:99999;overflow:visible;";
+      document.body.appendChild(globalContainer);
+    }
+    container = globalContainer;
+  }
+
+  const rect = frameEl.getBoundingClientRect();
+  const isGlobal = container.id === "global-floating-hearts-layer";
+
+  // Determine click coordinates relative to the chosen container
+  const clickX = e && e.clientX ? (isGlobal ? e.clientX : e.clientX - rect.left) : (isGlobal ? rect.left + rect.width / 2 : rect.width / 2);
+  const clickY = e && e.clientY ? (isGlobal ? e.clientY : e.clientY - rect.top) : (isGlobal ? rect.top + rect.height / 2 : rect.height / 2);
+
+  // Trigger luminous radial aura expanding wave at click coordinates
+  const aura = document.createElement("div");
+  aura.className = "frame-aura-burst";
+  const auraSize = Math.max(90, Math.min(rect.width ? rect.width * 0.45 : 140, 180));
+  aura.style.width = `${auraSize}px`;
+  aura.style.height = `${auraSize}px`;
+  aura.style.left = `${clickX}px`;
+  aura.style.top = `${clickY}px`;
+  container.appendChild(aura);
+  setTimeout(() => aura.remove(), 1100);
+
+  // Curated color palettes for vector hearts
+  const palettes = [
+    { fill: "url(#heartGradRuby)", glow: "rgba(255, 42, 109, 0.65)", stroke: "#FF2A6D" },
+    { fill: "url(#heartGradRose)", glow: "rgba(244, 63, 94, 0.65)", stroke: "#F43F5E" },
+    { fill: "url(#heartGradGold)", glow: "rgba(245, 158, 11, 0.6)", stroke: "#F59E0B" },
+    { fill: "url(#heartGradCoral)", glow: "rgba(251, 113, 133, 0.6)", stroke: "#FB7185" },
+    { fill: "url(#heartGradBlush)", glow: "rgba(236, 72, 153, 0.55)", stroke: "#EC4899" }
+  ];
+
+  // Helper to ensure gradient defs are in DOM
+  ensureSvgGradients();
+
+  // Particle distribution: 14 vector hearts + 6 stardust sparkles + 4 fairy dust orbs
+  const heartCount = 14;
+  const sparkleCount = 6;
+  const orbCount = 4;
+
+  // 1. Spawning Vector Hearts
+  for (let i = 0; i < heartCount; i++) {
+    const heart = document.createElement("div");
+    heart.className = "floating-frame-heart";
+
+    const palette = palettes[Math.floor(Math.random() * palettes.length)];
+    const isOutline = Math.random() < 0.22;
+    const heartSize = 16 + Math.floor(Math.random() * 18); // 16px to 34px
+
+    heart.style.width = `${heartSize}px`;
+    heart.style.height = `${heartSize}px`;
+
+    heart.innerHTML = isOutline
+      ? `<svg viewBox="0 0 24 24" fill="none" stroke="${palette.stroke}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>`
+      : `<svg viewBox="0 0 24 24" fill="${palette.fill}" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+
+    // Organic coordinates dispersed from click center
+    const maxSpread = rect.width ? Math.min(rect.width * 0.7, 180) : 120;
+    const spreadX = (Math.random() - 0.5) * maxSpread;
+    const spreadY = (Math.random() - 0.5) * 60;
+    const posX = clickX + spreadX;
+    const posY = clickY + spreadY;
+
+    heart.style.left = `${posX}px`;
+    heart.style.top = `${posY}px`;
+
+    // Dynamic Kinematics & Trajectory
+    const sway1 = (Math.random() - 0.5) * 60;
+    const sway2 = (Math.random() - 0.5) * 90;
+    const riseDist = -(220 + Math.random() * 150);
+    const rotDeg = (Math.random() - 0.5) * 36;
+    const duration = 2.4 + Math.random() * 0.8;
+    const delay = Math.random() * 0.22;
+    const targetScale = (0.9 + Math.random() * 0.45).toFixed(2);
+
+    heart.style.setProperty("--sway-1", `${sway1}px`);
+    heart.style.setProperty("--sway-2", `${sway2}px`);
+    heart.style.setProperty("--rise-dist", `${riseDist}px`);
+    heart.style.setProperty("--rot-deg", `${rotDeg}deg`);
+    heart.style.setProperty("--target-scale", targetScale);
+    heart.style.setProperty("--float-duration", `${duration}s`);
+    heart.style.setProperty("--glow-color", palette.glow);
+    heart.style.animationDelay = `${delay}s`;
+
+    container.appendChild(heart);
+    setTimeout(() => heart.remove(), (duration + delay + 0.3) * 1000);
+  }
+
+  // 2. Spawning Shimmering Stardust Sparkles
+  for (let j = 0; j < sparkleCount; j++) {
+    const sparkle = document.createElement("div");
+    sparkle.className = "floating-frame-sparkle";
+    const starSize = 12 + Math.floor(Math.random() * 10);
+    sparkle.style.width = `${starSize}px`;
+    sparkle.style.height = `${starSize}px`;
+
+    const starColor = Math.random() < 0.5 ? "#FDE047" : "#FFF7ED";
+    sparkle.innerHTML = `<svg viewBox="0 0 24 24" fill="${starColor}" aria-hidden="true"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/></svg>`;
+
+    const posX = clickX + (Math.random() - 0.5) * 120;
+    const posY = clickY + (Math.random() - 0.5) * 50;
+    sparkle.style.left = `${posX}px`;
+    sparkle.style.top = `${posY}px`;
+
+    const sparkleX = (Math.random() - 0.5) * 70;
+    const sparkleRise = -(180 + Math.random() * 140);
+    const sparkleDuration = 2.0 + Math.random() * 0.6;
+    const delay = Math.random() * 0.25;
+
+    sparkle.style.setProperty("--sparkle-x", `${sparkleX}px`);
+    sparkle.style.setProperty("--sparkle-rise", `${sparkleRise}px`);
+    sparkle.style.setProperty("--sparkle-scale", (0.9 + Math.random() * 0.5).toFixed(2));
+    sparkle.style.setProperty("--sparkle-duration", `${sparkleDuration}s`);
+    sparkle.style.animationDelay = `${delay}s`;
+
+    container.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), (sparkleDuration + delay + 0.3) * 1000);
+  }
+
+  // 3. Spawning Ambient Fairy Dust Micro-Orbs
+  for (let k = 0; k < orbCount; k++) {
+    const orb = document.createElement("div");
+    orb.className = "floating-frame-orb";
+    const orbSize = 5 + Math.floor(Math.random() * 6);
+    orb.style.width = `${orbSize}px`;
+    orb.style.height = `${orbSize}px`;
+
+    const posX = clickX + (Math.random() - 0.5) * 100;
+    const posY = clickY + (Math.random() - 0.5) * 40;
+    orb.style.left = `${posX}px`;
+    orb.style.top = `${posY}px`;
+
+    const orbX = (Math.random() - 0.5) * 50;
+    const orbRise = -(190 + Math.random() * 130);
+    const orbDuration = 2.2 + Math.random() * 0.6;
+    const delay = Math.random() * 0.2;
+
+    orb.style.setProperty("--orb-x", `${orbX}px`);
+    orb.style.setProperty("--orb-rise", `${orbRise}px`);
+    orb.style.setProperty("--orb-duration", `${orbDuration}s`);
+    orb.style.animationDelay = `${delay}s`;
+
+    container.appendChild(orb);
+    setTimeout(() => orb.remove(), (orbDuration + delay + 0.3) * 1000);
+  }
+}
+
+/**
+ * Injects reusable SVG gradient defs into the page once
+ */
+function ensureSvgGradients() {
+  if (document.getElementById("magical-hearts-svg-defs")) return;
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.id = "magical-hearts-svg-defs";
+  svg.style.cssText = "position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;";
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="heartGradRuby" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFE4E6"/>
+        <stop offset="35%" stop-color="#FF2A6D"/>
+        <stop offset="100%" stop-color="#BE123C"/>
+      </linearGradient>
+      <linearGradient id="heartGradRose" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFF1F2"/>
+        <stop offset="40%" stop-color="#F43F5E"/>
+        <stop offset="100%" stop-color="#E11D48"/>
+      </linearGradient>
+      <linearGradient id="heartGradGold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FEF3C7"/>
+        <stop offset="45%" stop-color="#FBBF24"/>
+        <stop offset="100%" stop-color="#D97706"/>
+      </linearGradient>
+      <linearGradient id="heartGradCoral" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFF7ED"/>
+        <stop offset="40%" stop-color="#FB7185"/>
+        <stop offset="100%" stop-color="#E11D48"/>
+      </linearGradient>
+      <linearGradient id="heartGradBlush" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FDF2F8"/>
+        <stop offset="45%" stop-color="#EC4899"/>
+        <stop offset="100%" stop-color="#9D174D"/>
+      </linearGradient>
+    </defs>
+  `;
+  document.body.appendChild(svg);
+}
+
+/**
+ * Warm Acoustic Harmonic Dream Chime via Web Audio API
+ * Synthesizes a soft, crystalline dream arpeggio (F#5, A#5, C#6, F#6) with gentle acoustic attack.
+ */
+function playMagicalChime() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    if (!appState.webAudioCtx) {
+      appState.webAudioCtx = new AudioContext();
+    }
+    const ctx = appState.webAudioCtx;
+    if (ctx.state === "suspended") {
+      ctx.resume();
+    }
+
+    // Warm dream chord: F#5 (739.99 Hz), A#5 (932.33 Hz), C#6 (1108.73 Hz), F#6 (1479.98 Hz)
+    const notes = [
+      { freq: 739.99, delay: 0.00, duration: 0.8 },
+      { freq: 932.33, delay: 0.07, duration: 0.85 },
+      { freq: 1108.73, delay: 0.14, duration: 0.95 },
+      { freq: 1479.98, delay: 0.22, duration: 1.15 }
+    ];
+
+    const now = ctx.currentTime;
+    const masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(0.24, now);
+    masterGain.connect(ctx.destination);
+
+    notes.forEach(({ freq, delay, duration }) => {
+      const startTime = now + delay;
+
+      // Primary crystalline tone
+      const osc1 = ctx.createOscillator();
+      osc1.type = "sine";
+      osc1.frequency.setValueAtTime(freq, startTime);
+
+      // Subtle warm acoustic harmonic
+      const osc2 = ctx.createOscillator();
+      osc2.type = "triangle";
+      osc2.frequency.setValueAtTime(freq * 2, startTime);
+
+      const filter = ctx.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(2800, startTime);
+
+      const noteGain = ctx.createGain();
+      noteGain.gain.setValueAtTime(0.0001, startTime);
+      noteGain.gain.exponentialRampToValueAtTime(0.16, startTime + 0.015);
+      noteGain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(noteGain);
+      noteGain.connect(masterGain);
+
+      osc1.start(startTime);
+      osc2.start(startTime);
+      osc1.stop(startTime + duration + 0.05);
+      osc2.stop(startTime + duration + 0.05);
+    });
+  } catch (e) {
+    // Non-blocking fallback
+  }
+}
+
+/**
+ * Tactile 3D Perspective Tilt on Desktop Hover
+ */
+function initArtFrame3DTilt(frame) {
+  if (!frame || window.innerWidth < 992) return;
+
+  frame.addEventListener("mousemove", (e) => {
+    const rect = frame.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -6;
+    const rotateY = ((x - centerX) / centerX) * 6;
+
+    frame.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale3d(1.015, 1.015, 1.015)`;
+  });
+
+  frame.addEventListener("mouseleave", () => {
+    frame.style.transform = "";
+  });
 }
 
 /* --------------------------------------------------------------------------
@@ -540,34 +899,64 @@ function initOpenWhenLetters() {
    -------------------------------------------------------------------------- */
 function initCandleInteraction() {
   const blowBtn = document.getElementById("blow-candles-btn");
-  const cakeScene = document.querySelector(".cake-scene");
+  const cakeScene = document.getElementById("artisan-cake-scene") || document.querySelector(".cake-scene");
   const resultMsg = document.getElementById("wish-result-message");
+  const statusText = document.getElementById("cake-status-text");
 
   if (!blowBtn || !cakeScene) return;
+
+  function playCandleExtinguishChime() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+
+      // Soft sparkling arpeggio
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.1);
+        gain.gain.setValueAtTime(0.09, ctx.currentTime + idx * 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.1 + 0.6);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + idx * 0.1);
+        osc.stop(ctx.currentTime + idx * 0.1 + 0.6);
+      });
+    } catch (e) {}
+  }
 
   blowBtn.addEventListener("click", () => {
     if (appState.candlesBlown) {
       // Relight if clicked again
       cakeScene.classList.remove("candles-blown");
       if (resultMsg) resultMsg.classList.remove("revealed");
-      blowBtn.innerHTML = `Blow the Candles <span aria-hidden="true">🕯️</span>`;
+      if (statusText) statusText.textContent = "Candles are lit • Make your silent wish ✨";
+      blowBtn.innerHTML = `<span class="btn-text">Make a Wish & Blow Candles</span> <span class="btn-icon" aria-hidden="true">🕯️</span>`;
       appState.candlesBlown = false;
       return;
     }
 
-    // Blow candles out
+    // Extinguish candles with realistic animation
     cakeScene.classList.add("candles-blown");
     appState.candlesBlown = true;
+    playCandleExtinguishChime();
 
-    // Reveal message
+    if (statusText) {
+      statusText.innerHTML = `Wish locked in! 💫 <span style="font-weight: normal; color: #78350F;">May it all come true!</span>`;
+    }
+
+    // Reveal bespoke birthday wish message
     if (resultMsg) {
       resultMsg.classList.add("revealed");
     }
 
-    blowBtn.innerHTML = `Light Candles Again <span aria-hidden="true">✨</span>`;
+    blowBtn.innerHTML = `<span class="btn-text">Light Candles Again</span> <span class="btn-icon" aria-hidden="true">✨</span>`;
 
-    // Confetti celebration
-    triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.45, 80);
+    // Celebratory pastel confetti burst
+    triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.45, 95, ["✨", "🎂", "💖", "🍓"]);
   });
 }
 
@@ -682,34 +1071,60 @@ function initChiyaMaker() {
     // Step 1: Empty cup reset
     teaLiquid.style.height = "0%";
     teacupScene.classList.remove("steaming");
-    statusLog.textContent = "Getting the clean cup ready...";
+    statusLog.textContent = "Warming the fine porcelain cup... ✨";
 
     // Step 2: Pouring tea (liquid rising)
     setTimeout(() => {
-      statusLog.textContent = "Pouring freshly brewed spiced chiya... ☕";
-      teaLiquid.style.height = "75%";
+      statusLog.textContent = "Pouring freshly simmered CTC black tea with rich whole milk... ☕";
+      teaLiquid.style.height = "82%";
+      playPorcelainClink();
     }, 600);
 
     // Step 3: Steam rising
     setTimeout(() => {
       teacupScene.classList.add("steaming");
-      statusLog.textContent = "Adding a little happiness...";
-    }, 2200);
+      statusLog.textContent = "Simmering crushed green cardamom pods, fresh ginger & cinnamon bark... 🌿☕";
+    }, 2000);
 
-    // Step 4: Adding extra love
+    // Step 4: Golden milk-tea hue & aromatic spice mist
     setTimeout(() => {
-      statusLog.textContent = "Adding extra love... ❤️";
-      triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.5, 40, ["☕", "❤️", "✨"]);
-    }, 3500);
+      statusLog.textContent = "Forming the golden spiced milk-tea surface with aromatic tea leaves... ☕✨";
+      triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.5, 45, ["☕", "✨", "🍃"]);
+    }, 3400);
 
     // Step 5: Ready!
     setTimeout(() => {
-      statusLog.innerHTML = `<strong>Your birthday chiya is ready! ☕</strong><br/><span style="font-size: 0.85rem; font-weight: normal; color: #92400E;">Warning: This is virtual chiya. Real chiya is still pending. 😂</span>`;
+      statusLog.innerHTML = `<strong>Your authentic Dudh Chiya is ready! ☕</strong><br/><span style="font-size: 0.85rem; font-weight: normal; color: #92400E;">Warm, spiced, and simmered with care. (Real chiya status is tracked below! 😂)</span>`;
       brewBtn.disabled = false;
-      brewBtn.innerHTML = `Make Another Cup <span aria-hidden="true">☕</span>`;
+      brewBtn.innerHTML = `Brew Another Cup <span aria-hidden="true">☕</span>`;
       isBrewing = false;
-    }, 5000);
+    }, 4800);
   });
+}
+
+function playPorcelainClink() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(1480, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(1920, ctx.currentTime + 0.08);
+
+    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.45);
+  } catch (e) {
+    // Audio context silently ignored in restrictive environments
+  }
 }
 
 /**
@@ -829,6 +1244,11 @@ function initChiyaEasterEgg() {
   teacup.addEventListener("click", () => {
     appState.chiyaEasterEggCounter++;
 
+    // Ripple effect on tea surface
+    teacup.classList.add("ripple-active");
+    setTimeout(() => teacup.classList.remove("ripple-active"), 700);
+    playPorcelainClink();
+
     // Wiggle feedback
     teacup.style.transform = `scale(1.08) rotate(${appState.chiyaEasterEggCounter % 2 === 0 ? -4 : 4}deg)`;
     setTimeout(() => {
@@ -837,7 +1257,7 @@ function initChiyaEasterEgg() {
 
     if (appState.chiyaEasterEggCounter >= 5) {
       modal.classList.add("active");
-      triggerConfettiBurst(window.innerWidth / 2, window.innerHeight / 2, 90, ["☕", "❤️", "✨", "☕", "❤️"]);
+      triggerConfettiBurst(window.innerWidth / 2, window.innerHeight / 2, 90, ["☕", "✨", "☕", "🏆"]);
       appState.chiyaEasterEggCounter = 0; // Reset counter
     }
   });
@@ -853,6 +1273,539 @@ function initChiyaEasterEgg() {
       modal.classList.remove("active");
     }
   });
+}
+
+/* ==========================================================================
+   NEW PERSONAL & INTERACTIVE FEATURE IMPLEMENTATIONS
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   8. TIME-AWARE BIRTHDAY BANNER
+   -------------------------------------------------------------------------- */
+function initTimeAwareBanner() {
+  const textEl = document.getElementById("time-aware-text");
+  if (!textEl) return;
+
+  const hour = new Date().getHours();
+  let greeting = "";
+
+  if (hour >= 5 && hour < 12) {
+    greeting = "Good morning, birthday girl ☀️ Starting your birthday without chiya would be illegal, obviously. ☕";
+  } else if (hour >= 12 && hour < 17) {
+    greeting = "Birthday afternoon check: Cake? ✓ Good mood? Hopefully ✓ Chiya? This better be ✓ ☕";
+  } else if (hour >= 17 && hour < 21) {
+    greeting = "Hope your birthday treated you well today. ✨";
+  } else {
+    greeting = "Still here? 👀 Okay... one last birthday message before the day ends.";
+  }
+
+  textEl.textContent = greeting;
+}
+
+/* --------------------------------------------------------------------------
+   2. PERSONAL VOICE MESSAGE PLAYER
+   -------------------------------------------------------------------------- */
+function initVoiceMessagePlayer() {
+  const card = document.querySelector(".voice-note-card");
+  const playBtn = document.getElementById("voice-play-toggle-btn");
+  const playIcon = document.getElementById("voice-play-icon");
+  const audio = document.getElementById("voice-audio-element");
+  const progressTrack = document.getElementById("voice-progress-track");
+  const progressFill = document.getElementById("voice-progress-fill");
+  const timeLabel = document.getElementById("voice-time-label");
+
+  if (!playBtn || !card) return;
+
+  let isPlaying = false;
+  let synthInterval = null;
+  let simulatedSeconds = 0;
+  const simulatedDuration = 32;
+
+  function formatTime(sec) {
+    const s = Math.floor(sec || 0);
+    const m = Math.floor(s / 60);
+    const rem = s % 60;
+    return `${m}:${rem < 10 ? '0' : ''}${rem}`;
+  }
+
+  function stopPlayback() {
+    isPlaying = false;
+    card.classList.remove("is-playing");
+    if (playIcon) playIcon.className = "fa-solid fa-play";
+    if (synthInterval) {
+      clearInterval(synthInterval);
+      synthInterval = null;
+    }
+    // Restore background music
+    if (appState.audioElement && appState.isMusicPlaying) {
+      appState.audioElement.volume = 0.7;
+    }
+  }
+
+  function startSimulatedPlayback() {
+    isPlaying = true;
+    card.classList.add("is-playing");
+    if (playIcon) playIcon.className = "fa-solid fa-pause";
+
+    // Lower background music
+    if (appState.audioElement && appState.isMusicPlaying) {
+      appState.audioElement.volume = 0.15;
+    }
+
+    playAcousticVoiceNoteMelody();
+
+    synthInterval = setInterval(() => {
+      simulatedSeconds++;
+      const pct = Math.min(100, (simulatedSeconds / simulatedDuration) * 100);
+      if (progressFill) progressFill.style.width = `${pct}%`;
+      if (timeLabel) timeLabel.textContent = `${formatTime(simulatedSeconds)} / ${formatTime(simulatedDuration)}`;
+
+      if (simulatedSeconds >= simulatedDuration) {
+        simulatedSeconds = 0;
+        stopPlayback();
+      }
+    }, 1000);
+  }
+
+  if (audio) {
+    audio.addEventListener("loadedmetadata", () => {
+      if (timeLabel && !isNaN(audio.duration) && audio.duration > 0) {
+        timeLabel.textContent = `0:00 / ${formatTime(audio.duration)}`;
+      }
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      if (!isNaN(audio.duration) && audio.duration > 0) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        if (progressFill) progressFill.style.width = `${pct}%`;
+        if (timeLabel) timeLabel.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+      }
+    });
+
+    audio.addEventListener("ended", () => {
+      stopPlayback();
+    });
+
+    audio.addEventListener("error", () => {
+      console.info("Notice: Place recorded voice note at audio/birthday-message.mp3");
+    });
+  }
+
+  playBtn.addEventListener("click", () => {
+    if (!isPlaying) {
+      if (audio && audio.src && audio.readyState >= 2) {
+        audio.play().then(() => {
+          isPlaying = true;
+          card.classList.add("is-playing");
+          if (playIcon) playIcon.className = "fa-solid fa-pause";
+          if (appState.audioElement && appState.isMusicPlaying) {
+            appState.audioElement.volume = 0.15;
+          }
+        }).catch(() => {
+          startSimulatedPlayback();
+        });
+      } else {
+        startSimulatedPlayback();
+      }
+    } else {
+      if (audio && !audio.paused) {
+        audio.pause();
+      }
+      stopPlayback();
+    }
+  });
+
+  if (progressTrack) {
+    progressTrack.addEventListener("click", (e) => {
+      const rect = progressTrack.getBoundingClientRect();
+      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      if (audio && !isNaN(audio.duration) && audio.duration > 0) {
+        audio.currentTime = pos * audio.duration;
+      } else {
+        simulatedSeconds = Math.floor(pos * simulatedDuration);
+        if (progressFill) progressFill.style.width = `${pos * 100}%`;
+        if (timeLabel) timeLabel.textContent = `${formatTime(simulatedSeconds)} / ${formatTime(simulatedDuration)}`;
+      }
+    });
+  }
+}
+
+function playAcousticVoiceNoteMelody() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 392.00, 329.63];
+    notes.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.45);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime + idx * 0.45);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.45 + 0.55);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + idx * 0.45);
+      osc.stop(ctx.currentTime + idx * 0.45 + 0.6);
+    });
+  } catch (e) {}
+}
+
+/* --------------------------------------------------------------------------
+   6. BLURRED MEMORY REVEAL
+   -------------------------------------------------------------------------- */
+function initBlurredMemory() {
+  const card = document.getElementById("blurred-memory-card");
+  const trigger = document.getElementById("blurred-memory-trigger");
+  const revealBtn = document.getElementById("blurred-reveal-btn");
+
+  if (!card) return;
+
+  function revealMemory() {
+    if (card.classList.contains("is-revealed")) return;
+    card.classList.add("is-revealed");
+    if (revealBtn) {
+      revealBtn.innerHTML = `Memory Revealed ✨ <i class="fa-solid fa-check"></i>`;
+      revealBtn.style.background = "#059669";
+    }
+    setTimeout(() => {
+      triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.6, 60, ["📸", "✨", "☕", "🎉"]);
+    }, 900);
+  }
+
+  if (revealBtn) revealBtn.addEventListener("click", revealMemory);
+  if (trigger) trigger.addEventListener("click", revealMemory);
+}
+
+/* --------------------------------------------------------------------------
+   1. MINI QUIZ: "HOW WELL DO I KNOW YOU?"
+   -------------------------------------------------------------------------- */
+const quizQuestions = [
+  {
+    question: "What can probably fix your mood?",
+    options: [
+      { text: "Sleep", note: "A solid option, but we both know what really works..." },
+      { text: "Money", note: "Helpful, but still not #1 on your emergency list..." },
+      { text: "Chiya ☕", note: "Bingo. Instant peace in a warm cup!" },
+      { text: "More Chiya 😂", note: "The only mathematically indisputable truth." }
+    ]
+  },
+  {
+    question: "Your ideal emergency solution?",
+    options: [
+      { text: "Call someone", note: "Only after proper contemplation..." },
+      { text: "Think carefully", note: "Overthinking mode: actively buffering..." },
+      { text: "Panic", note: "Classic, but highly inefficient 😂" },
+      { text: "Make chiya first ☕", note: "Priorities in exact required order." }
+    ]
+  },
+  {
+    question: "What should NEVER be forgotten?",
+    options: [
+      { text: "Phone", note: "Essential survival gear..." },
+      { text: "Birthday", note: "Especially today! 🎂" },
+      { text: "Chiya", note: "Vital life support ☕" },
+      { text: "Apparently all of the above 😂", note: "Full marks for absolute accuracy!" }
+    ]
+  },
+  {
+    question: "Your typical reaction to hearing good news?",
+    options: [
+      { text: "Calm celebration", note: "Never seen you that calm 😂" },
+      { text: "Text in ALL CAPS", note: "KEYBOARD SMASH COMMENCING" },
+      { text: "Wait, really?!", note: "First comes the disbelief..." },
+      { text: "Celebrate with chiya ☕", note: "Tradition must be upheld." }
+    ]
+  },
+  {
+    question: "Your standard reply time when you're busy?",
+    options: [
+      { text: "2 seconds", note: "Only during extreme plot twists..." },
+      { text: "3 business days", note: "The official processing timeline 😂" },
+      { text: "Sorry was making chiya ☕", note: "A 100% legally binding excuse." },
+      { text: "Randomly at 2:00 AM 😂", note: "The midnight philosopher arrives." }
+    ]
+  }
+];
+
+function initMiniQuiz() {
+  const activeView = document.getElementById("quiz-active-view");
+  const resultView = document.getElementById("quiz-result-view");
+  const badge = document.getElementById("quiz-step-badge");
+  const progressFill = document.getElementById("quiz-progress-fill");
+  const questionText = document.getElementById("quiz-question-text");
+  const optionsList = document.getElementById("quiz-options-list");
+  const feedbackBox = document.getElementById("quiz-feedback-box");
+  const retakeBtn = document.getElementById("quiz-retake-btn");
+
+  if (!activeView || !resultView || !optionsList) return;
+
+  let currentIdx = 0;
+  let isSelecting = false;
+
+  function renderQuestion(idx) {
+    isSelecting = false;
+    const q = quizQuestions[idx];
+    if (!q) return;
+
+    if (badge) badge.textContent = `Question ${idx + 1} of ${quizQuestions.length}`;
+    if (progressFill) progressFill.style.width = `${((idx + 1) / quizQuestions.length) * 100}%`;
+    if (questionText) questionText.textContent = q.question;
+    if (feedbackBox) {
+      feedbackBox.textContent = "";
+      feedbackBox.style.opacity = "0";
+    }
+
+    optionsList.innerHTML = "";
+    const letters = ["A", "B", "C", "D"];
+
+    q.options.forEach((opt, optIdx) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "quiz-option-btn";
+      btn.innerHTML = `
+        <span class="quiz-option-key">${letters[optIdx] || optIdx + 1}</span>
+        <span>${opt.text}</span>
+      `;
+
+      btn.addEventListener("click", () => {
+        if (isSelecting) return;
+        isSelecting = true;
+
+        btn.classList.add("is-selected");
+        if (feedbackBox) {
+          feedbackBox.textContent = opt.note;
+          feedbackBox.style.opacity = "1";
+        }
+
+        setTimeout(() => {
+          if (currentIdx + 1 < quizQuestions.length) {
+            currentIdx++;
+            renderQuestion(currentIdx);
+          } else {
+            // Completed quiz!
+            activeView.style.display = "none";
+            resultView.classList.add("active");
+            triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.6, 70, ["👀", "☕", "🎉", "✨"]);
+          }
+        }, 1100);
+      });
+
+      optionsList.appendChild(btn);
+    });
+  }
+
+  if (retakeBtn) {
+    retakeBtn.addEventListener("click", () => {
+      currentIdx = 0;
+      resultView.classList.remove("active");
+      activeView.style.display = "block";
+      renderQuestion(0);
+    });
+  }
+
+  renderQuestion(0);
+}
+
+/* --------------------------------------------------------------------------
+   3. THINGS YOU PROBABLY DON'T REALIZE
+   -------------------------------------------------------------------------- */
+const unrealizedObservations = [
+  "You somehow make random conversations interesting.",
+  "Your random replies are sometimes funnier than you probably realize. 😂",
+  "You're surprisingly easy to talk to when the conversation actually starts.",
+  "Your dedication to chiya deserves scientific research. ☕",
+  "You have your own way of making ordinary conversations memorable.",
+  "Okay, enough compliments. Don't get too confident now. 😂"
+];
+
+function initUnrealizedObservations() {
+  const quoteEl = document.getElementById("unrealized-quote-text");
+  const badgeEl = document.getElementById("unrealized-badge");
+  const nextBtn = document.getElementById("unrealized-next-btn");
+  const dots = document.querySelectorAll(".unrealized-dot");
+
+  if (!quoteEl || !nextBtn) return;
+
+  let currentIdx = 0;
+
+  function updateObservation(idx) {
+    quoteEl.style.opacity = "0";
+    quoteEl.style.transform = "translateY(8px)";
+
+    setTimeout(() => {
+      quoteEl.textContent = `“${unrealizedObservations[idx]}”`;
+      if (badgeEl) badgeEl.textContent = `Observation ${idx + 1} of ${unrealizedObservations.length}`;
+
+      dots.forEach((dot, dIdx) => {
+        dot.classList.toggle("active", dIdx === idx);
+      });
+
+      if (idx === unrealizedObservations.length - 1) {
+        nextBtn.innerHTML = `Start Over <i class="fa-solid fa-rotate-left"></i>`;
+      } else {
+        nextBtn.innerHTML = `Next <i class="fa-solid fa-arrow-right"></i>`;
+      }
+
+      quoteEl.style.opacity = "1";
+      quoteEl.style.transform = "translateY(0)";
+    }, 200);
+  }
+
+  nextBtn.addEventListener("click", () => {
+    currentIdx = (currentIdx + 1) % unrealizedObservations.length;
+    updateObservation(currentIdx);
+  });
+}
+
+/* --------------------------------------------------------------------------
+   7. REAL CHIYA PROMISE / STATUS CARD
+   -------------------------------------------------------------------------- */
+function initRealChiyaCard() {
+  const btn = document.getElementById("check-real-chiya-btn");
+  const revealBox = document.getElementById("real-chiya-revealed-status");
+
+  if (!btn || !revealBox) return;
+
+  btn.addEventListener("click", () => {
+    revealBox.classList.add("active");
+    btn.innerHTML = `Status Checked ✓`;
+    btn.disabled = true;
+    btn.style.opacity = "0.85";
+    triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.7, 40, ["☕", "✨"]);
+  });
+}
+
+/* --------------------------------------------------------------------------
+   4. DEVELOPER-STYLE PERSONALITY SCANNER (TERMINAL)
+   -------------------------------------------------------------------------- */
+function initDeveloperScan() {
+  const runBtn = document.getElementById("terminal-run-again-btn");
+  const valChiya = document.getElementById("val-chiya");
+  const valRandom = document.getElementById("val-random");
+  const valOverthinking = document.getElementById("val-overthinking");
+  const fills = document.querySelectorAll(".terminal-metric-bar-fill");
+
+  if (!runBtn) return;
+
+  function runDiagnostics() {
+    fills.forEach(fill => {
+      fill.style.width = "0%";
+    });
+
+    setTimeout(() => {
+      const chiyaPct = 98 + Math.floor(Math.random() * 3); // 98 - 100%
+      const randomPct = 83 + Math.floor(Math.random() * 12); // 83 - 94%
+      const overthinkingPct = 68 + Math.floor(Math.random() * 11); // 68 - 78%
+
+      if (valChiya) valChiya.textContent = `${chiyaPct}% ☕`;
+      if (valRandom) valRandom.textContent = `${randomPct}%`;
+      if (valOverthinking) valOverthinking.textContent = `${overthinkingPct}%`;
+
+      fills.forEach(fill => {
+        const target = fill.getAttribute("data-target") || "90%";
+        fill.style.width = target;
+      });
+
+      playPorcelainClink();
+    }, 400);
+  }
+
+  runBtn.addEventListener("click", () => {
+    runBtn.textContent = "[ RUNNING... ]";
+    runDiagnostics();
+    setTimeout(() => {
+      runBtn.textContent = "[ RUN AGAIN ]";
+    }, 1200);
+  });
+}
+
+/* --------------------------------------------------------------------------
+   5. "DO NOT CLICK" BUTTON
+   -------------------------------------------------------------------------- */
+function initDoNotClickButton() {
+  const btn = document.getElementById("do-not-click-btn");
+  const warnText = document.getElementById("do-not-click-warning-text");
+  const secretBox = document.getElementById("secret-revealed-box");
+
+  if (!btn || !warnText || !secretBox) return;
+
+  let clickCount = 0;
+
+  btn.addEventListener("click", () => {
+    clickCount++;
+    btn.classList.add("shake-btn");
+    setTimeout(() => btn.classList.remove("shake-btn"), 450);
+
+    if (clickCount === 1) {
+      warnText.textContent = "I literally said don't click it. 😭";
+      btn.textContent = "Seriously, don't.";
+    } else if (clickCount === 2) {
+      warnText.textContent = "Again?? 😂";
+      btn.textContent = "Last warning.";
+    } else if (clickCount >= 3) {
+      btn.textContent = "Okay... you asked for it.";
+      btn.disabled = true;
+      warnText.textContent = "";
+      secretBox.classList.add("active");
+      triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.6, 75, ["😹", "✨", "🎁", "🎉"]);
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   9. ONE QUIET / SERIOUS SECTION
+   -------------------------------------------------------------------------- */
+function initQuietSection() {
+  const quietSection = document.getElementById("quiet-section");
+  if (!quietSection) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.body.classList.add("quiet-mode-active");
+        if (appState.audioElement && appState.isMusicPlaying) {
+          appState.audioElement.volume = 0.22;
+        }
+      } else {
+        document.body.classList.remove("quiet-mode-active");
+        if (appState.audioElement && appState.isMusicPlaying) {
+          appState.audioElement.volume = 0.7;
+        }
+      }
+    });
+  }, { threshold: 0.25 });
+
+  observer.observe(quietSection);
+}
+
+/* --------------------------------------------------------------------------
+   10. FINAL LOCKED ENVELOPE
+   -------------------------------------------------------------------------- */
+function initFinalLockedEnvelope() {
+  const box = document.getElementById("final-envelope-box");
+  const openBtn = document.getElementById("open-final-envelope-btn");
+  const trigger = document.getElementById("final-envelope-trigger");
+  const letter = document.getElementById("final-letter-unfolded");
+
+  if (!box || !letter) return;
+
+  function openEnvelope() {
+    if (box.classList.contains("is-opened")) return;
+    box.classList.add("is-opened");
+    if (openBtn) {
+      openBtn.innerHTML = `Opened with Care ✨`;
+      openBtn.disabled = true;
+      openBtn.style.opacity = "0.85";
+    }
+    setTimeout(() => {
+      letter.classList.add("active");
+      triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.7, 75, ["💌", "✨", "☕", "🎂"]);
+    }, 450);
+  }
+
+  if (openBtn) openBtn.addEventListener("click", openEnvelope);
+  if (trigger) trigger.addEventListener("click", openEnvelope);
 }
 
 /* --------------------------------------------------------------------------
@@ -877,6 +1830,38 @@ function initScrollAnimations() {
   );
 
   revealElements.forEach(el => observer.observe(el));
+
+  // Navbar Scrollspy: Automatically update active link on scroll
+  const navLinks = document.querySelectorAll(".header-nav .nav-link");
+  const trackedSections = [
+    { id: "hero", link: document.querySelector('.header-nav a[href="#hero"]') },
+    { id: "letter-section", link: document.querySelector('.header-nav a[href="#letter-section"]') },
+    { id: "gallery-section", link: document.querySelector('.header-nav a[href="#gallery-section"]') },
+    { id: "chiya-section", link: document.querySelector('.header-nav a[href="#chiya-section"]') },
+    { id: "wishes-section", link: document.querySelector('.header-nav a[href="#wishes-section"]') }
+  ];
+
+  window.addEventListener("scroll", () => {
+    const scrollPos = window.scrollY + 120;
+    let currentId = "hero";
+
+    trackedSections.forEach(item => {
+      const sec = document.getElementById(item.id);
+      if (sec && sec.offsetTop <= scrollPos) {
+        currentId = item.id;
+      }
+    });
+
+    trackedSections.forEach(item => {
+      if (item.link) {
+        if (item.id === currentId) {
+          item.link.classList.add("active");
+        } else {
+          item.link.classList.remove("active");
+        }
+      }
+    });
+  }, { passive: true });
 }
 
 /* --------------------------------------------------------------------------
