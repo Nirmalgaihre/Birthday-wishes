@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Command Center | Nirmal Gaihre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #0B0F19;
+      --card-bg: rgba(18, 24, 38, 0.85);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --accent: #6366F1;
+      --accent-glow: rgba(99, 102, 241, 0.25);
+      --success: #10B981;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --coke: #DC2626;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(220, 38, 38, 0.08) 0%, transparent 40%);
+      color: var(--text);
+      font-family: 'Outfit', -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Auth Gate Screen */
+    .auth-gate {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      padding: 1.5rem;
+    }
+
+    .auth-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2.75rem 2.25rem;
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px var(--accent-glow);
+    }
+
+    .auth-icon-wrap {
+      width: 64px;
+      height: 64px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.8rem;
+      color: #818CF8;
+    }
+
+    .auth-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .auth-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin-bottom: 1.75rem;
+    }
+
+    .auth-authorized-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34D399;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-control {
+      width: 100%;
+      background: rgba(11, 15, 25, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      color: #FFF;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 0.95rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+      margin-top: 0.5rem;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+    }
+
+    .auth-error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #F87171;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      display: none;
+      margin-top: 1rem;
+    }
+
+    /* Dashboard Layout */
+    .dashboard {
+      display: none;
+      flex-direction: column;
+      min-height: 100vh;
+      max-width: 1360px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    /* Top Nav */
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.75rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .dash-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .dash-brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #6366F1, #8B5CF6);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: white;
+    }
+
+    .dash-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .dash-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .dash-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .live-pulse {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34D399;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #10B981;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10B981;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.1); }
+      100% { opacity: 0.4; transform: scale(0.9); }
+    }
+
+    .btn-sm {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 0.5rem 0.85rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-sm:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-danger {
+      color: #F87171;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .btn-danger:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    /* Metric Cards Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .metric-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .metric-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .metric-icon {
+      font-size: 1.25rem;
+      opacity: 0.85;
+    }
+
+    .metric-value {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.3rem;
+      color: #FFF;
+    }
+
+    .metric-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Main Content Sections */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .section-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .search-input {
+      background: rgba(11, 15, 25, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 0.45rem 0.75rem;
+      color: #FFF;
+      font-size: 0.85rem;
+      outline: none;
+      min-width: 180px;
+    }
+
+    .select-input {
+      background: rgba(11, 15, 25, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 0.45rem 0.75rem;
+      color: #FFF;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    /* Activity Table */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 10px;
+      background: rgba(11, 15, 25, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.86rem;
+    }
+
+    th {
+      padding: 0.85rem 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.95rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      vertical-align: middle;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .badge-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: rgba(99, 102, 241, 0.15);
+      color: #A5B4FC;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      max-width: 240px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .badge-coke-action {
+      background: rgba(220, 38, 38, 0.15);
+      color: #FCA5A5;
+      border-color: rgba(220, 38, 38, 0.3);
+    }
+
+    .badge-excuse-action {
+      background: rgba(217, 119, 6, 0.15);
+      color: #FCD34D;
+      border-color: rgba(217, 119, 6, 0.3);
+    }
+
+    .badge-chiya-action {
+      background: rgba(180, 83, 9, 0.15);
+      color: #FBBF24;
+      border-color: rgba(180, 83, 9, 0.3);
+    }
+
+    .badge-device {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #E5E7EB;
+    }
+
+    .badge-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      color: #D1D5DB;
+    }
+
+    .time-cell {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .empty-state {
+      padding: 3rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+    }
+    .empty-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.6;
+    }
+
+    /* Breakdown lists */
+    .breakdown-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .breakdown-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 0.85rem;
+      background: rgba(11, 15, 25, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+
+    .breakdown-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .breakdown-bar-wrap {
+      flex-grow: 1;
+      margin: 0 1rem;
+      background: rgba(255, 255, 255, 0.08);
+      height: 6px;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .breakdown-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #6366F1, #8B5CF6);
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .breakdown-count {
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      color: #FFF;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. AUTHENTICATION GATE (Secure Admin Access)
+       ========================================================================= -->
+  <div class="auth-gate" id="auth-gate">
+    <div class="auth-card">
+      <div class="auth-icon-wrap">
+        <i class="fa-solid fa-user-shield"></i>
+      </div>
+      <h2 class="auth-title">Admin Command Portal</h2>
+      <p class="auth-desc">Private telemetry & click analytics dashboard for Laxuu's Birthday Celebration.</p>
+
+      <div class="auth-authorized-badge">
+        <i class="fa-solid fa-lock"></i>
+        <span>Authorized for: gaihrenirmal2021@gmail.com</span>
+      </div>
+
+      <form class="auth-form" id="admin-login-form">
+        <div class="form-group">
+          <label for="admin-email">Admin Email / ID</label>
+          <input type="text" id="admin-email" class="form-control" value="gaihrenirmal2021@gmail.com" required readonly style="background: rgba(255,255,255,0.04); color: #9CA3AF;" />
+        </div>
+
+        <div class="form-group">
+          <label for="admin-secret">Secret Access Passphrase / Key</label>
+          <input type="password" id="admin-secret" class="form-control" placeholder="Enter admin secret key..." required autofocus />
+        </div>
+
+        <button type="submit" class="btn-submit" id="btn-unlock">
+          <i class="fa-solid fa-key"></i>
+          <span>Unlock Command Dashboard</span>
+        </button>
+
+        <div class="auth-error" id="auth-error"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. DASHBOARD VIEW (Once authenticated)
+       ========================================================================= -->
+  <div class="dashboard" id="dashboard-view">
+    
+    <!-- Top Header -->
+    <header class="dash-header">
+      <div class="dash-brand">
+        <div class="dash-brand-icon">
+          <i class="fa-solid fa-chart-line"></i>
+        </div>
+        <div>
+          <h1 class="dash-title">Nirmal Gaihre Analytics Hub</h1>
+          <p class="dash-subtitle">Real-time button & interaction telemetry • Laxuu Birthday Page</p>
+        </div>
+      </div>
+
+      <div class="dash-actions">
+        <div class="live-pulse" id="live-indicator">
+          <span class="live-dot"></span>
+          <span>Live Stream Active</span>
+        </div>
+
+        <button type="button" class="btn-sm" id="btn-refresh" title="Refresh data">
+          <i class="fa-solid fa-arrows-rotate"></i>
+          <span>Refresh</span>
+        </button>
+
+        <button type="button" class="btn-sm" id="btn-test-click" title="Simulate a test button click to verify tracker">
+          <i class="fa-solid fa-flask"></i>
+          <span>Test Track</span>
+        </button>
+
+        <button type="button" class="btn-sm" id="btn-export" title="Export tracking logs as JSON">
+          <i class="fa-solid fa-download"></i>
+          <span>Export JSON</span>
+        </button>
+
+        <button type="button" class="btn-sm btn-danger" id="btn-clear-logs" title="Clear tracking logs">
+          <i class="fa-solid fa-trash-can"></i>
+          <span>Clear Logs</span>
+        </button>
+
+        <button type="button" class="btn-sm" id="btn-logout" title="Sign out of admin panel">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Metrics Overview -->
+    <section class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title">Total Button Clicks</span>
+          <span class="metric-icon" style="color: #818CF8;"><i class="fa-solid fa-hand-pointer"></i></span>
+        </div>
+        <div class="metric-value" id="val-total-clicks">0</div>
+        <div class="metric-sub">
+          <i class="fa-solid fa-arrow-trend-up" style="color: var(--success);"></i>
+          <span>All tracked actions & taps</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title">Unique Visitors</span>
+          <span class="metric-icon" style="color: #34D399;"><i class="fa-solid fa-users"></i></span>
+        </div>
+        <div class="metric-value" id="val-unique-ips">0</div>
+        <div class="metric-sub">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Distinct IP addresses</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title">Device Breakdown</span>
+          <span class="metric-icon" style="color: #FBBF24;"><i class="fa-solid fa-mobile-screen"></i></span>
+        </div>
+        <div class="metric-value" id="val-device-summary" style="font-size: 1.5rem;">0 Mobile / 0 PC</div>
+        <div class="metric-sub">
+          <span id="val-device-pct">Based on User-Agent inspection</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title">Latest Click Activity</span>
+          <span class="metric-icon" style="color: #F472B6;"><i class="fa-solid fa-bolt"></i></span>
+        </div>
+        <div class="metric-value" id="val-latest-action" style="font-size: 1.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+          No events yet
+        </div>
+        <div class="metric-sub" id="val-latest-time">Waiting for first user tap...</div>
+      </div>
+    </section>
+
+    <!-- Main Content Layout -->
+    <div class="content-grid">
+      
+      <!-- Table: Live Clicks Feed -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <div class="section-card-title">
+            <i class="fa-solid fa-list-check" style="color: var(--accent);"></i>
+            <span>Real-Time Interaction Feed</span>
+          </div>
+
+          <div class="filter-bar">
+            <input type="text" id="filter-search" class="search-input" placeholder="Search action, IP, city..." />
+            <select id="filter-device" class="select-input">
+              <option value="ALL">All Devices</option>
+              <option value="Mobile">Mobile Only</option>
+              <option value="Desktop">Desktop Only</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Time (Nepal NPT)</th>
+                <th>Button / Action Clicked</th>
+                <th>Device & Browser</th>
+                <th>Location & IP (Zero Permission)</th>
+                <th>Section</th>
+              </tr>
+            </thead>
+            <tbody id="events-table-body">
+              <tr>
+                <td colspan="5" class="empty-state">
+                  <div class="empty-icon">⏳</div>
+                  <p>Loading real-time tracking data...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Right Column: Popular Actions & Device Stats -->
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <!-- Top Clicked Buttons Card -->
+        <div class="section-card">
+          <div class="section-card-header">
+            <div class="section-card-title">
+              <i class="fa-solid fa-fire" style="color: #F87171;"></i>
+              <span>Most Clicked Elements</span>
+            </div>
+          </div>
+          <div class="breakdown-list" id="top-actions-list">
+            <div class="empty-state" style="padding: 1.5rem 0;">No actions recorded yet.</div>
+          </div>
+        </div>
+
+        <!-- Geo & Locations Card -->
+        <div class="section-card">
+          <div class="section-card-header">
+            <div class="section-card-title">
+              <i class="fa-solid fa-earth-asia" style="color: #34D399;"></i>
+              <span>Detected Geo Locations</span>
+            </div>
+          </div>
+          <div class="breakdown-list" id="top-locations-list">
+            <div class="empty-state" style="padding: 1.5rem 0;">No locations resolved yet.</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // State
+    let authToken = null;
+    let allEvents = [];
+    let stats = null;
+    let autoRefreshTimer = null;
+
+    const authGate = document.getElementById('auth-gate');
+    const dashboardView = document.getElementById('dashboard-view');
+    const loginForm = document.getElementById('admin-login-form');
+    const secretInput = document.getElementById('admin-secret');
+    const authError = document.getElementById('auth-error');
+
+    // Check URL parameters for direct secret access (?secret=... or ?key=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const directSecret = urlParams.get('secret') || urlParams.get('key');
+
+    async function init() {
+      if (directSecret) {
+        secretInput.value = directSecret;
+        await attemptLogin('gaihrenirmal2021@gmail.com', directSecret);
+        return;
+      }
+
+      // Check existing session
+      try {
+        const resp = await fetch('/api/admin/check-auth');
+        const data = await resp.json();
+        if (data.authenticated) {
+          showDashboard();
+          return;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function attemptLogin(email, secretKey) {
+      authError.style.display = 'none';
+      try {
+        const resp = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, secretKey })
+        });
+        const data = await resp.json();
+        if (data.success) {
+          authToken = data.token;
+          showDashboard();
+        } else {
+          authError.textContent = data.message || 'Invalid secret key.';
+          authError.style.display = 'block';
+        }
+      } catch (err) {
+        authError.textContent = 'Server error during authentication.';
+        authError.style.display = 'block';
+      }
+    }
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('admin-email').value;
+      const secret = secretInput.value;
+      attemptLogin(email, secret);
+    });
+
+    function showDashboard() {
+      authGate.style.display = 'none';
+      dashboardView.style.display = 'flex';
+      fetchDashboardData();
+
+      // Auto poll every 4 seconds
+      if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+      autoRefreshTimer = setInterval(fetchDashboardData, 4000);
+    }
+
+    async function fetchDashboardData() {
+      try {
+        const [eventsResp, statsResp] = await Promise.all([
+          fetch('/api/admin/events', {
+            headers: authToken ? { 'Authorization': `Bearer ${authToken}` } : {}
+          }),
+          fetch('/api/admin/stats', {
+            headers: authToken ? { 'Authorization': `Bearer ${authToken}` } : {}
+          })
+        ]);
+
+        if (eventsResp.status === 401 || statsResp.status === 401) {
+          clearInterval(autoRefreshTimer);
+          dashboardView.style.display = 'none';
+          authGate.style.display = 'flex';
+          authError.textContent = 'Session expired. Please re-enter your admin secret.';
+          authError.style.display = 'block';
+          return;
+        }
+
+        const eventsData = await eventsResp.json();
+        const statsData = await statsResp.json();
+
+        allEvents = eventsData.events || [];
+        stats = statsData;
+
+        renderStats();
+        renderTable();
+        renderBreakdowns();
+      } catch (err) {
+        console.error('Error fetching dashboard telemetry:', err);
+      }
+    }
+
+    function renderStats() {
+      if (!stats) return;
+
+      document.getElementById('val-total-clicks').textContent = stats.totalClicks || 0;
+      document.getElementById('val-unique-ips').textContent = stats.uniqueIps || 0;
+
+      const mobile = stats.deviceCounts?.Mobile || 0;
+      const desktop = stats.deviceCounts?.Desktop || 0;
+      const tablet = stats.deviceCounts?.Tablet || 0;
+      document.getElementById('val-device-summary').textContent = `${mobile} Mobile / ${desktop} PC`;
+
+      const totalDevices = mobile + desktop + tablet;
+      const mobilePct = totalDevices > 0 ? Math.round((mobile / totalDevices) * 100) : 0;
+      document.getElementById('val-device-pct').textContent = `${mobilePct}% Mobile Visitors`;
+
+      if (stats.latestClick) {
+        document.getElementById('val-latest-action').textContent = stats.latestClick.label || stats.latestClick.action;
+        document.getElementById('val-latest-time').textContent = `${stats.latestClick.nepalTime} • ${stats.latestClick.geo?.city || 'Nepal'}`;
+      } else {
+        document.getElementById('val-latest-action').textContent = 'No events yet';
+        document.getElementById('val-latest-time').textContent = 'Waiting for first user tap...';
+      }
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('events-table-body');
+      const search = (document.getElementById('filter-search').value || '').toLowerCase();
+      const deviceFilter = document.getElementById('filter-device').value;
+
+      const filtered = allEvents.filter(e => {
+        if (deviceFilter !== 'ALL' && e.device?.type !== deviceFilter) return false;
+        if (!search) return true;
+
+        const text = `${e.action} ${e.label} ${e.elementId || ''} ${e.ip} ${e.geo?.city || ''} ${e.geo?.country || ''} ${e.device?.os || ''} ${e.device?.browser || ''}`.toLowerCase();
+        return text.includes(search);
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="empty-state">
+              <div class="empty-icon">🔍</div>
+              <p>No interaction events match your current filter.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(e => {
+        // Badge color style
+        let badgeClass = 'badge-action';
+        if (e.label?.includes('Coke') || e.label?.includes('Xtreme')) badgeClass += ' badge-coke-action';
+        else if (e.label?.includes('बहाना') || e.label?.includes('Excuse') || e.label?.includes('झूट')) badgeClass += ' badge-excuse-action';
+        else if (e.label?.includes('Chiya') || e.label?.includes('चिया')) badgeClass += ' badge-chiya-action';
+
+        const deviceIcon = e.device?.type === 'Mobile' ? 'fa-mobile-screen' : (e.device?.type === 'Tablet' ? 'fa-tablet-screen-button' : 'fa-laptop');
+        const flag = e.geo?.countryCode === 'NP' ? '🇳🇵' : (e.geo?.countryCode === 'US' ? '🇺🇸' : '🌐');
+
+        return `
+          <tr>
+            <td class="time-cell">${escapeHtml(e.nepalTime || e.timestamp)}</td>
+            <td>
+              <span class="${badgeClass}" title="${escapeHtml(e.label || e.action)}">
+                <i class="fa-solid fa-hand-pointer"></i>
+                ${escapeHtml(e.label || e.action)}
+              </span>
+            </td>
+            <td>
+              <div class="badge-device">
+                <i class="fa-solid ${deviceIcon}"></i>
+                <span>${escapeHtml(e.device?.os || 'Unknown')} • ${escapeHtml(e.device?.browser || '')}</span>
+              </div>
+              ${e.device?.screen ? `<div style="font-size: 0.72rem; color: var(--text-muted);">${escapeHtml(e.device.screen)}</div>` : ''}
+            </td>
+            <td>
+              <div class="badge-location">
+                <span>${flag}</span>
+                <strong>${escapeHtml(e.geo?.city || 'Unknown')}, ${escapeHtml(e.geo?.country || 'Nepal')}</strong>
+              </div>
+              <div style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">
+                ${escapeHtml(e.ip)}
+              </div>
+            </td>
+            <td>
+              <span style="font-size: 0.78rem; color: var(--text-muted);">${escapeHtml(e.section || 'General')}</span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderBreakdowns() {
+      if (!stats) return;
+
+      // Top actions
+      const actionsEl = document.getElementById('top-actions-list');
+      if (stats.topActions && stats.topActions.length > 0) {
+        const max = stats.topActions[0].count || 1;
+        actionsEl.innerHTML = stats.topActions.map(a => {
+          const pct = Math.round((a.count / max) * 100);
+          return `
+            <div class="breakdown-item">
+              <span class="breakdown-label" title="${escapeHtml(a.name)}">
+                <i class="fa-solid fa-circle-dot" style="color: var(--accent); font-size: 0.65rem;"></i>
+                <span style="max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(a.name)}</span>
+              </span>
+              <div class="breakdown-bar-wrap">
+                <div class="breakdown-bar" style="width: ${pct}%"></div>
+              </div>
+              <span class="breakdown-count">${a.count}</span>
+            </div>
+          `;
+        }).join('');
+      } else {
+        actionsEl.innerHTML = '<div class="empty-state" style="padding: 1.5rem 0;">No actions recorded yet.</div>';
+      }
+
+      // Top Locations
+      const locsEl = document.getElementById('top-locations-list');
+      const locEntries = Object.entries(stats.locationCounts || {}).sort((a,b) => b[1] - a[1]).slice(0, 5);
+      if (locEntries.length > 0) {
+        const max = locEntries[0][1] || 1;
+        locsEl.innerHTML = locEntries.map(([loc, count]) => {
+          const pct = Math.round((count / max) * 100);
+          return `
+            <div class="breakdown-item">
+              <span class="breakdown-label">
+                <i class="fa-solid fa-location-dot" style="color: #34D399; font-size: 0.75rem;"></i>
+                <span>${escapeHtml(loc)}</span>
+              </span>
+              <div class="breakdown-bar-wrap">
+                <div class="breakdown-bar" style="width: ${pct}%; background: linear-gradient(90deg, #10B981, #059669);"></div>
+              </div>
+              <span class="breakdown-count">${count}</span>
+            </div>
+          `;
+        }).join('');
+      } else {
+        locsEl.innerHTML = '<div class="empty-state" style="padding: 1.5rem 0;">No locations resolved yet.</div>';
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Filter Listeners
+    document.getElementById('filter-search').addEventListener('input', renderTable);
+    document.getElementById('filter-device').addEventListener('change', renderTable);
+    document.getElementById('btn-refresh').addEventListener('click', fetchDashboardData);
+
+    // Test Click Tracker
+    document.getElementById('btn-test-click').addEventListener('click', async () => {
+      try {
+        await fetch('/api/track', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'Test Verification Click',
+            label: 'Admin Self-Test Tracker 🧪',
+            elementId: 'btn-test-click',
+            section: 'Admin Hub',
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            screen: `${window.screen.width}x${window.screen.height}`
+          })
+        });
+        await fetchDashboardData();
+      } catch (e) {
+        console.error(e);
+      }
+    });
+
+    // Clear Logs
+    document.getElementById('btn-clear-logs').addEventListener('click', async () => {
+      if (!confirm('Are you sure you want to clear all tracked click events?')) return;
+      try {
+        await fetch('/api/admin/events', {
+          method: 'DELETE',
+          headers: authToken ? { 'Authorization': `Bearer ${authToken}` } : {}
+        });
+        await fetchDashboardData();
+      } catch (e) {
+        console.error(e);
+      }
+    });
+
+    // Export JSON
+    document.getElementById('btn-export').addEventListener('click', () => {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(allEvents, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `laxuu_clicks_telemetry_${Date.now()}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    });
+
+    // Logout
+    document.getElementById('btn-logout').addEventListener('click', async () => {
+      try {
+        await fetch('/api/admin/logout', { method: 'POST' });
+      } catch (e) {}
+      clearInterval(autoRefreshTimer);
+      authToken = null;
+      dashboardView.style.display = 'none';
+      authGate.style.display = 'flex';
+      secretInput.value = '';
+    });
+
+    init();
+  </script>
+</body>
+</html>

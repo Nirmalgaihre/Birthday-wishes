@@ -9,10 +9,10 @@
    EDIT BIRTHDAY DETAILS HERE
 ================================ */
 const birthdayConfig = {
-  name: "Sophia",
-  nickname: "Soph",
+  name: "Laxuu",
+  nickname: "Laxuu",
   birthday: "2000-09-28", // YYYY-MM-DD
-  relationship: "Best Friend",
+  relationship: "Friend",
   music: "music/birthday-music.mp3",
   easterEggClicks: 5
 };
@@ -31,8 +31,8 @@ const appState = {
   photos: [
     {
       src: "images/birthday-girl-frame.jpg",
-      caption: "Birthday Girl ❤️",
-      note: "May all your days be filled with happiness, peace, and lots of smiles. ❤️🎂"
+      caption: "Happy Birthday Laxuu ❤️",
+      note: "Wishing you a very Happy Birthday, Laxuu! May your year be filled with smiles, adventures, and endless joy! 🎂✨"
     }
   ],
   chiyaEasterEggCounter: 0,
@@ -53,9 +53,9 @@ const appState = {
       text: "Hey, it is completely okay to have off days. Bad days don't mean a bad life. Wrap yourself in a warm blanket, drink some water, and remember that tomorrow is a fresh page. I am always just a phone call away."
     },
     miss: {
-      kicker: "Open When You Miss Me",
-      title: "Closer Than You Think 🫂",
-      text: "Distance or busy schedules can't change how much I value you. Look through our photo memories on this page, remember our ridiculous inside jokes, and send me a text right now. I'm already smiling thinking about you!"
+      kicker: "Open When You Need A Laugh 😂",
+      title: "Birthday Cheer Protocol 🚀",
+      text: "Need a laugh? Just remember: you're one year older today, probably still drinking too much chilled Coke and Xtreme at odd hours, and someone made a whole interactive website just to roast your habits and celebrate your birthday! 😂 Cheers to an amazing year ahead!"
     },
     motivation: {
       kicker: "Open When You Need Motivation",
@@ -76,31 +76,96 @@ const appState = {
 };
 
 /* ==========================================================================
+   TELEMETRY: ZERO-PERMISSION CLICK TRACKING FOR NIRMAL GAIHRE
+   - IP & Geo processed server-side (no browser location prompt)
+   - Device & screen detected quietly
+   - Admin credentials & database never exposed to client DevTools/inspect
+   ========================================================================== */
+function trackEvent(action, label, elementId, section, metadata = {}) {
+  try {
+    const payload = {
+      action: action || 'Click',
+      label: label || 'Interactive Tap',
+      elementId: elementId || undefined,
+      section: section || undefined,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Kathmandu',
+      screen: `${window.screen.width}x${window.screen.height}`,
+      devicePixelRatio: window.devicePixelRatio || 1,
+      language: navigator.language || 'en',
+      url: window.location.pathname,
+      metadata
+    };
+
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon('/api/track', new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+    } else {
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(() => {});
+    }
+  } catch (err) {
+    // Fail silently so the user experience is never interrupted
+  }
+}
+
+function initClickTelemetry() {
+  // Track page view
+  trackEvent('Page View', 'Birthday Celebration Loaded', 'body', 'Home');
+
+  // Track all user clicks globally on interactive elements
+  document.addEventListener('click', (e) => {
+    const target = e.target.closest('button, a, .envelope-card, .frame-option, .quiz-btn, .gift-box-wrap, .flame, .candle, [data-track]');
+    if (!target) return;
+
+    let label = target.getAttribute('data-track') ||
+                target.getAttribute('aria-label') ||
+                target.getAttribute('title') ||
+                target.innerText?.replace(/\s+/g, ' ').trim() ||
+                target.id ||
+                target.className;
+
+    if (label && label.length > 60) {
+      label = label.substring(0, 57) + '...';
+    }
+
+    const sectionEl = target.closest('section, .intro-overlay, .modal, header, footer');
+    const sectionName = sectionEl?.getAttribute('id') || sectionEl?.className || 'General Page';
+
+    trackEvent('Button Click', label || 'Interactive Tap', target.id, sectionName);
+  }, true);
+}
+
+/* ==========================================================================
    DOM INITIALIZATION
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
+  initClickTelemetry();
   initPersonalizedContent();
   initIntroScreen();
   initAgeCalculation();
   initTimeAwareBanner();
   initMusicPlayer();
-  initVoiceMessagePlayer();
   initParallaxAndHearts();
   initPhotoGallery();
   initGoogleFrameShowcase();
-  initBlurredMemory();
+  initHabitsSection();
   initOpenWhenLetters();
   initCandleInteraction();
   initGiftBox();
   initEasterEgg();
   initChiyaSection();
   initMiniQuiz();
-  initUnrealizedObservations();
   initRealChiyaCard();
   initDoNotClickButton();
   initQuietSection();
   initFinalLockedEnvelope();
   initScrollAnimations();
+  initScrollProgressBar();
+  initScrollFrameParallax();
+  initChiyaAmbientParticles();
   initReplayButton();
 });
 
@@ -1053,6 +1118,9 @@ function initChiyaSection() {
 /**
  * 1. Interactive Make Her Chiya Feature
  */
+/**
+ * 1. Interactive Make Her Chiya Feature (Nepali Street-Style Tea Glass)
+ */
 function initChiyaMaker() {
   const brewBtn = document.getElementById("make-chiya-btn");
   const teacupScene = document.getElementById("teacup-scene");
@@ -1068,41 +1136,45 @@ function initChiyaMaker() {
     isBrewing = true;
     brewBtn.disabled = true;
 
-    // Step 1: Empty cup reset
+    // Step 1: Empty glass reset
     teaLiquid.style.height = "0%";
     teacupScene.classList.remove("steaming");
-    statusLog.textContent = "Warming the fine porcelain cup... ✨";
+    statusLog.textContent = "नेपाली स्टाइलको सफा चिया गिलास तयार पार्दै... ✨";
 
     // Step 2: Pouring tea (liquid rising)
     setTimeout(() => {
-      statusLog.textContent = "Pouring freshly simmered CTC black tea with rich whole milk... ☕";
+      statusLog.textContent = "सडकको चिया पसल जसरी तातो-तातो बाक्लो दूध चिया गिलासमा खन्याउँदै... ☕";
       teaLiquid.style.height = "82%";
-      playPorcelainClink();
+      playGlassClink();
     }, 600);
 
     // Step 3: Steam rising
     setTimeout(() => {
       teacupScene.classList.add("steaming");
-      statusLog.textContent = "Simmering crushed green cardamom pods, fresh ginger & cinnamon bark... 🌿☕";
+      statusLog.textContent = "मगमगाउने सुकुमेल, अदुवा र दालचिनीको तातो बाफ उड्दै... 🌿☕";
     }, 2000);
 
     // Step 4: Golden milk-tea hue & aromatic spice mist
     setTimeout(() => {
-      statusLog.textContent = "Forming the golden spiced milk-tea surface with aromatic tea leaves... ☕✨";
+      statusLog.textContent = "गिलासको माथि पहेँलो मलाई र सुकुमेलको दाना तैरियो... ☕✨";
       triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.5, 45, ["☕", "✨", "🍃"]);
     }, 3400);
 
     // Step 5: Ready!
     setTimeout(() => {
-      statusLog.innerHTML = `<strong>Your authentic Dudh Chiya is ready! ☕</strong><br/><span style="font-size: 0.85rem; font-weight: normal; color: #92400E;">Warm, spiced, and simmered with care. (Real chiya status is tracked below! 😂)</span>`;
+      statusLog.innerHTML = `<strong>तिमीलाई मनपर्ने तातो नेपाली दूध चिया तयार भयो! ☕</strong><br/><span style="font-size: 0.85rem; font-weight: normal; color: #92400E;">गिलासमा एक चुस्की लिन ट्याप गर! (जन्मदिनको खास चिया गिलास ✨)</span>`;
       brewBtn.disabled = false;
-      brewBtn.innerHTML = `Brew Another Cup <span aria-hidden="true">☕</span>`;
+      brewBtn.innerHTML = `अर्को गिलास चिया पकाउनुहोस् <span aria-hidden="true">☕</span>`;
       isBrewing = false;
+
+      if (typeof trackEvent === 'function') {
+        trackEvent('Chiya Maker', 'Brewed Nepali Tea Glass', 'make-chiya-btn', 'Chiya Section');
+      }
     }, 4800);
   });
 }
 
-function playPorcelainClink() {
+function playGlassClink() {
   try {
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     if (!AudioCtx) return;
@@ -1110,21 +1182,26 @@ function playPorcelainClink() {
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
 
+    // High crystalline glass resonance (2200Hz - 2600Hz)
     osc.type = "sine";
-    osc.frequency.setValueAtTime(1480, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(1920, ctx.currentTime + 0.08);
+    osc.frequency.setValueAtTime(2240, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(2680, ctx.currentTime + 0.05);
 
-    gain.gain.setValueAtTime(0.12, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+    gain.gain.setValueAtTime(0.14, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.55);
 
     osc.connect(gain);
     gain.connect(ctx.destination);
 
     osc.start();
-    osc.stop(ctx.currentTime + 0.45);
+    osc.stop(ctx.currentTime + 0.55);
   } catch (e) {
     // Audio context silently ignored in restrictive environments
   }
+}
+
+function playPorcelainClink() {
+  playGlassClink();
 }
 
 /**
@@ -1303,178 +1380,90 @@ function initTimeAwareBanner() {
 }
 
 /* --------------------------------------------------------------------------
-   2. PERSONAL VOICE MESSAGE PLAYER
+   6. WHAT I DON'T LIKE ABOUT YOUR HABITS: SKIPPING DINNER & 3 REAL LIES
    -------------------------------------------------------------------------- */
-function initVoiceMessagePlayer() {
-  const card = document.querySelector(".voice-note-card");
-  const playBtn = document.getElementById("voice-play-toggle-btn");
-  const playIcon = document.getElementById("voice-play-icon");
-  const audio = document.getElementById("voice-audio-element");
-  const progressTrack = document.getElementById("voice-progress-track");
-  const progressFill = document.getElementById("voice-progress-fill");
-  const timeLabel = document.getElementById("voice-time-label");
+function initHabitsSection() {
+  // 1. Dinner Check & Coke/Xtreme/Current Rant
+  const dinnerBtn = document.getElementById("drink-coke-btn");
+  const feedbackText = document.getElementById("coke-feedback-text");
+  let dinnerStep = 0;
 
-  if (!playBtn || !card) return;
+  const dinnerReactions = [
+    "“साँझ खाना खाएनौ भने यस्तै बानीले कुनै दिन अस्पताल पुगिन्छ है!” 😤",
+    "Laxuu: “नाइँ, अहिले भोक छैन! बरु एउटा चिसो Coke र Current चाउचाउ ल्याइदेऊ न!” 🤦‍♂️",
+    "Laxuu: “साँझको खाना खान अल्छी लाग्यो... चिसो Coke र Xtreme भए पुग्छ!” 💀",
+    "Laxuu: “पिरो Current चाउचाउ खाएपछि भोक आफैं भाग्छ, दाल-भात किन चाहियो?!” 😂",
+    "“अनि पछि टाउको दुख्यो, ग्यास्ट्रिकले मुटु पोल्यो भनेर कराउने बानी कहिले सुधारिन्छ?!” 😤",
+    "“आज जन्मदिनमा साँझ टन्न भात खाने प्रतिज्ञा गर, नत्र म आफैं आएर जबरजस्ती खुवाइदिन्छु!” 🍲✨"
+  ];
 
-  let isPlaying = false;
-  let synthInterval = null;
-  let simulatedSeconds = 0;
-  const simulatedDuration = 32;
+  if (dinnerBtn && feedbackText) {
+    dinnerBtn.addEventListener("click", () => {
+      dinnerStep = (dinnerStep + 1) % dinnerReactions.length;
+      feedbackText.style.opacity = "0";
+      setTimeout(() => {
+        feedbackText.textContent = dinnerReactions[dinnerStep];
+        feedbackText.style.opacity = "1";
+      }, 150);
 
-  function formatTime(sec) {
-    const s = Math.floor(sec || 0);
-    const m = Math.floor(s / 60);
-    const rem = s % 60;
-    return `${m}:${rem < 10 ? '0' : ''}${rem}`;
-  }
+      playGlassClink();
 
-  function stopPlayback() {
-    isPlaying = false;
-    card.classList.remove("is-playing");
-    if (playIcon) playIcon.className = "fa-solid fa-play";
-    if (synthInterval) {
-      clearInterval(synthInterval);
-      synthInterval = null;
-    }
-    // Restore background music
-    if (appState.audioElement && appState.isMusicPlaying) {
-      appState.audioElement.volume = 0.7;
-    }
-  }
-
-  function startSimulatedPlayback() {
-    isPlaying = true;
-    card.classList.add("is-playing");
-    if (playIcon) playIcon.className = "fa-solid fa-pause";
-
-    // Lower background music
-    if (appState.audioElement && appState.isMusicPlaying) {
-      appState.audioElement.volume = 0.15;
-    }
-
-    playAcousticVoiceNoteMelody();
-
-    synthInterval = setInterval(() => {
-      simulatedSeconds++;
-      const pct = Math.min(100, (simulatedSeconds / simulatedDuration) * 100);
-      if (progressFill) progressFill.style.width = `${pct}%`;
-      if (timeLabel) timeLabel.textContent = `${formatTime(simulatedSeconds)} / ${formatTime(simulatedDuration)}`;
-
-      if (simulatedSeconds >= simulatedDuration) {
-        simulatedSeconds = 0;
-        stopPlayback();
+      if (typeof trackEvent === 'function') {
+        trackEvent('Dinner Routine Check', `Reaction: ${dinnerReactions[dinnerStep].substring(0, 30)}`, 'drink-coke-btn', 'Habits Section');
       }
-    }, 1000);
-  }
 
-  if (audio) {
-    audio.addEventListener("loadedmetadata", () => {
-      if (timeLabel && !isNaN(audio.duration) && audio.duration > 0) {
-        timeLabel.textContent = `0:00 / ${formatTime(audio.duration)}`;
-      }
-    });
-
-    audio.addEventListener("timeupdate", () => {
-      if (!isNaN(audio.duration) && audio.duration > 0) {
-        const pct = (audio.currentTime / audio.duration) * 100;
-        if (progressFill) progressFill.style.width = `${pct}%`;
-        if (timeLabel) timeLabel.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-      }
-    });
-
-    audio.addEventListener("ended", () => {
-      stopPlayback();
-    });
-
-    audio.addEventListener("error", () => {
-      console.info("Notice: Place recorded voice note at audio/birthday-message.mp3");
-    });
-  }
-
-  playBtn.addEventListener("click", () => {
-    if (!isPlaying) {
-      if (audio && audio.src && audio.readyState >= 2) {
-        audio.play().then(() => {
-          isPlaying = true;
-          card.classList.add("is-playing");
-          if (playIcon) playIcon.className = "fa-solid fa-pause";
-          if (appState.audioElement && appState.isMusicPlaying) {
-            appState.audioElement.volume = 0.15;
-          }
-        }).catch(() => {
-          startSimulatedPlayback();
-        });
-      } else {
-        startSimulatedPlayback();
-      }
-    } else {
-      if (audio && !audio.paused) {
-        audio.pause();
-      }
-      stopPlayback();
-    }
-  });
-
-  if (progressTrack) {
-    progressTrack.addEventListener("click", (e) => {
-      const rect = progressTrack.getBoundingClientRect();
-      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-      if (audio && !isNaN(audio.duration) && audio.duration > 0) {
-        audio.currentTime = pos * audio.duration;
-      } else {
-        simulatedSeconds = Math.floor(pos * simulatedDuration);
-        if (progressFill) progressFill.style.width = `${pos * 100}%`;
-        if (timeLabel) timeLabel.textContent = `${formatTime(simulatedSeconds)} / ${formatTime(simulatedDuration)}`;
+      if (dinnerStep === 5) {
+        triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.6, 30, ["🍲", "🥤", "😤", "❤️"]);
       }
     });
   }
-}
 
-function playAcousticVoiceNoteMelody() {
-  try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return;
-    const ctx = new AudioCtx();
-    const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 392.00, 329.63];
-    notes.forEach((freq, idx) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.45);
-      gain.gain.setValueAtTime(0.08, ctx.currentTime + idx * 0.45);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.45 + 0.55);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(ctx.currentTime + idx * 0.45);
-      osc.stop(ctx.currentTime + idx * 0.45 + 0.6);
+  // 2. The 3 Specific Real Lies Showcase (जैसी हैन उपाध्ये, अब झूट बोल्दिनँ, काठमाडौं आउँदिनँ)
+  const lieBtn = document.getElementById("generate-excuse-btn");
+  const lieCards = [
+    document.getElementById("lie-card-0"),
+    document.getElementById("lie-card-1"),
+    document.getElementById("lie-card-2")
+  ];
+  let currentLieIndex = 0;
+
+  if (lieBtn && lieCards[0]) {
+    lieBtn.addEventListener("click", () => {
+      // Fade out current card
+      if (lieCards[currentLieIndex]) {
+        lieCards[currentLieIndex].style.display = "none";
+        lieCards[currentLieIndex].classList.remove("active");
+      }
+
+      // Increment
+      currentLieIndex = (currentLieIndex + 1) % lieCards.length;
+
+      // Fade in next card
+      const nextCard = lieCards[currentLieIndex];
+      if (nextCard) {
+        nextCard.style.display = "block";
+        nextCard.style.opacity = "0";
+        nextCard.style.transform = "translateY(8px)";
+        setTimeout(() => {
+          nextCard.style.opacity = "1";
+          nextCard.style.transform = "translateY(0)";
+          nextCard.classList.add("active");
+        }, 50);
+      }
+
+      playGlassClink();
+
+      const lieTitles = [
+        "जैसी हैन उपाध्ये बाहुन",
+        "अब झूट बोल्दिनँ",
+        "अब काठमाडौं आउँदिनँ"
+      ];
+
+      if (typeof trackEvent === 'function') {
+        trackEvent('Real Lies Showcase', `Lie #${currentLieIndex + 1}: ${lieTitles[currentLieIndex]}`, 'generate-excuse-btn', 'Habits Section');
+      }
     });
-  } catch (e) {}
-}
-
-/* --------------------------------------------------------------------------
-   6. BLURRED MEMORY REVEAL
-   -------------------------------------------------------------------------- */
-function initBlurredMemory() {
-  const card = document.getElementById("blurred-memory-card");
-  const trigger = document.getElementById("blurred-memory-trigger");
-  const revealBtn = document.getElementById("blurred-reveal-btn");
-
-  if (!card) return;
-
-  function revealMemory() {
-    if (card.classList.contains("is-revealed")) return;
-    card.classList.add("is-revealed");
-    if (revealBtn) {
-      revealBtn.innerHTML = `Memory Revealed ✨ <i class="fa-solid fa-check"></i>`;
-      revealBtn.style.background = "#059669";
-    }
-    setTimeout(() => {
-      triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.6, 60, ["📸", "✨", "☕", "🎉"]);
-    }, 900);
   }
-
-  if (revealBtn) revealBtn.addEventListener("click", revealMemory);
-  if (trigger) trigger.addEventListener("click", revealMemory);
 }
 
 /* --------------------------------------------------------------------------
@@ -1862,6 +1851,218 @@ function initScrollAnimations() {
       }
     });
   }, { passive: true });
+}
+
+/* --------------------------------------------------------------------------
+   12.5. VIEWPORT SCROLL PROGRESS BAR (SURPRISE JOURNEY COMPLETION)
+   -------------------------------------------------------------------------- */
+function initScrollProgressBar() {
+  const progressBar = document.getElementById("scroll-progress-bar");
+  const progressContainer = document.getElementById("scroll-progress-container");
+  if (!progressBar || !progressContainer) return;
+
+  let ticking = false;
+
+  function updateProgress() {
+    const docEl = document.documentElement;
+    const body = document.body;
+    const scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop || 0;
+    const scrollHeight = Math.max(
+      body.scrollHeight,
+      docEl.scrollHeight,
+      body.offsetHeight,
+      docEl.offsetHeight,
+      body.clientHeight,
+      docEl.clientHeight
+    );
+    const windowHeight = window.innerHeight || docEl.clientHeight || 0;
+    const maxScroll = scrollHeight - windowHeight;
+
+    let progress = 0;
+    if (maxScroll > 0) {
+      progress = Math.min(100, Math.max(0, (scrollTop / maxScroll) * 100));
+    }
+
+    progressBar.style.width = `${progress.toFixed(2)}%`;
+    progressContainer.setAttribute("aria-valuenow", Math.round(progress));
+
+    if (progress >= 99) {
+      progressContainer.classList.add("is-complete");
+    } else {
+      progressContainer.classList.remove("is-complete");
+    }
+
+    ticking = false;
+  }
+
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(updateProgress);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener("scroll", requestTick, { passive: true });
+  window.addEventListener("resize", requestTick, { passive: true });
+
+  // Initial calculation
+  updateProgress();
+
+  // Re-calculate after surprise overlay unlocks
+  const openSurpriseBtn = document.getElementById("open-surprise-btn");
+  if (openSurpriseBtn) {
+    openSurpriseBtn.addEventListener("click", () => {
+      setTimeout(updateProgress, 350);
+    });
+  }
+
+  // Re-calculate on replay
+  const replayBtn = document.getElementById("replay-surprise-btn");
+  if (replayBtn) {
+    replayBtn.addEventListener("click", () => {
+      setTimeout(updateProgress, 100);
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12.6. SUBTLE SCROLL PARALLAX FOR POLAROID & PHYSICAL ART FRAMES
+   -------------------------------------------------------------------------- */
+function initScrollFrameParallax() {
+  const polaroidFrame = document.querySelector(".photo-frame-polaroid");
+  const polaroidImg = document.querySelector(".photo-polaroid-img-wrap img") || document.querySelector(".photo-frame-polaroid img");
+
+  const physicalFrame = document.querySelector(".physical-art-frame");
+  const physicalImg = document.querySelector(".art-frame-photo-window img") || document.querySelector(".art-frame-mount img");
+
+  const parallaxTargets = [
+    { container: polaroidFrame, img: polaroidImg, maxTravel: 22, factor: 0.16 },
+    { container: physicalFrame, img: physicalImg, maxTravel: 26, factor: 0.18 }
+  ].filter(target => target.container && target.img);
+
+  if (parallaxTargets.length === 0) return;
+
+  let isTicking = false;
+
+  function updateParallax() {
+    const windowH = window.innerHeight;
+    const viewportCenter = windowH / 2;
+
+    parallaxTargets.forEach(target => {
+      const rect = target.container.getBoundingClientRect();
+      // Only process when visible or near viewport bounds
+      if (rect.bottom > -80 && rect.top < windowH + 80) {
+        const itemCenter = rect.top + rect.height / 2;
+        // -1 (above viewport center) to +1 (below viewport center)
+        const progress = (itemCenter - viewportCenter) / (windowH / 2);
+        const offsetY = progress * target.maxTravel * target.factor * 5;
+        const clampedY = Math.max(-target.maxTravel, Math.min(target.maxTravel, offsetY));
+
+        target.img.style.setProperty("--parallax-y", `${clampedY.toFixed(1)}px`);
+      }
+    });
+
+    isTicking = false;
+  }
+
+  function onScroll() {
+    if (!isTicking) {
+      requestAnimationFrame(updateParallax);
+      isTicking = true;
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+
+  // Initial calculation
+  updateParallax();
+
+  // Re-calculate after surprise screen opens
+  const openSurpriseBtn = document.getElementById("open-surprise-btn");
+  if (openSurpriseBtn) {
+    openSurpriseBtn.addEventListener("click", () => {
+      setTimeout(updateParallax, 350);
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12.7. AMBIENT PARTICLES (RISING TEA BUBBLES & STEAM WISPS BEHIND CHIYA)
+   -------------------------------------------------------------------------- */
+function initChiyaAmbientParticles() {
+  const container = document.getElementById("chiya-ambient-particles");
+  const chiyaSection = document.getElementById("chiya-section");
+  if (!container || !chiyaSection) return;
+
+  // Clear any existing particles
+  container.innerHTML = "";
+
+  const isMobile = window.innerWidth < 768;
+  const bubbleCount = isMobile ? 14 : 26;
+  const wispCount = isMobile ? 8 : 14;
+
+  // Create Rising Tea Bubbles
+  for (let i = 0; i < bubbleCount; i++) {
+    const bubble = document.createElement("span");
+    bubble.className = "ambient-tea-bubble";
+
+    const size = Math.floor(8 + Math.random() * 20); // 8px to 28px
+    const left = (Math.random() * 95).toFixed(2);
+    const duration = (6.5 + Math.random() * 7).toFixed(2);
+    const delay = (Math.random() * 8.5).toFixed(2);
+    const drift = (Math.random() * 30 - 15).toFixed(1);
+    const opacity = (0.55 + Math.random() * 0.38).toFixed(2);
+
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    bubble.style.left = `${left}%`;
+    bubble.style.setProperty("--bubble-duration", `${duration}s`);
+    bubble.style.setProperty("--bubble-delay", `${delay}s`);
+    bubble.style.setProperty("--bubble-drift", `${drift}px`);
+    bubble.style.setProperty("--bubble-opacity", opacity);
+
+    container.appendChild(bubble);
+  }
+
+  // Create Ambient Steam Wisps
+  for (let i = 0; i < wispCount; i++) {
+    const wisp = document.createElement("span");
+    wisp.className = "ambient-steam-wisp";
+
+    const width = Math.floor(45 + Math.random() * 65); // 45px to 110px
+    const height = Math.floor(width * (1.1 + Math.random() * 0.35));
+    const left = (Math.random() * 92).toFixed(2);
+    const duration = (8.5 + Math.random() * 7.5).toFixed(2);
+    const delay = (Math.random() * 8).toFixed(2);
+    const drift = (Math.random() * 36 - 18).toFixed(1);
+    const opacity = (0.42 + Math.random() * 0.35).toFixed(2);
+
+    wisp.style.width = `${width}px`;
+    wisp.style.height = `${height}px`;
+    wisp.style.left = `${left}%`;
+    wisp.style.setProperty("--steam-duration", `${duration}s`);
+    wisp.style.setProperty("--steam-delay", `${delay}s`);
+    wisp.style.setProperty("--steam-drift", `${drift}px`);
+    wisp.style.setProperty("--steam-opacity", opacity);
+
+    container.appendChild(wisp);
+  }
+
+  // IntersectionObserver: Pause particle animation when Chiya section is off-screen
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          container.classList.remove("is-paused");
+        } else {
+          container.classList.add("is-paused");
+        }
+      });
+    }, { rootMargin: "180px" });
+
+    observer.observe(chiyaSection);
+  }
 }
 
 /* --------------------------------------------------------------------------

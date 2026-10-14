@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Birthday Surprise - Happy Birthday!</title>
+  <title>Birthday Surprise - Happy Birthday Laxuu!</title>
   <meta name="description" content="A handcrafted, emotional, and interactive birthday surprise celebration website with music, photo memories, interactive cake, letters, and gift reveal." />
-  <meta property="og:title" content="Birthday Surprise - Happy Birthday!" />
+  <meta property="og:title" content="Birthday Surprise - Happy Birthday Laxuu!" />
   <meta property="og:description" content="A handcrafted, emotional, and interactive birthday surprise celebration website with music, photo memories, interactive cake, letters, and gift reveal." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -38,17 +38,17 @@
       <div class="intro-decor-dots" aria-hidden="true"></div>
       <div class="intro-sparkle-accents" aria-hidden="true">
         <span class="intro-sparkle intro-sparkle-1">✨</span>
-        <span class="intro-sparkle intro-sparkle-2">💖</span>
+        <span class="intro-sparkle intro-sparkle-2">🎂</span>
         <span class="intro-sparkle intro-sparkle-3">☕</span>
       </div>
       <span class="intro-badge">
-        <i class="fa-solid fa-heart" aria-hidden="true"></i> Special Delivery
+        <i class="fa-solid fa-cake-candles" aria-hidden="true"></i> Birthday Celebration 🎉
       </span>
-      <h1 class="intro-title" id="intro-title-heading">Hey <span data-bind="nickname">Soph</span> 👀</h1>
-      <p class="intro-subtitle" id="intro-subtitle-desc">I handcrafted something special just for your day...</p>
+      <h1 class="intro-title" id="intro-title-heading">Wishing You a Very Happy Birthday, <span data-bind="name">Laxuu</span>! 🎂✨</h1>
+      <p class="intro-subtitle" id="intro-subtitle-desc">Today is all about celebrating you! Ready to unwrap your birthday surprise?</p>
       <div class="intro-action-wrapper">
         <button type="button" class="btn-primary intro-cta-btn" id="open-surprise-btn" aria-label="Open your birthday surprise">
-          <span class="btn-text">Open Your Surprise</span>
+          <span class="btn-text">Open Your Birthday Surprise</span>
           <span class="btn-icon" aria-hidden="true">🎁</span>
         </button>
         <span class="intro-hint">Tap to unlock your celebration ✨</span>
@@ -70,6 +70,15 @@
   </button>
 
   <!-- =========================================================================
+       VIEWPORT SCROLL PROGRESS BAR (CELEBRATION COMPLETION INDICATOR)
+       ========================================================================= -->
+  <div class="scroll-progress-container" id="scroll-progress-container" role="progressbar" aria-label="Celebration Journey Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="scroll-progress-bar" id="scroll-progress-bar">
+      <div class="scroll-progress-glow" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
        NAVIGATION BAR
        ========================================================================= -->
   <header class="top-header">
@@ -87,6 +96,9 @@
         </a>
         <a href="#gallery-section" class="nav-link">
           <i class="fa-solid fa-camera" aria-hidden="true"></i> Memories
+        </a>
+        <a href="#habits-section" class="nav-link">
+          <i class="fa-solid fa-bottle-droplet" aria-hidden="true"></i> Habits 😂
         </a>
         <a href="#chiya-section" class="nav-link">
           <i class="fa-solid fa-mug-hot" aria-hidden="true"></i> Chiya ☕
@@ -113,7 +125,7 @@
           <!-- Time-Aware Birthday Banner (Dynamic JavaScript Date) -->
           <div class="time-aware-banner" id="time-aware-banner" aria-live="polite">
             <span class="time-aware-pulse" aria-hidden="true"></span>
-            <span id="time-aware-text">Good morning, birthday girl ☀️ Starting your birthday without chiya would be illegal, obviously. ☕</span>
+            <span id="time-aware-text">Happy Birthday, Laxuu! ☀️ Starting your birthday without chiya would be illegal, obviously. ☕</span>
           </div>
 
           <div class="hero-kicker">
@@ -122,10 +134,10 @@
           </div>
           <h1 class="hero-title">
             HAPPY BIRTHDAY 🎂<br />
-            <span class="hero-name-highlight easter-egg-trigger" data-bind="name" title="Click me!">Sophia</span>
+            <span class="hero-name-highlight easter-egg-trigger" data-bind="name" title="Click me!">Laxuu</span>
           </h1>
           <p class="hero-subtitle">
-            Today isn't just another day. It's the day someone amazing, kind-hearted, and truly irreplaceable came into this world. ✨
+            Today is all about celebrating you, Laxuu! Time to laugh, drink too much chiya, blow out candles, and enjoy every single moment. ✨
           </p>
           <div class="hero-cta-group">
             <a href="#letter-section" class="btn-primary">
@@ -140,13 +152,15 @@
         <div class="hero-image-wrapper">
           <div class="photo-frame-polaroid">
             <div class="washi-tape" aria-hidden="true"></div>
-            <img src="images/birthday-person.jpg" alt="Photo of birthday person" />
+            <div class="photo-polaroid-img-wrap">
+              <img src="images/birthday-person.jpg" alt="Photo of birthday person" />
+            </div>
             <div class="photo-polaroid-caption">
               The birthday star ✨
             </div>
             <div class="hero-floating-badge">
-              <i class="fa-solid fa-crown" style="color: var(--color-accent);" aria-hidden="true"></i>
-              <span>Deserving of the World</span>
+              <i class="fa-solid fa-cake-candles" style="color: var(--color-accent);" aria-hidden="true"></i>
+              <span>Happy Birthday Laxuu 🎂</span>
             </div>
           </div>
         </div>
@@ -189,7 +203,7 @@
 
         <p class="age-footer-note reveal-on-scroll">
           <i class="fa-regular fa-clock" style="color: var(--color-accent);" aria-hidden="true"></i>
-          <span>Counting every cherished moment with you.</span>
+          <span>Counting another awesome year of life, laughs & celebrations! 🎉</span>
         </p>
       </div>
     </section>
@@ -211,7 +225,7 @@
           </div>
 
           <h3 class="letter-salutation">
-            Happy Birthday, <span data-bind="name">Sophia</span>!
+            Happy Birthday, <span data-bind="name">Laxuu</span>! 🎉
           </h3>
 
           <div class="letter-body">
@@ -219,100 +233,19 @@
               I don't know exactly how to put everything into words, but I hope this new chapter of your life brings you more happiness, inner peace, beautiful memories, and everything you have been patiently working for.
             </p>
             <p>
-              Thank you for being such an extraordinary person. Thank you for your spontaneous laughter, for listening when things get tough, and for bringing pure genuine energy into every room you enter. You make life so much more fun and meaningful simply by existing.
+              Thank you for being such an extraordinary presence in life. Thank you for your spontaneous laughter, for listening when things get tough, and for bringing pure genuine energy wherever you go. Life is so much more fun and entertaining with you around.
             </p>
             <p>
-              As you blow out your candles today, know that you are celebrated, admired, and deeply loved. May this year shower you with endless adventures, good health, and sweet surprises.
+              As you blow out your candles today, know that you are celebrated, admired, and supported all the way. May this year shower you with endless adventures, good health, and sweet surprises.
             </p>
           </div>
 
           <div class="letter-signoff">
-            Always cheering for you & wishing you the absolute best! 🎂✨
+            Always cheering for you & wishing you the absolute best, Laxuu! 🎂✨
           </div>
           <div class="letter-date-stamp">
             Made with warmth, memories, and definitely too much chiya ☕
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         PERSONAL VOICE MESSAGE SECTION
-         ======================================================================= -->
-    <section class="section section-voice-note" id="voice-note-section">
-      <div class="section-container">
-        <div class="section-header reveal-on-scroll">
-          <span class="section-tag" style="color: #B45309;">Audio Note 🎧</span>
-          <h2 class="section-title">Some Things Sound Better Than They Read 🎧</h2>
-          <p class="section-subtitle">
-            I could've written this too... But this one felt better said.
-          </p>
-        </div>
-
-        <div class="voice-note-card reveal-on-scroll">
-          <div class="voice-card-header">
-            <div class="voice-avatar-circle" aria-hidden="true">
-              <i class="fa-solid fa-headphones"></i>
-            </div>
-            <div class="voice-header-meta">
-              <h4>Birthday Voice Note 🎙️</h4>
-              <p>Personal audio message • Tap play when you're ready</p>
-            </div>
-          </div>
-
-          <div class="voice-player-interactive" id="voice-player-interactive">
-            <button type="button" class="voice-play-toggle-btn" id="voice-play-toggle-btn" aria-label="Play birthday voice message">
-              <i class="fa-solid fa-play" id="voice-play-icon" aria-hidden="true"></i>
-            </button>
-
-            <div class="voice-controls-stack">
-              <!-- Animated waveform bars -->
-              <div class="voice-waveform-display" id="voice-waveform" aria-hidden="true">
-                <!-- Dynamically populated or rendered bars -->
-                <span class="waveform-bar" style="height: 10px;"></span>
-                <span class="waveform-bar" style="height: 18px;"></span>
-                <span class="waveform-bar" style="height: 24px;"></span>
-                <span class="waveform-bar" style="height: 12px;"></span>
-                <span class="waveform-bar" style="height: 20px;"></span>
-                <span class="waveform-bar" style="height: 28px;"></span>
-                <span class="waveform-bar" style="height: 16px;"></span>
-                <span class="waveform-bar" style="height: 22px;"></span>
-                <span class="waveform-bar" style="height: 30px;"></span>
-                <span class="waveform-bar" style="height: 14px;"></span>
-                <span class="waveform-bar" style="height: 25px;"></span>
-                <span class="waveform-bar" style="height: 19px;"></span>
-                <span class="waveform-bar" style="height: 27px;"></span>
-                <span class="waveform-bar" style="height: 15px;"></span>
-                <span class="waveform-bar" style="height: 21px;"></span>
-                <span class="waveform-bar" style="height: 29px;"></span>
-                <span class="waveform-bar" style="height: 12px;"></span>
-                <span class="waveform-bar" style="height: 23px;"></span>
-                <span class="waveform-bar" style="height: 17px;"></span>
-                <span class="waveform-bar" style="height: 26px;"></span>
-                <span class="waveform-bar" style="height: 11px;"></span>
-                <span class="waveform-bar" style="height: 20px;"></span>
-                <span class="waveform-bar" style="height: 28px;"></span>
-                <span class="waveform-bar" style="height: 14px;"></span>
-                <span class="waveform-bar" style="height: 22px;"></span>
-                <span class="waveform-bar" style="height: 16px;"></span>
-                <span class="waveform-bar" style="height: 24px;"></span>
-                <span class="waveform-bar" style="height: 10px;"></span>
-              </div>
-
-              <div class="voice-track-and-time">
-                <div class="voice-progress-track" id="voice-progress-track" title="Click to seek">
-                  <div class="voice-progress-fill" id="voice-progress-fill"></div>
-                </div>
-                <span class="voice-time-label" id="voice-time-label">0:00 / 0:32</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="voice-disclaimer-note">
-            <span>🎧 Best heard with earphones on. Press play when you're ready!</span>
-          </div>
-
-          <audio id="voice-audio-element" preload="metadata" src="audio/birthday-message.mp3"></audio>
         </div>
       </div>
     </section>
@@ -323,9 +256,9 @@
     <section class="section section-alt" id="gallery-section">
       <div class="section-container">
         <div class="section-header reveal-on-scroll">
-          <span class="section-tag">Special Memory 📸</span>
-          <h2 class="section-title">Framed with Love ❤️</h2>
-          <p class="section-subtitle">A special celebration memory captured in time.</p>
+          <span class="section-tag">Birthday Memories 📸</span>
+          <h2 class="section-title">Celebrating Laxuu 🎉</h2>
+          <p class="section-subtitle">A memorable birthday moment captured in time.</p>
         </div>
 
         <div class="gallery-showcase-wrapper reveal-on-scroll">
@@ -342,11 +275,13 @@
           <div class="physical-art-frame" id="physical-art-frame" role="button" tabindex="0" aria-label="View photo in full screen" title="Click to view full screen!">
             <div class="art-frame-gold-fillet">
               <div class="art-frame-mount">
-                <img id="framed-art-image" src="images/birthday-girl-frame.jpg" alt="Birthday Girl Framed Memory" loading="lazy" />
+                <div class="art-frame-photo-window">
+                  <img id="framed-art-image" src="images/birthday-girl-frame.jpg" alt="Birthday Girl Framed Memory" loading="lazy" />
+                </div>
                 <div class="art-frame-glare" aria-hidden="true"></div>
                 <div class="art-frame-zoom-badge">
-                  <i class="fa-solid fa-heart" aria-hidden="true"></i>
-                  <span>Click to Celebrate ❤️</span>
+                  <i class="fa-solid fa-cake-candles" aria-hidden="true"></i>
+                  <span>Celebrate Laxuu 🎂</span>
                 </div>
               </div>
             </div>
@@ -361,7 +296,7 @@
             <span class="plaque-screw top-right" aria-hidden="true"></span>
             <span class="plaque-screw bottom-left" aria-hidden="true"></span>
             <span class="plaque-screw bottom-right" aria-hidden="true"></span>
-            <h3 class="plaque-title">A Moment Worth Remembering ✨</h3>
+            <h3 class="plaque-title">Birthday Celebration for Laxuu ✨</h3>
             <p class="plaque-subtitle">
               <span>Archived with a smile</span>
               <span aria-hidden="true">•</span>
@@ -369,7 +304,7 @@
             </p>
             <span class="plaque-action-hint">
               <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
-              <span>Click Frame to Reveal</span>
+              <span>Click Frame to Celebrate</span>
             </span>
           </div>
         </div>
@@ -377,235 +312,107 @@
     </section>
 
     <!-- =======================================================================
-         6. BLURRED MEMORY REVEAL
+         6. WHAT I DON'T LIKE ABOUT YOUR HABITS: COKE, XTREME & INNOCENT LIES
          ======================================================================= -->
-    <section class="section section-blurred-memory" id="blurred-memory-section">
+    <section class="section section-habits" id="habits-section">
       <div class="section-container">
         <div class="section-header reveal-on-scroll">
-          <span class="section-tag" style="color: #B45309;">Special Reveal 📸</span>
-          <h2 class="section-title">Do You Remember This? 👀</h2>
-          <p class="section-subtitle">No cheating. Take a guess before revealing.</p>
+          <span class="section-tag" style="color: #DC2626;">Laxuu का बानीहरू 🥤👀</span>
+          <h2 class="section-title">मलाई मन नपर्ने तिम्रा बानीहरू 😤</h2>
+          <p class="section-subtitle">
+            अरू सब राम्रो छ, तर तिम्रा यी २ वटा बानी देख्दा चाहिँ मलाई साँचै रिस उठ्छ!
+          </p>
         </div>
 
-        <div class="blurred-memory-wrapper reveal-on-scroll">
-          <div class="blurred-memory-card" id="blurred-memory-card">
-            <div class="blurred-memory-img-frame" id="blurred-memory-trigger" role="button" tabindex="0" title="Click to reveal memory">
-              <img src="images/special-memory.jpg" alt="Special hidden memory" class="blurred-memory-img" id="blurred-memory-img" />
-              <div class="blurred-memory-lock-overlay" id="blurred-lock-overlay">
-                <div class="blurred-lock-icon">
-                  <i class="fa-solid fa-eye-slash" aria-hidden="true"></i>
+        <div class="habits-grid">
+          <!-- Card 1: Skipping Dinner & Addicted to Cold Drinks & Current Noodles -->
+          <div class="habit-card reveal-on-scroll">
+            <div class="habit-badge badge-coke">
+              <i class="fa-solid fa-fire-burner" aria-hidden="true"></i> साँझको बानी 🥤🍜
+            </div>
+            <div class="habit-icon-header">
+              <span class="habit-emoji">🥤🍜</span>
+              <h3>खाना नखाने, Coke, Xtreme र Current मात्रै खाने!</h3>
+            </div>
+            
+            <div class="habit-direct-rant">
+              <p>साँझ घरमा पाकेको तातो दाल-भात-तरकारी पेटभरि खान छोडेर, खाली पेटमा चिसो Coke र Xtreme इनर्जी ड्रिंक घुट्क्याउने अनि सँगै पिरो Current चाउचाउ मात्र चपाउने बानी! जति सम्झाए पनि पटक्कै नसुन्ने, अनि पछि 'ग्यास्ट्रिक भयो, मुटु ढुकढुक भयो, टाउको दुख्यो' भन्दै आफैं छटपटाउने! रिस नउठेर के उठ्छ त?! 🤦‍♂️😤</p>
+            </div>
+
+            <!-- Realistic Dinner Menu vs Reality Box -->
+            <div class="habit-interactive-box">
+              <div class="habit-status-display" id="coke-status-display">
+                <div class="habit-diet-grid">
+                  <div class="diet-item bad">
+                    <span class="diet-label">साँझको पोसिलो खाना:</span>
+                    <span class="diet-value">❌ "भोक छैन, खाँदै खान्न!"</span>
+                  </div>
+                  <div class="diet-item guilty">
+                    <span class="diet-label">Coke र Xtreme:</span>
+                    <span class="diet-value">🥤 "चिसो-चिसो घुट्घुट् २-३ क्यान!"</span>
+                  </div>
+                  <div class="diet-item spicy">
+                    <span class="diet-label">Current चाउचाउ:</span>
+                    <span class="diet-value">🍜 "पिरो-पिरो भए पनि खानैपर्ने!"</span>
+                  </div>
                 </div>
-                <span style="font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.85rem;">Memory Locked 🔒</span>
+                <p class="habit-feedback-text" id="coke-feedback-text">“साँझ खाना खाएनौ भने यस्तै बानीले कुनै दिन अस्पताल पुगिन्छ है!” 😤</p>
               </div>
-            </div>
-
-            <button type="button" class="btn-primary blurred-reveal-btn" id="blurred-reveal-btn" style="background: #B45309;">
-              Reveal Memory <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
-            </button>
-
-            <div class="blurred-memory-caption-box" id="blurred-caption-box">
-              <h3 class="blurred-caption-title">Yeah... this one. 😂</h3>
-              <p class="blurred-caption-text">
-                Out of all the random days, this was easily one of the best. Proof that good company, unscripted laughs, and spontaneous moments make the best memories.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         6. MEMORY TIMELINE
-         ======================================================================= -->
-    <section class="section" id="timeline-section">
-      <div class="section-container">
-        <div class="section-header reveal-on-scroll">
-          <span class="section-tag">Chapter by Chapter</span>
-          <h2 class="section-title">Our Little Timeline ✨</h2>
-          <p class="section-subtitle">How a simple hello turned into one of the greatest blessings.</p>
-        </div>
-
-        <div class="timeline-container">
-          <!-- Timeline Entry 1 -->
-          <div class="timeline-item reveal-on-scroll">
-            <div class="timeline-dot" aria-hidden="true"></div>
-            <div class="timeline-card">
-              <span class="timeline-date">The Beginning</span>
-              <h3 class="timeline-title">The Day Our Paths Crossed</h3>
-              <p class="timeline-desc">
-                Neither of us knew that an ordinary day would mark the beginning of so many shared laughs and unforgettable memories.
-              </p>
+              <button type="button" class="btn-primary habit-action-btn" id="drink-coke-btn">
+                <span>“साँझ खाना खायौ त?” सोध्नुहोस्</span> <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+              </button>
             </div>
           </div>
 
-          <!-- Timeline Entry 2 -->
-          <div class="timeline-item reveal-on-scroll">
-            <div class="timeline-dot" aria-hidden="true"></div>
-            <div class="timeline-card">
-              <span class="timeline-date">Unfiltered Laughter</span>
-              <h3 class="timeline-title">Our First Proper Conversation</h3>
-              <p class="timeline-desc">
-                From polite small talk to laughing until our stomachs hurt. That was the moment I realized what a gem of a human you are.
-              </p>
+          <!-- Card 2: The Specific Real Lies Told With an Innocent Face -->
+          <div class="habit-card reveal-on-scroll">
+            <div class="habit-badge badge-lies">
+              <i class="fa-solid fa-user-secret" aria-hidden="true"></i> सोझो अनुहार बनाएर झूट 🤥
             </div>
-          </div>
-
-          <!-- Timeline Entry 3 -->
-          <div class="timeline-item reveal-on-scroll">
-            <div class="timeline-dot" aria-hidden="true"></div>
-            <div class="timeline-card">
-              <span class="timeline-date">Wild Adventures</span>
-              <h3 class="timeline-title">That Unforgettable Day</h3>
-              <p class="timeline-desc">
-                Getting slightly lost, singing along at the top of our lungs, and agreeing that wrong turns often lead to the greatest stories.
-              </p>
+            <div class="habit-icon-header">
+              <span class="habit-emoji">🤥😇</span>
+              <h3>सोझो अनुहार बनाएर झूट बोल्ने कला</h3>
             </div>
-          </div>
 
-          <!-- Timeline Entry 4 -->
-          <div class="timeline-item reveal-on-scroll">
-            <div class="timeline-dot" aria-hidden="true"></div>
-            <div class="timeline-card">
-              <span class="timeline-date">Unshakable Bond</span>
-              <h3 class="timeline-title">Through Highs and Lows</h3>
-              <p class="timeline-desc">
-                Having someone who celebrates your victories and stands firmly by your side during quiet rainy days. That is what you represent.
-              </p>
+            <div class="habit-direct-rant">
+              <p>संसारकै सबैभन्दा सोझो र निर्दोष अनुहार बनाएर यस्तो सफासँग आँखा नझिम्क्याई झूट बोल्ने बानी! अहिलेलाई मुख्य ३ वटा झूट सम्झिएँ, अरू त कति छन् कति... पछि रङ्गेहात पक्रँदा चाहिँ उल्टै मरी-मरी हाँसेर टार्न खोज्ने! 🤦‍♂️😂</p>
             </div>
-          </div>
 
-          <!-- Timeline Entry 5 -->
-          <div class="timeline-item reveal-on-scroll">
-            <div class="timeline-dot" aria-hidden="true"></div>
-            <div class="timeline-card">
-              <span class="timeline-date">Today & Beyond</span>
-              <h3 class="timeline-title">Celebrating The Best Person!</h3>
-              <p class="timeline-desc">
-                Here we are today, honoring you and eagerly cheering for every dazzling chapter still waiting to unfold in your life.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         7. THINGS I APPRECIATE ABOUT YOU
-         ======================================================================= -->
-    <section class="section section-alt" id="appreciation-section">
-      <div class="section-container">
-        <div class="section-header reveal-on-scroll">
-          <span class="section-tag">Reasons You Shine</span>
-          <h2 class="section-title">A Few Things That Make You Special</h2>
-          <p class="section-subtitle">Just a handful of the countless reasons why having you around is a true gift.</p>
-        </div>
-
-        <div class="appreciation-grid">
-          <div class="appreciation-card reveal-on-scroll">
-            <div class="appreciation-icon-box">
-              <i class="fa-regular fa-face-smile-beam" aria-hidden="true"></i>
-            </div>
-            <h3 class="appreciation-title">Your Smile 😊</h3>
-            <p class="appreciation-desc">
-              It instantly brightens any room and can turn around the gloomiest of moods without even trying.
-            </p>
-          </div>
-
-          <div class="appreciation-card reveal-on-scroll">
-            <div class="appreciation-icon-box">
-              <i class="fa-solid fa-heart" aria-hidden="true"></i>
-            </div>
-            <h3 class="appreciation-title">Your Kindness ❤️</h3>
-            <p class="appreciation-desc">
-              You possess a rare and gentle empathy that makes people feel heard, appreciated, and safe.
-            </p>
-          </div>
-
-          <div class="appreciation-card reveal-on-scroll">
-            <div class="appreciation-icon-box">
-              <i class="fa-solid fa-comments" aria-hidden="true"></i>
-            </div>
-            <h3 class="appreciation-title">Your Random Talks 😂</h3>
-            <p class="appreciation-desc">
-              From midnight philosophical theories to the most absurd memes, our conversations never get boring.
-            </p>
-          </div>
-
-          <div class="appreciation-card reveal-on-scroll">
-            <div class="appreciation-icon-box">
-              <i class="fa-solid fa-bolt" aria-hidden="true"></i>
-            </div>
-            <h3 class="appreciation-title">Your Energy ✨</h3>
-            <p class="appreciation-desc">
-              You radiate a vibrant spark that inspires everyone around you to be a little bolder and happier.
-            </p>
-          </div>
-
-          <div class="appreciation-card reveal-on-scroll">
-            <div class="appreciation-icon-box">
-              <i class="fa-solid fa-hands-holding-child" aria-hidden="true"></i>
-            </div>
-            <h3 class="appreciation-title">Your Support 🫶</h3>
-            <p class="appreciation-desc">
-              Always dependable, always encouraging, and forever cheering for the people you hold close.
-            </p>
-          </div>
-
-          <div class="appreciation-card reveal-on-scroll">
-            <div class="appreciation-icon-box">
-              <i class="fa-solid fa-seedling" aria-hidden="true"></i>
-            </div>
-            <h3 class="appreciation-title">Just Being You 🌷</h3>
-            <p class="appreciation-desc">
-              Never change. Your uniqueness, authenticity, and gentle spirit are what make you completely irreplaceable.
-            </p>
-          </div>
-
-          <div class="appreciation-card reveal-on-scroll">
-            <div class="appreciation-icon-box" style="background: #FEF3C7; color: #B45309;">
-              <i class="fa-solid fa-mug-hot" aria-hidden="true"></i>
-            </div>
-            <h3 class="appreciation-title">Your Love for Chiya ☕</h3>
-            <p class="appreciation-desc">
-              At this point, I'm pretty sure chiya is part of your personality. 😂
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         3. THINGS YOU PROBABLY DON'T REALIZE
-         ======================================================================= -->
-    <section class="section" id="unrealized-section">
-      <div class="section-container">
-        <div class="section-header reveal-on-scroll">
-          <span class="section-tag" style="color: #B45309;">Honest Observations</span>
-          <h2 class="section-title">Things You Probably Don't Realize About Yourself</h2>
-          <p class="section-subtitle">Not generic compliments. Just things I've noticed along the way.</p>
-        </div>
-
-        <div class="unrealized-wrapper reveal-on-scroll">
-          <div class="unrealized-card" id="unrealized-card">
-            <div>
-              <span class="unrealized-badge" id="unrealized-badge">Observation 1 of 6</span>
-              <div class="unrealized-quote-text" id="unrealized-quote-text">
-                “You somehow make random conversations interesting.”
+            <!-- Specific Real Lies Showcase -->
+            <div class="habit-interactive-box">
+              <div class="real-lies-list" id="real-lies-container">
+                <div class="real-lie-card active" id="lie-card-0">
+                  <div class="lie-badge-row">
+                    <span class="lie-num-tag">झूट १</span>
+                    <span class="lie-emoji">🤦‍♂️</span>
+                  </div>
+                  <h4 class="lie-title">“म जैसी हैन, उपाध्ये बाहुन हो!”</h4>
+                  <p class="lie-reaction">संसारकै सबैभन्दा सोझो मुख बनाएर जातै चेन्ज गरिदिने कला! हे भगवान, कसैले यति सफासँग ढाँट्न सक्छ?! 😂</p>
+                </div>
+                <div class="real-lie-card" id="lie-card-1" style="display: none;">
+                  <div class="lie-badge-row">
+                    <span class="lie-num-tag">झूट २</span>
+                    <span class="lie-emoji">😇</span>
+                  </div>
+                  <h4 class="lie-title">“अब म कहिल्यै झूट बोल्दिनँ!”</h4>
+                  <p class="lie-reaction">सबैभन्दा ठूलो झूट नै यही हो! यो भनेको २ मिनेट बित्न पाउँदैन, अर्को नयाँ झूट तयार भइसकेको हुन्छ! 🤥</p>
+                </div>
+                <div class="real-lie-card" id="lie-card-2" style="display: none;">
+                  <div class="lie-badge-row">
+                    <span class="lie-num-tag">झूट ३</span>
+                    <span class="lie-emoji">🚌</span>
+                  </div>
+                  <h4 class="lie-title">“अब म काठमाडौं आउँदिनँ!”</h4>
+                  <p class="lie-reaction">काठमाडौं कहिल्यै आउँदिनँ भनेर कसम खाने, अनि मौका मिल्नेबित्तिकै झोला बोकेर हिँड्ने सुर कस्को हो?! 😂</p>
+                </div>
               </div>
-            </div>
-
-            <div class="unrealized-nav-row">
-              <div class="unrealized-dots-group" id="unrealized-dots-group">
-                <span class="unrealized-dot active"></span>
-                <span class="unrealized-dot"></span>
-                <span class="unrealized-dot"></span>
-                <span class="unrealized-dot"></span>
-                <span class="unrealized-dot"></span>
-                <span class="unrealized-dot"></span>
+              
+              <div class="lies-bottom-note">
+                <small>💡 अहिलेलाई यत्ति सम्झिएँ, अरू बहाना नबनाऊ! 🤫</small>
               </div>
 
-              <button type="button" class="btn-primary" id="unrealized-next-btn" style="background: #B45309; padding: 0.6rem 1.4rem;">
-                Next <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              <button type="button" class="btn-primary habit-action-btn" id="generate-excuse-btn" style="background: #D97706;">
+                <span>अर्को झूट हेर्नुहोस्</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
               </button>
             </div>
           </div>
@@ -613,16 +420,21 @@
       </div>
     </section>
 
+
+
     <!-- =======================================================================
-         SPECIAL CHIYA LOVER SECTION
+         SPECIAL CHIYA LOVER SECTION (CLASSIC NEPALI STREET-STYLE TEA GLASS)
          ======================================================================= -->
     <section class="section chiya-section" id="chiya-section">
-      <div class="section-container">
+      <!-- Ambient Rising Tea Bubbles & Steam Wisps Particle Layer -->
+      <div class="chiya-ambient-particles" id="chiya-ambient-particles" aria-hidden="true"></div>
+
+      <div class="section-container" style="position: relative; z-index: 2;">
         <div class="section-header reveal-on-scroll">
-          <span class="section-tag" style="color: #B45309;">Artisanal Dudh Chiya ☕</span>
+          <span class="section-tag" style="color: #B45309;">नेपाली स्टाइल चिया गिलास ☕</span>
           <h2 class="section-title">For the Chiya Lover ☕</h2>
           <p class="section-subtitle">
-            Slow-simmered CTC tea, fresh crushed cardamom & rich milk — brewed right on screen.
+            Slow-simmered CTC tea, crushed cardamom & fresh whole milk in an authentic Nepali tea glass.
           </p>
         </div>
 
@@ -630,36 +442,64 @@
           <!-- Left Column: Personal Note & Interactive Cup -->
           <div class="chiya-card reveal-on-scroll">
             <div class="chiya-note-box">
-              <span class="chiya-note-quote">“Some people need motivation. Some people need sleep. And then there's you... you just need chiya. ☕😂”</span>
+              <span class="chiya-note-quote">“Some people need motivation. Some people need sleep. And then there's you... you just need a hot glass of chiya. ☕😂”</span>
               <p>
-                So here's an artisanal virtual cup of spiced chiya, handcrafted just for your birthday! ☕✨
+                Here is your authentic virtual glass of hot Dudh Chiya, handcrafted in a classic roadside tea glass! ☕✨
               </p>
             </div>
 
             <div class="chiya-maker-wrapper">
-              <!-- Artisanal Ultra-Realistic Spiced Milk Chiya Cup with Real Brewed Milk-Tea Tone, Tea Leaves & Steam -->
-              <div class="teacup-scene" id="teacup-scene" role="button" tabindex="0" title="Tap cup to sip! (or tap 5 times for a secret easter egg!)">
-                <div class="teacup-steam-group" aria-hidden="true">
+              <!-- Realistic Classic Nepali Street-Style Fluted Chiya Glass Cup -->
+              <div class="chiya-glass-scene" id="teacup-scene" role="button" tabindex="0" title="Tap glass to sip! (or tap 5 times for a secret easter egg!)">
+                <!-- Ambient Rising Steam Wisps from Hot Dudh Chiya -->
+                <div class="glass-steam-group" aria-hidden="true">
                   <div class="steam-wisp"></div>
                   <div class="steam-wisp"></div>
                   <div class="steam-wisp"></div>
                   <div class="steam-wisp"></div>
                   <div class="steam-heart">☕</div>
                 </div>
-                <!-- Saucer Shadow & Saucer -->
-                <div class="teacup-saucer-shadow" aria-hidden="true"></div>
-                <div class="teacup-saucer" aria-hidden="true">
-                  <div class="saucer-inner-ring"></div>
-                </div>
-                <!-- Sculpted Teacup Body -->
-                <div class="teacup-body">
-                  <div class="teacup-glaze-sheen" aria-hidden="true"></div>
-                  <div class="teacup-gold-rim" aria-hidden="true"></div>
-                  <div class="teacup-interior-shadow" aria-hidden="true"></div>
-                  <div class="teacup-tea-liquid" id="teacup-tea-liquid">
-                    <!-- Milk Chiya Surface with Milk Skin & Spices -->
-                    <div class="teacup-chiya-surface">
-                      <div class="chiya-malai-skin" aria-hidden="true"></div>
+
+                <!-- Realistic Countertop Caustic Glass Shadow -->
+                <div class="chiya-glass-shadow" aria-hidden="true"></div>
+
+                <!-- Master Realistic Glass Cup Body -->
+                <div class="chiya-glass-cup">
+                  <!-- Polished Circular Top Rim with Light Gleam -->
+                  <div class="glass-rim" aria-hidden="true">
+                    <div class="glass-rim-inner"></div>
+                    <div class="glass-rim-gleam"></div>
+                  </div>
+
+                  <!-- Iconic Faceted Fluted Glass Ribs (Classic Nepali Tea Glass Texture) -->
+                  <div class="glass-flutes-layer" aria-hidden="true">
+                    <div class="flute-panel p1"></div>
+                    <div class="flute-panel p2"></div>
+                    <div class="flute-panel p3"></div>
+                    <div class="flute-panel p4"></div>
+                    <div class="flute-panel p5"></div>
+                    <div class="flute-panel p6"></div>
+                    <div class="flute-panel p7"></div>
+                  </div>
+
+                  <!-- Specular Glass Highlights (Light reflections) -->
+                  <div class="glass-specular-left" aria-hidden="true"></div>
+                  <div class="glass-specular-right" aria-hidden="true"></div>
+
+                  <!-- Steaming Authentic Spiced Dudh Chiya Liquid Layer (Rises on Brew) -->
+                  <div class="chiya-glass-liquid" id="teacup-tea-liquid">
+                    <!-- Liquid Body Warm Amber-Caramel Gradient with Rising Bubbles -->
+                    <div class="chiya-liquid-gradient"></div>
+                    <div class="chiya-liquid-bubbles" aria-hidden="true">
+                      <span class="l-bubble b1"></span>
+                      <span class="l-bubble b2"></span>
+                      <span class="l-bubble b3"></span>
+                      <span class="l-bubble b4"></span>
+                    </div>
+
+                    <!-- Creamy Top Froth / Milk Skin (Malai) Surface with Crushed Spices -->
+                    <div class="chiya-glass-surface">
+                      <div class="glass-malai-froth" aria-hidden="true"></div>
                       <div class="chiya-spice-crush" aria-hidden="true">
                         <span class="spice-dot sd1"></span>
                         <span class="spice-dot sd2"></span>
@@ -670,25 +510,20 @@
                         <span class="tea-leaf-speck tl2"></span>
                       </div>
                       <div class="chiya-steam-bubble" aria-hidden="true"></div>
+                      <div class="teacup-ripple" aria-hidden="true"></div>
                     </div>
-                    <div class="teacup-ripple" aria-hidden="true"></div>
                   </div>
-                </div>
-                <!-- Cinnamon Stick in Chiya -->
-                <div class="cinnamon-stick" aria-hidden="true"></div>
-                <!-- Tea Bag String & Kraft Tag -->
-                <div class="tea-string-tag" aria-hidden="true">
-                  <div class="tea-string"></div>
-                  <div class="tea-tag"><span>Dudh Chiya ☕</span></div>
-                </div>
-                <!-- Ergonomic Sculpted Handle -->
-                <div class="teacup-handle" aria-hidden="true">
-                  <div class="handle-inner-shadow"></div>
+
+                  <!-- Solid Heavy Molded Glass Base with Light Refraction (Classic Thick Bottom) -->
+                  <div class="glass-heavy-base" aria-hidden="true">
+                    <div class="base-refraction-line"></div>
+                    <div class="base-prism-gleam"></div>
+                  </div>
                 </div>
               </div>
 
               <div class="teacup-tap-hint">
-                <i class="fa-solid fa-hand-pointer" aria-hidden="true"></i> Tap cup to take a sip! (5 taps = secret 🏆)
+                <i class="fa-solid fa-hand-pointer" aria-hidden="true"></i> Tap glass to take a sip! (5 taps = secret 🏆)
               </div>
 
               <button type="button" class="btn-primary" id="make-chiya-btn" style="background: #B45309; box-shadow: 0 6px 18px rgba(180, 83, 9, 0.35); margin-top: 1rem;">
@@ -696,7 +531,7 @@
               </button>
 
               <div class="chiya-status-log" id="chiya-status-log">
-                Click the button above to brew your birthday cup!
+                Click the button above to brew your birthday glass of chiya!
               </div>
             </div>
 
@@ -876,9 +711,9 @@
           </div>
 
           <div class="envelope-card reveal-on-scroll" data-letter-type="miss">
-            <div class="envelope-icon-wrap"><i class="fa-regular fa-envelope" aria-hidden="true"></i></div>
-            <div class="envelope-tag">Affection</div>
-            <h3 class="envelope-title">Open when you miss me</h3>
+            <div class="envelope-icon-wrap"><i class="fa-solid fa-face-laugh-beam" aria-hidden="true"></i></div>
+            <div class="envelope-tag">Cheer & Laughs</div>
+            <h3 class="envelope-title">Open when you need a laugh 😂</h3>
             <span class="envelope-action-hint">Open letter <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
           </div>
 
@@ -1048,7 +883,7 @@
           <div class="gift-revealed-content" id="gift-revealed-content">
             <span class="gift-revealed-badge">Birthday Pass</span>
             <h3 class="gift-revealed-title">
-              Happy Birthday, <span data-bind="name">Sophia</span>! 🎉🎂
+              Happy Birthday, <span data-bind="name">Laxuu</span>! 🎉🎂
             </h3>
             <p class="gift-revealed-text">
               My gift to you isn't just this website. It's a promise to always be in your corner, celebrating your achievements, sharing good coffee, and cheering you on. Plus, a little celebratory voucher for you!
@@ -1145,7 +980,7 @@ Have the best birthday, take care of yourself, and go celebrate properly.
         <h2 class="final-title">And that's it...</h2>
         <p class="final-message">
           Just a small website for someone who deserves a very big birthday celebration.<br />
-          Happy Birthday Once Again, <span class="easter-egg-trigger" data-bind="name" style="cursor: pointer; color: var(--color-primary); font-weight: 700;">Sophia</span> ✨
+          Happy Birthday Once Again, <span class="easter-egg-trigger" data-bind="name" style="cursor: pointer; color: var(--color-primary); font-weight: 700;">Laxuu</span> ✨
         </p>
 
         <div class="replay-button-wrap">

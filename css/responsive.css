@@ -76,6 +76,7 @@
     max-width: 300px;
   }
 
+  .photo-polaroid-img-wrap,
   .photo-frame-polaroid img {
     height: 320px;
   }
@@ -264,6 +265,15 @@
     grid-template-columns: 1fr;
   }
 
+  .habits-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .habit-card {
+    padding: 1.65rem 1.25rem;
+  }
+
   .section-title {
     font-size: 1.85rem;
   }
@@ -400,6 +410,7 @@
     max-width: 250px;
   }
 
+  .photo-polaroid-img-wrap,
   .photo-frame-polaroid img {
     height: 250px;
   }

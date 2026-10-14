@@ -1,0 +1,1521 @@
+[
+  {
+    "id": "clk_1791999775235_f0ox2",
+    "timestamp": "2026-10-14T17:42:55.228Z",
+    "nepalTime": "Oct 14, 2026, 11:27:55 PM (NPT)",
+    "action": "Real Lies Showcase",
+    "label": "Lie #1: जैसी हैन उपाध्ये बाहुन",
+    "elementId": "generate-excuse-btn",
+    "section": "Habits Section",
+    "ip": "127.0.0.1",
+    "geo": {
+      "city": "Local / Dev Network",
+      "region": "Local Area",
+      "country": "Localhost",
+      "countryCode": "LOC",
+      "isp": "Internal Network",
+      "source": "timezone-inference"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Unknown OS",
+      "browser": "Unknown Browser"
+    }
+  },
+  {
+    "id": "clk_1791999520696_zls3v",
+    "timestamp": "2026-10-14T17:38:40.696Z",
+    "nepalTime": "Oct 14, 2026, 11:23:40 PM (NPT)",
+    "action": "Button Click",
+    "label": "Home",
+    "section": "top-header",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999517148_w0qhp",
+    "timestamp": "2026-10-14T17:38:37.147Z",
+    "nepalTime": "Oct 14, 2026, 11:23:37 PM (NPT)",
+    "action": "Button Click",
+    "label": "Open Gift 🎁",
+    "section": "top-header",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999507418_b893m",
+    "timestamp": "2026-10-14T17:38:27.417Z",
+    "nepalTime": "Oct 14, 2026, 11:23:27 PM (NPT)",
+    "action": "Button Click",
+    "label": "Blow out the birthday candles",
+    "elementId": "blow-candles-btn",
+    "section": "wishes-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999504550_5ihr8",
+    "timestamp": "2026-10-14T17:38:24.549Z",
+    "nepalTime": "Oct 14, 2026, 11:23:24 PM (NPT)",
+    "action": "Button Click",
+    "label": "Wishes 🎂",
+    "section": "top-header",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999502629_sjdb9",
+    "timestamp": "2026-10-14T17:38:22.629Z",
+    "nepalTime": "Oct 14, 2026, 11:23:22 PM (NPT)",
+    "action": "Button Click",
+    "label": "Chiya ☕",
+    "section": "top-header",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999501335_lxw17",
+    "timestamp": "2026-10-14T17:38:21.335Z",
+    "nepalTime": "Oct 14, 2026, 11:23:21 PM (NPT)",
+    "action": "Button Click",
+    "label": "Habits 😂",
+    "section": "top-header",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999412542_s8trm",
+    "timestamp": "2026-10-14T17:36:52.542Z",
+    "nepalTime": "Oct 14, 2026, 11:21:52 PM (NPT)",
+    "action": "Button Click",
+    "label": "Replay the Surprise",
+    "elementId": "replay-surprise-btn",
+    "section": "final-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999399794_9xgzs",
+    "timestamp": "2026-10-14T17:36:39.793Z",
+    "nepalTime": "Oct 14, 2026, 11:21:39 PM (NPT)",
+    "action": "Button Click",
+    "label": "Last warning.",
+    "elementId": "do-not-click-btn",
+    "section": "do-not-click-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999398340_0mhuo",
+    "timestamp": "2026-10-14T17:36:38.340Z",
+    "nepalTime": "Oct 14, 2026, 11:21:38 PM (NPT)",
+    "action": "Button Click",
+    "label": "Seriously, don't.",
+    "elementId": "do-not-click-btn",
+    "section": "do-not-click-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999396534_3ume5",
+    "timestamp": "2026-10-14T17:36:36.533Z",
+    "nepalTime": "Oct 14, 2026, 11:21:36 PM (NPT)",
+    "action": "Button Click",
+    "label": "DO NOT CLICK 👀",
+    "elementId": "do-not-click-btn",
+    "section": "do-not-click-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999384215_2vgsk",
+    "timestamp": "2026-10-14T17:36:24.215Z",
+    "nepalTime": "Oct 14, 2026, 11:21:24 PM (NPT)",
+    "action": "Button Click",
+    "label": "CALM Open when you're overthinking Open letter",
+    "section": "letters-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999381954_mzexg",
+    "timestamp": "2026-10-14T17:36:21.954Z",
+    "nepalTime": "Oct 14, 2026, 11:21:21 PM (NPT)",
+    "action": "Button Click",
+    "label": "Close Letter ❤️",
+    "section": "General Page",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999376854_2af5x",
+    "timestamp": "2026-10-14T17:36:16.853Z",
+    "nepalTime": "Oct 14, 2026, 11:21:16 PM (NPT)",
+    "action": "Button Click",
+    "label": "ENCOURAGEMENT Open when you need motivation Open letter",
+    "section": "letters-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999361810_98qfw",
+    "timestamp": "2026-10-14T17:36:01.810Z",
+    "nepalTime": "Oct 14, 2026, 11:21:01 PM (NPT)",
+    "action": "Button Click",
+    "label": "CHEER & LAUGHS Open when you need a laugh 😂 Open letter",
+    "section": "letters-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999352604_3rqjo",
+    "timestamp": "2026-10-14T17:35:52.603Z",
+    "nepalTime": "Oct 14, 2026, 11:20:52 PM (NPT)",
+    "action": "Button Click",
+    "label": "COMFORT Open when you're sad Open letter",
+    "section": "letters-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999339827_x29q0",
+    "timestamp": "2026-10-14T17:35:39.826Z",
+    "nepalTime": "Oct 14, 2026, 11:20:39 PM (NPT)",
+    "action": "Button Click",
+    "label": "TEA TIME Open when you need chiya ☕ Open letter",
+    "section": "letters-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999332538_lc4o4",
+    "timestamp": "2026-10-14T17:35:32.538Z",
+    "nepalTime": "Oct 14, 2026, 11:20:32 PM (NPT)",
+    "action": "Button Click",
+    "label": "CELEBRATION Open when you're happy Open letter",
+    "section": "letters-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999115637_q5497",
+    "timestamp": "2026-10-14T17:31:55.637Z",
+    "nepalTime": "Oct 14, 2026, 11:16:55 PM (NPT)",
+    "action": "Excuse Generator",
+    "label": "Excuse #5",
+    "elementId": "generate-excuse-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999115634_jcsfu",
+    "timestamp": "2026-10-14T17:31:55.634Z",
+    "nepalTime": "Oct 14, 2026, 11:16:55 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को बहाना सुन्नुहोस्",
+    "elementId": "generate-excuse-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999114989_ziow5",
+    "timestamp": "2026-10-14T17:31:54.988Z",
+    "nepalTime": "Oct 14, 2026, 11:16:54 PM (NPT)",
+    "action": "Excuse Generator",
+    "label": "Excuse #4",
+    "elementId": "generate-excuse-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999114972_trn05",
+    "timestamp": "2026-10-14T17:31:54.971Z",
+    "nepalTime": "Oct 14, 2026, 11:16:54 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को बहाना सुन्नुहोस्",
+    "elementId": "generate-excuse-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999113509_2wkcy",
+    "timestamp": "2026-10-14T17:31:53.509Z",
+    "nepalTime": "Oct 14, 2026, 11:16:53 PM (NPT)",
+    "action": "Excuse Generator",
+    "label": "Excuse #3",
+    "elementId": "generate-excuse-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999113392_qs81q",
+    "timestamp": "2026-10-14T17:31:53.392Z",
+    "nepalTime": "Oct 14, 2026, 11:16:53 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को बहाना सुन्नुहोस्",
+    "elementId": "generate-excuse-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999110791_64kt2",
+    "timestamp": "2026-10-14T17:31:50.791Z",
+    "nepalTime": "Oct 14, 2026, 11:16:50 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को बहाना सुन्नुहोस्",
+    "elementId": "generate-excuse-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999110682_xa8kq",
+    "timestamp": "2026-10-14T17:31:50.682Z",
+    "nepalTime": "Oct 14, 2026, 11:16:50 PM (NPT)",
+    "action": "Excuse Generator",
+    "label": "Excuse #2",
+    "elementId": "generate-excuse-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999044170_yet9n",
+    "timestamp": "2026-10-14T17:30:44.169Z",
+    "nepalTime": "Oct 14, 2026, 11:15:44 PM (NPT)",
+    "action": "Drink Simulator",
+    "label": "Coke & Xtreme: 2 Cans",
+    "elementId": "drink-coke-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999044134_6llb0",
+    "timestamp": "2026-10-14T17:30:44.134Z",
+    "nepalTime": "Oct 14, 2026, 11:15:44 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को क्यानको हिसाब हेर्नुहोस्",
+    "elementId": "drink-coke-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999043813_xwdaq",
+    "timestamp": "2026-10-14T17:30:43.812Z",
+    "nepalTime": "Oct 14, 2026, 11:15:43 PM (NPT)",
+    "action": "Drink Simulator",
+    "label": "Coke & Xtreme: 1 Cans",
+    "elementId": "drink-coke-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999043800_az6mj",
+    "timestamp": "2026-10-14T17:30:43.800Z",
+    "nepalTime": "Oct 14, 2026, 11:15:43 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को क्यानको हिसाब हेर्नुहोस्",
+    "elementId": "drink-coke-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999043745_ruftz",
+    "timestamp": "2026-10-14T17:30:43.745Z",
+    "nepalTime": "Oct 14, 2026, 11:15:43 PM (NPT)",
+    "action": "Drink Simulator",
+    "label": "Coke & Xtreme: 5 Cans",
+    "elementId": "drink-coke-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999043730_wh7wi",
+    "timestamp": "2026-10-14T17:30:43.730Z",
+    "nepalTime": "Oct 14, 2026, 11:15:43 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को क्यानको हिसाब हेर्नुहोस्",
+    "elementId": "drink-coke-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999043480_bp2r1",
+    "timestamp": "2026-10-14T17:30:43.480Z",
+    "nepalTime": "Oct 14, 2026, 11:15:43 PM (NPT)",
+    "action": "Drink Simulator",
+    "label": "Coke & Xtreme: 4 Cans",
+    "elementId": "drink-coke-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999043476_ipvgb",
+    "timestamp": "2026-10-14T17:30:43.475Z",
+    "nepalTime": "Oct 14, 2026, 11:15:43 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को क्यानको हिसाब हेर्नुहोस्",
+    "elementId": "drink-coke-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999043264_efnrk",
+    "timestamp": "2026-10-14T17:30:43.264Z",
+    "nepalTime": "Oct 14, 2026, 11:15:43 PM (NPT)",
+    "action": "Drink Simulator",
+    "label": "Coke & Xtreme: 3 Cans",
+    "elementId": "drink-coke-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999043219_la43u",
+    "timestamp": "2026-10-14T17:30:43.219Z",
+    "nepalTime": "Oct 14, 2026, 11:15:43 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को क्यानको हिसाब हेर्नुहोस्",
+    "elementId": "drink-coke-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999043028_4j0ko",
+    "timestamp": "2026-10-14T17:30:43.027Z",
+    "nepalTime": "Oct 14, 2026, 11:15:43 PM (NPT)",
+    "action": "Drink Simulator",
+    "label": "Coke & Xtreme: 2 Cans",
+    "elementId": "drink-coke-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999043000_9syi0",
+    "timestamp": "2026-10-14T17:30:43.000Z",
+    "nepalTime": "Oct 14, 2026, 11:15:43 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को क्यानको हिसाब हेर्नुहोस्",
+    "elementId": "drink-coke-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999042200_jspqb",
+    "timestamp": "2026-10-14T17:30:42.200Z",
+    "nepalTime": "Oct 14, 2026, 11:15:42 PM (NPT)",
+    "action": "Drink Simulator",
+    "label": "Coke & Xtreme: 1 Cans",
+    "elementId": "drink-coke-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999042172_ot09p",
+    "timestamp": "2026-10-14T17:30:42.172Z",
+    "nepalTime": "Oct 14, 2026, 11:15:42 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को क्यानको हिसाब हेर्नुहोस्",
+    "elementId": "drink-coke-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999040614_mveib",
+    "timestamp": "2026-10-14T17:30:40.614Z",
+    "nepalTime": "Oct 14, 2026, 11:15:40 PM (NPT)",
+    "action": "Drink Simulator",
+    "label": "Coke & Xtreme: 5 Cans",
+    "elementId": "drink-coke-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999040589_sm9ox",
+    "timestamp": "2026-10-14T17:30:40.589Z",
+    "nepalTime": "Oct 14, 2026, 11:15:40 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को क्यानको हिसाब हेर्नुहोस्",
+    "elementId": "drink-coke-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999035555_yuwjn",
+    "timestamp": "2026-10-14T17:30:35.555Z",
+    "nepalTime": "Oct 14, 2026, 11:15:35 PM (NPT)",
+    "action": "Drink Simulator",
+    "label": "Coke & Xtreme: 4 Cans",
+    "elementId": "drink-coke-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999035533_w4s0j",
+    "timestamp": "2026-10-14T17:30:35.533Z",
+    "nepalTime": "Oct 14, 2026, 11:15:35 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को क्यानको हिसाब हेर्नुहोस्",
+    "elementId": "drink-coke-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999031431_pfqgv",
+    "timestamp": "2026-10-14T17:30:31.430Z",
+    "nepalTime": "Oct 14, 2026, 11:15:31 PM (NPT)",
+    "action": "Drink Simulator",
+    "label": "Coke & Xtreme: 3 Cans",
+    "elementId": "drink-coke-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999031413_2pioc",
+    "timestamp": "2026-10-14T17:30:31.413Z",
+    "nepalTime": "Oct 14, 2026, 11:15:31 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को क्यानको हिसाब हेर्नुहोस्",
+    "elementId": "drink-coke-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999028364_7pymr",
+    "timestamp": "2026-10-14T17:30:28.364Z",
+    "nepalTime": "Oct 14, 2026, 11:15:28 PM (NPT)",
+    "action": "Drink Simulator",
+    "label": "Coke & Xtreme: 2 Cans",
+    "elementId": "drink-coke-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999028347_4qeop",
+    "timestamp": "2026-10-14T17:30:28.347Z",
+    "nepalTime": "Oct 14, 2026, 11:15:28 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को क्यानको हिसाब हेर्नुहोस्",
+    "elementId": "drink-coke-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999021565_bgjp2",
+    "timestamp": "2026-10-14T17:30:21.565Z",
+    "nepalTime": "Oct 14, 2026, 11:15:21 PM (NPT)",
+    "action": "Drink Simulator",
+    "label": "Coke & Xtreme: 1 Cans",
+    "elementId": "drink-coke-btn",
+    "section": "Habits Section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999021437_fbctc",
+    "timestamp": "2026-10-14T17:30:21.437Z",
+    "nepalTime": "Oct 14, 2026, 11:15:21 PM (NPT)",
+    "action": "Button Click",
+    "label": "अर्को क्यानको हिसाब हेर्नुहोस्",
+    "elementId": "drink-coke-btn",
+    "section": "habits-section",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999014668_3we6l",
+    "timestamp": "2026-10-14T17:30:14.668Z",
+    "nepalTime": "Oct 14, 2026, 11:15:14 PM (NPT)",
+    "action": "Button Click",
+    "label": "Open your birthday surprise",
+    "elementId": "open-surprise-btn",
+    "section": "intro-overlay",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999012507_gii3w",
+    "timestamp": "2026-10-14T17:30:12.507Z",
+    "nepalTime": "Oct 14, 2026, 11:15:12 PM (NPT)",
+    "action": "Page View",
+    "label": "Birthday Celebration Loaded",
+    "elementId": "body",
+    "section": "Home",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999012339_j7blr",
+    "timestamp": "2026-10-14T17:30:12.339Z",
+    "nepalTime": "Oct 14, 2026, 11:15:12 PM (NPT)",
+    "action": "Button Click",
+    "label": "Open your birthday surprise",
+    "elementId": "open-surprise-btn",
+    "section": "intro-overlay",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791999010278_hkva1",
+    "timestamp": "2026-10-14T17:30:10.278Z",
+    "nepalTime": "Oct 14, 2026, 11:15:10 PM (NPT)",
+    "action": "Page View",
+    "label": "Birthday Celebration Loaded",
+    "elementId": "body",
+    "section": "Home",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791998990503_sbxao",
+    "timestamp": "2026-10-14T17:29:50.503Z",
+    "nepalTime": "Oct 14, 2026, 11:14:50 PM (NPT)",
+    "action": "Test Verification Click",
+    "label": "Admin Self-Test Tracker 🧪",
+    "elementId": "btn-test-click",
+    "section": "Admin Hub",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    }
+  },
+  {
+    "id": "clk_1791998947699_g3skj",
+    "timestamp": "2026-10-14T17:29:07.693Z",
+    "nepalTime": "Oct 14, 2026, 11:14:07 PM (NPT)",
+    "action": "Page View",
+    "label": "Birthday Celebration Loaded",
+    "elementId": "body",
+    "section": "Home",
+    "ip": "103.162.12.239",
+    "geo": {
+      "city": "Walin",
+      "region": "Gandaki Pradesh",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Waling Internet Pvt. Ltd.",
+      "lat": 27.9772,
+      "lon": 83.7677,
+      "source": "ip-lookup"
+    },
+    "device": {
+      "type": "Desktop",
+      "os": "Linux",
+      "browser": "Chrome",
+      "screen": "1366x768"
+    },
+    "metadata": {}
+  },
+  {
+    "id": "clk_1791998902003_d7tyy",
+    "timestamp": "2026-10-14T17:28:21.969Z",
+    "nepalTime": "Oct 14, 2026, 11:13:21 PM (NPT)",
+    "action": "Button Click",
+    "label": "Coke र Xtreme को ओभरडोज 🥤",
+    "elementId": "drink-coke-btn",
+    "section": "habits-section",
+    "ip": "127.0.0.1",
+    "geo": {
+      "city": "Kathmandu",
+      "region": "Bagmati",
+      "country": "Nepal",
+      "countryCode": "NP",
+      "isp": "Internal Network",
+      "source": "timezone-inference"
+    },
+    "device": {
+      "type": "Mobile",
+      "os": "iOS (iPhone)",
+      "browser": "Safari",
+      "screen": "393x852"
+    }
+  }
+]

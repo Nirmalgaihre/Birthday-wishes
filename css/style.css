@@ -416,6 +416,64 @@ a {
 }
 
 /* --------------------------------------------------------------------------
+   4.5. VIEWPORT SCROLL PROGRESS BAR (SURPRISE JOURNEY COMPLETION)
+   -------------------------------------------------------------------------- */
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3.5px;
+  background: rgba(225, 29, 72, 0.07);
+  z-index: 999;
+  pointer-events: none;
+  overflow: visible;
+  transition: opacity var(--transition-normal);
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #E11D48 0%, #F43F5E 30%, #FB7185 65%, #F59E0B 100%);
+  border-radius: 0 9999px 9999px 0;
+  box-shadow: 0 0 10px rgba(225, 29, 72, 0.4), 0 0 4px rgba(245, 158, 11, 0.6);
+  position: relative;
+  will-change: width;
+  transition: width 0.08s ease-out;
+}
+
+.scroll-progress-glow {
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, #FFFFFF 20%, #FDE68A 50%, rgba(225, 29, 72, 0.8) 80%, transparent 100%);
+  border-radius: 50%;
+  filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.9));
+  pointer-events: none;
+  animation: progressPulse 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes progressPulse {
+  0% {
+    transform: translateY(-50%) scale(0.9);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-50%) scale(1.3);
+    opacity: 1;
+    filter: drop-shadow(0 0 7px rgba(225, 29, 72, 1));
+  }
+}
+
+.scroll-progress-container.is-complete .scroll-progress-bar {
+  background: linear-gradient(90deg, #E11D48 0%, #EC4899 40%, #10B981 75%, #F59E0B 100%);
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.65), 0 0 6px rgba(16, 185, 129, 0.7);
+}
+
+/* --------------------------------------------------------------------------
    5. NAVIGATION / HEADER (TOP BAR)
    -------------------------------------------------------------------------- */
 .top-header {
@@ -679,11 +737,30 @@ a {
   box-shadow: 0 16px 40px rgba(50, 30, 35, 0.18);
 }
 
-.photo-frame-polaroid img {
+.photo-polaroid-img-wrap {
   width: 100%;
   height: 380px;
+  overflow: hidden;
+  border-radius: 4px;
+  position: relative;
+  background-color: var(--color-bg-alt);
+}
+
+.photo-polaroid-img-wrap img,
+.photo-frame-polaroid img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 4px;
+  display: block;
+  transform: scale(1.12) translateY(var(--parallax-y, 0px));
+  will-change: transform;
+  transition: transform 0.14s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.photo-frame-polaroid:hover .photo-polaroid-img-wrap img,
+.photo-frame-polaroid:hover img {
+  transform: scale(1.16) translateY(var(--parallax-y, 0px));
 }
 
 .photo-polaroid-caption {
@@ -2178,11 +2255,98 @@ a {
   overflow: hidden;
 }
 
+/* Ambient Rising Tea Bubbles & Steam Wisps Particle Layer Behind Chiya Container */
+.chiya-ambient-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.chiya-ambient-particles.is-paused * {
+  animation-play-state: paused !important;
+}
+
+/* Ambient Tea Bubble Particle */
+.ambient-tea-bubble {
+  position: absolute;
+  bottom: -40px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.92) 0%, rgba(254, 215, 170, 0.55) 28%, rgba(217, 119, 6, 0.28) 65%, rgba(180, 83, 9, 0.12) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.42);
+  box-shadow: inset -1px -1px 3px rgba(180, 83, 9, 0.28), 0 0 12px rgba(245, 158, 11, 0.25);
+  animation: floatAmbientBubble var(--bubble-duration, 8s) ease-in-out infinite var(--bubble-delay, 0s);
+  will-change: transform, opacity;
+}
+
+/* Ambient Steam Wisp Particle */
+.ambient-steam-wisp {
+  position: absolute;
+  bottom: -60px;
+  pointer-events: none;
+  border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+  background: radial-gradient(ellipse at 50% 60%, rgba(254, 243, 199, 0.55) 0%, rgba(245, 235, 224, 0.3) 40%, rgba(251, 146, 60, 0.08) 70%, transparent 100%);
+  filter: blur(14px);
+  -webkit-filter: blur(14px);
+  animation: floatAmbientSteam var(--steam-duration, 11s) cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite var(--steam-delay, 0s);
+  will-change: transform, opacity;
+}
+
+@keyframes floatAmbientBubble {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: var(--bubble-opacity, 0.75);
+    transform: translateY(-15vh) translateX(calc(var(--bubble-drift, 12px) * 0.4)) scale(0.85);
+  }
+  50% {
+    transform: translateY(-50vh) translateX(calc(var(--bubble-drift, 12px) * -0.7)) scale(1.05);
+    opacity: var(--bubble-opacity, 0.75);
+  }
+  80% {
+    transform: translateY(-85vh) translateX(calc(var(--bubble-drift, 12px) * 0.9)) scale(1.2);
+    opacity: calc(var(--bubble-opacity, 0.75) * 0.65);
+  }
+  100% {
+    transform: translateY(-115vh) translateX(calc(var(--bubble-drift, 12px) * 1.3)) scale(1.35);
+    opacity: 0;
+  }
+}
+
+@keyframes floatAmbientSteam {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.7) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: var(--steam-opacity, 0.5);
+    transform: translateY(-18vh) translateX(calc(var(--steam-drift, 18px) * 0.5)) scale(1.1) rotate(6deg);
+  }
+  60% {
+    opacity: calc(var(--steam-opacity, 0.5) * 0.85);
+    transform: translateY(-60vh) translateX(calc(var(--steam-drift, 18px) * -0.8)) scale(1.55) rotate(-9deg);
+  }
+  90% {
+    opacity: calc(var(--steam-opacity, 0.5) * 0.35);
+    transform: translateY(-90vh) translateX(calc(var(--steam-drift, 18px) * 1.1)) scale(1.95) rotate(14deg);
+  }
+  100% {
+    transform: translateY(-115vh) translateX(calc(var(--steam-drift, 18px) * 1.4)) scale(2.3) rotate(20deg);
+    opacity: 0;
+  }
+}
+
 .chiya-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: start;
+  position: relative;
+  z-index: 2;
 }
 
 /* Chiya Card Common */
@@ -2193,6 +2357,7 @@ a {
   padding: 2.5rem 2rem;
   box-shadow: 0 10px 30px rgba(138, 77, 36, 0.08);
   position: relative;
+  z-index: 2;
 }
 
 /* Personal Chiya Note */
@@ -2244,156 +2409,260 @@ a {
   transform: translateY(2px) scale(0.98);
 }
 
-/* Ambient Ambient Saucer Drop Shadow */
+/* ==========================================================================
+   AUTHENTIC NEPALI STREET-STYLE CHIYA GLASS CUP (चिया गिलास)
+   Ultra-realistic transparent fluted cutting tea glass with thick heavy base,
+   warm simmered Dudh Chiya gradient, creamy malai froth, and steam wisps.
+   ========================================================================== */
+.chiya-glass-scene,
+.teacup-scene {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 14px 26px rgba(120, 53, 15, 0.18));
+}
+
+.chiya-glass-scene:hover,
+.teacup-scene:hover {
+  transform: translateY(-5px) scale(1.03);
+}
+
+.chiya-glass-scene:active,
+.teacup-scene:active {
+  transform: translateY(2px) scale(0.98);
+}
+
+/* Realistic Countertop Caustic Drop Shadow */
+.chiya-glass-shadow,
 .teacup-saucer-shadow {
   position: absolute;
-  bottom: -4px;
+  bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
-  width: 220px;
+  width: 140px;
   height: 18px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(120, 53, 15, 0.35) 0%, rgba(120, 53, 15, 0.08) 60%, transparent 80%);
+  background: radial-gradient(ellipse at center, rgba(120, 53, 15, 0.45) 0%, rgba(120, 53, 15, 0.12) 60%, transparent 80%);
   filter: blur(4px);
   pointer-events: none;
   z-index: 0;
 }
 
-/* Photorealistic Ceramic Saucer with Fine Gold Inlay */
-.teacup-saucer {
+/* Master Realistic Glass Cup Container */
+.chiya-glass-cup {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 218px;
-  height: 20px;
-  background: radial-gradient(ellipse at 50% 30%, #FFFFFF 0%, #FAF5EE 55%, #E5D5C6 100%);
-  border: 1.5px solid #D8C6B6;
-  border-radius: 50% 50% 45% 45% / 100% 100% 35% 35%;
+  width: 114px;
+  height: 168px;
+  /* Authentic roadside tea glass silhouette with downward taper */
+  clip-path: polygon(3% 0%, 97% 0%, 86% 100%, 14% 100%);
+  border-radius: 0 0 14px 14px;
+  background: linear-gradient(105deg, rgba(255, 255, 255, 0.32) 0%, rgba(240, 245, 250, 0.10) 25%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.22) 80%, rgba(255, 255, 255, 0.4) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
   box-shadow: 
-    0 10px 22px rgba(120, 53, 15, 0.2), 
-    inset 0 2px 4px rgba(255, 255, 255, 0.95), 
-    inset 0 -3px 8px rgba(120, 53, 15, 0.15);
-  z-index: 1;
-}
-
-.saucer-inner-ring {
-  position: absolute;
-  top: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 175px;
-  height: 8px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(217, 119, 6, 0.45);
-  box-shadow: inset 0 1px 2px rgba(217, 119, 6, 0.2);
-}
-
-/* Ceramic Porcelain Teacup Body with Fine Bevels */
-.teacup-body {
-  position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 148px;
-  height: 110px;
-  background: radial-gradient(circle at 35% 25%, #FFFFFF 0%, #FAF6F0 45%, #E9DDD0 85%, #DDCFC2 100%);
-  border: 2px solid #D5C2B1;
-  border-radius: 0 0 74px 74px;
+    inset 0 0 16px rgba(255, 255, 255, 0.4),
+    inset 4px 0 10px rgba(255, 255, 255, 0.6),
+    inset -4px 0 10px rgba(120, 53, 15, 0.2),
+    0 12px 28px rgba(120, 53, 15, 0.25);
   overflow: hidden;
-  box-shadow: 
-    inset 6px 0 14px rgba(255, 255, 255, 0.95),
-    inset -8px 0 18px rgba(120, 53, 15, 0.12),
-    inset 0 -16px 24px rgba(120, 53, 15, 0.16),
-    0 12px 28px rgba(120, 53, 15, 0.16);
   z-index: 2;
 }
 
-/* Porcelain High-Gloss Specular Sheen */
-.teacup-glaze-sheen {
+/* Polished Top Rim with Light Gleam */
+.glass-rim {
   position: absolute;
-  top: 6px;
-  left: 14px;
-  width: 22px;
-  height: 75px;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.5) 30%, rgba(255, 255, 255, 0.95) 70%, rgba(210, 230, 250, 0.8) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), inset 0 1px 1px #FFFFFF;
+  z-index: 10;
+}
+
+.glass-rim-gleam {
+  position: absolute;
+  top: 1px;
+  left: 12px;
+  width: 24px;
+  height: 3px;
+  background: #FFFFFF;
   border-radius: 50%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.15) 80%, transparent 100%);
-  transform: rotate(-14deg);
-  pointer-events: none;
-  filter: blur(1.5px);
-  z-index: 5;
+  filter: blur(0.5px);
 }
 
-/* Interior Cup Shadow (Depth Effect) */
-.teacup-interior-shadow {
+/* Iconic Faceted Fluted Glass Ribs (Classic Nepali Tea Glass Texture) */
+.glass-flutes-layer {
   position: absolute;
-  top: 0;
+  top: 8px;
+  bottom: 22px;
   left: 0;
   right: 0;
-  height: 24px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(85, 45, 18, 0.25) 0%, transparent 80%);
+  display: flex;
   pointer-events: none;
-  z-index: 4;
-}
-
-/* Elegant 24K Gold Lip Trim */
-.teacup-gold-rim {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, #D97706 0%, #FDE68A 25%, #FFFBEB 35%, #F59E0B 65%, #B45309 100%);
-  box-shadow: 0 1px 4px rgba(217, 119, 6, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.9);
   z-index: 6;
+  opacity: 0.85;
 }
 
-/* Authentic Spiced Dudh Chiya (Milk Tea) Liquid */
-.teacup-tea-liquid {
+.flute-panel {
+  flex: 1;
+  height: 100%;
+  border-right: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: inset 1px 0 3px rgba(255, 255, 255, 0.2), inset -1px 0 3px rgba(120, 53, 15, 0.08);
+}
+
+.flute-panel.p2,
+.flute-panel.p6 {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0%, transparent 100%);
+}
+
+.flute-panel.p1 {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+.flute-panel.p7 {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 100%);
+}
+
+/* Vertical Specular Glass Sheens */
+.glass-specular-left {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 6px;
+  bottom: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.3) 70%, transparent 100%);
+  border-radius: 4px;
+  filter: blur(1px);
+  pointer-events: none;
+  z-index: 7;
+}
+
+.glass-specular-right {
+  position: absolute;
+  top: 14px;
+  right: 12px;
+  width: 4px;
+  bottom: 30px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 80%, transparent 100%);
+  border-radius: 4px;
+  filter: blur(1px);
+  pointer-events: none;
+  z-index: 7;
+}
+
+/* Solid Heavy Molded Glass Base (Classic Thick Bottom) */
+.glass-heavy-base {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: 0%;
-  /* Rich, warm golden-amber spiced milk-tea gradient */
-  background: linear-gradient(180deg, #D99B61 0%, #C47F42 25%, #9E5B2B 60%, #68381A 100%);
-  transition: height 2s cubic-bezier(0.2, 0.8, 0.25, 1);
-  border-radius: 0 0 70px 70px;
-  overflow: hidden;
-  z-index: 3;
+  right: 0;
+  height: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(220, 235, 250, 0.6) 40%, rgba(255, 255, 255, 0.9) 100%);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    inset 0 -3px 8px rgba(120, 53, 15, 0.15),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  z-index: 8;
+  pointer-events: none;
 }
 
-/* Warm Dudh Chiya Surface with Milk Sheen (Malai) */
+.base-refraction-line {
+  position: absolute;
+  top: 6px;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 1px;
+}
+
+.base-prism-gleam {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 5px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, transparent 80%);
+}
+
+/* Steaming Authentic Dudh Chiya (Milk Tea) Liquid Layer */
+.chiya-glass-liquid,
+.teacup-tea-liquid {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  /* Rich simmered Dudh Chiya gradient: creamy amber top down to deep steeped black tea */
+  background: linear-gradient(180deg, #F0CBA2 0%, #DCA167 15%, #C27D3E 45%, #9E5B2B 75%, #68381A 100%);
+  transition: height 2s cubic-bezier(0.2, 0.8, 0.25, 1);
+  overflow: hidden;
+  z-index: 4;
+}
+
+.chiya-liquid-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 40% 30%, rgba(255, 230, 200, 0.3) 0%, transparent 70%);
+}
+
+.chiya-liquid-bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.l-bubble {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+}
+
+.l-bubble.b1 { width: 4px; height: 4px; bottom: 18px; left: 24px; }
+.l-bubble.b2 { width: 3px; height: 3px; bottom: 35px; right: 28px; }
+.l-bubble.b3 { width: 5px; height: 5px; bottom: 55px; left: 42px; }
+.l-bubble.b4 { width: 3.5px; height: 3.5px; bottom: 75px; right: 38px; }
+
+/* Creamy Froth Surface (Meniscus & Malai Skin) */
+.chiya-glass-surface,
 .teacup-chiya-surface {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 24px;
-  /* Authentic creamy milk-tea surface: warm spiced beige-caramel with lighter center */
-  background: radial-gradient(ellipse at 48% 45%, #F5DEC7 0%, #E8C19B 40%, #C68953 80%, #9D5A2B 100%);
+  height: 20px;
+  background: radial-gradient(ellipse at 48% 45%, #F7E4D0 0%, #E9C6A2 35%, #C88B55 75%, #A15E2F 100%);
   border-radius: 50%;
-  box-shadow: inset 0 2px 5px rgba(255, 245, 235, 0.9), 0 3px 8px rgba(104, 56, 26, 0.35);
+  box-shadow: inset 0 2px 5px rgba(255, 245, 235, 0.95), 0 3px 6px rgba(104, 56, 26, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
 
-/* Subtle Natural Milk-Tea Cream Film (Malai Swirl) */
+.glass-malai-froth,
 .chiya-malai-skin {
   position: absolute;
   top: 2px;
-  left: 18px;
-  right: 22px;
-  height: 14px;
+  left: 12px;
+  right: 14px;
+  height: 12px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at 40% 40%, rgba(255, 250, 242, 0.6) 0%, rgba(245, 222, 199, 0.25) 60%, transparent 80%);
+  background: radial-gradient(ellipse at 40% 40%, rgba(255, 250, 242, 0.7) 0%, rgba(245, 222, 199, 0.3) 60%, transparent 80%);
   filter: blur(1px);
   pointer-events: none;
 }
 
-/* Fresh Crushed Cardamom, Cloves & Black Tea Leaf Specks */
+/* Fresh Crushed Cardamom, Cloves & Tea Specks */
 .chiya-spice-crush {
   position: absolute;
   inset: 0;
@@ -2407,11 +2676,11 @@ a {
   opacity: 0.85;
 }
 
-.spice-dot.sd1 { width: 3px; height: 3px; top: 7px; left: 32px; background: #602F13; }
-.spice-dot.sd2 { width: 2.5px; height: 2.5px; top: 12px; left: 48px; background: #7A3F1D; }
-.spice-dot.sd3 { width: 4px; height: 3px; top: 8px; right: 38px; background: #3C1A09; }
-.spice-dot.sd4 { width: 2px; height: 2px; top: 14px; right: 52px; background: #602F13; }
-.spice-dot.sd5 { width: 3px; height: 2px; top: 5px; left: 72px; background: #7A3F1D; }
+.spice-dot.sd1 { width: 3px; height: 3px; top: 5px; left: 24px; background: #602F13; }
+.spice-dot.sd2 { width: 2.5px; height: 2.5px; top: 10px; left: 38px; background: #7A3F1D; }
+.spice-dot.sd3 { width: 3.5px; height: 3px; top: 6px; right: 28px; background: #3C1A09; }
+.spice-dot.sd4 { width: 2px; height: 2px; top: 12px; right: 42px; background: #602F13; }
+.spice-dot.sd5 { width: 3px; height: 2px; top: 4px; left: 52px; background: #7A3F1D; }
 
 .tea-leaf-speck {
   position: absolute;
@@ -2419,135 +2688,29 @@ a {
   border-radius: 1px;
 }
 
-.tea-leaf-speck.tl1 { width: 5px; height: 1.5px; top: 11px; left: 62px; transform: rotate(24deg); }
-.tea-leaf-speck.tl2 { width: 4px; height: 1.5px; top: 13px; right: 32px; transform: rotate(-35deg); }
+.tea-leaf-speck.tl1 { width: 4px; height: 1.5px; top: 8px; left: 45px; transform: rotate(20deg); }
+.tea-leaf-speck.tl2 { width: 3.5px; height: 1.5px; top: 10px; right: 22px; transform: rotate(-30deg); }
 
-/* Aromatic Fresh Steam Bubble */
 .chiya-steam-bubble {
   position: absolute;
-  top: 6px;
-  right: 44px;
-  width: 6px;
-  height: 5px;
+  top: 5px;
+  right: 32px;
+  width: 5px;
+  height: 4px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.8);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.15);
 }
 
-/* Interactive Surface Ripple on Tap */
-.teacup-ripple {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  border: 2px solid rgba(254, 243, 199, 0.95);
-  border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  opacity: 0;
-  pointer-events: none;
-}
-
-.teacup-scene.ripple-active .teacup-ripple {
-  animation: teaRippleWave 0.75s ease-out forwards;
-}
-
-@keyframes teaRippleWave {
-  0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0.95; }
-  100% { transform: translate(-50%, -50%) scale(10); opacity: 0; }
-}
-
-/* Realistic Cinnamon Stick Resting in Cup */
-.cinnamon-stick {
-  position: absolute;
-  top: 24px;
-  right: 68px;
-  width: 14px;
-  height: 82px;
-  background: repeating-linear-gradient(90deg, #78350F, #92400E 3px, #5B270C 6px, #78350F 9px);
-  border-radius: 7px;
-  transform: rotate(26deg);
-  box-shadow: 
-    -3px 4px 10px rgba(0, 0, 0, 0.25), 
-    inset 1px 0 2px rgba(255, 255, 255, 0.2), 
-    inset -1px 0 2px rgba(0, 0, 0, 0.4);
-  z-index: 4;
-  pointer-events: none;
-  transition: transform 0.3s ease;
-}
-
-.teacup-scene:hover .cinnamon-stick {
-  transform: rotate(28deg) translateY(-2px);
-}
-
-/* Tea Bag String and Hanging Kraft Tag */
-.tea-string-tag {
-  position: absolute;
-  top: 15px;
-  left: 48px;
-  z-index: 5;
-  pointer-events: none;
-}
-
-.tea-string {
-  width: 2px;
-  height: 48px;
-  background: linear-gradient(180deg, #E5D5C6 0%, #D8C5B3 100%);
-  transform: rotate(-18deg);
-  transform-origin: top;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
-}
-
-.tea-tag {
-  position: absolute;
-  top: 42px;
-  left: -22px;
-  background: #FDF6EC;
-  border: 1px solid #D8C3AE;
-  border-radius: 4px;
-  padding: 2px 7px;
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: #78350F;
-  box-shadow: 0 3px 8px rgba(120, 53, 15, 0.18);
-  transform: rotate(-12deg);
-  white-space: nowrap;
-}
-
-/* Sculpted Porcelain Ceramic Handle with Inner Glow */
-.teacup-handle {
-  position: absolute;
-  right: 18px;
-  top: 56px;
-  width: 48px;
-  height: 64px;
-  border: 8px solid #EFE5DB;
-  border-left: none;
-  border-radius: 0 32px 34px 0;
-  background: transparent;
-  box-shadow: 
-    4px 5px 12px rgba(120, 53, 15, 0.18),
-    inset -2px 0 5px rgba(255, 255, 255, 0.95),
-    inset 2px 0 4px rgba(120, 53, 15, 0.12);
-  z-index: 1;
-}
-
-.handle-inner-shadow {
-  position: absolute;
-  inset: -2px;
-  border-radius: 0 30px 32px 0;
-  border-right: 2px solid rgba(217, 119, 6, 0.3);
-  pointer-events: none;
-}
-
-/* Ethereal Volumetric Steam Clouds */
+/* Steam Wisps Rising from Hot Glass of Chiya */
+.glass-steam-group,
 .teacup-steam-group {
   position: absolute;
-  top: 10px;
+  top: 0px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 14px;
+  gap: 12px;
   align-items: flex-end;
   opacity: 0;
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
@@ -2555,7 +2718,9 @@ a {
   z-index: 10;
 }
 
-.teacup-scene.steaming .teacup-steam-group {
+.chiya-glass-scene.steaming .glass-steam-group,
+.teacup-scene.steaming .teacup-steam-group,
+.teacup-scene.steaming .glass-steam-group {
   opacity: 1;
 }
 
@@ -3064,6 +3229,16 @@ a {
   overflow: hidden;
 }
 
+.art-frame-photo-window {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  position: relative;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.18);
+  background: #111827;
+}
+
+.art-frame-photo-window img,
 .art-frame-mount img {
   width: 100%;
   height: auto;
@@ -3072,11 +3247,14 @@ a {
   display: block;
   border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.08) translateY(var(--parallax-y, 0px));
+  will-change: transform;
+  transition: transform 0.14s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
+.physical-art-frame:hover .art-frame-photo-window img,
 .physical-art-frame:hover .art-frame-mount img {
-  transform: scale(1.02);
+  transform: scale(1.11) translateY(var(--parallax-y, 0px));
 }
 
 /* Realistic Glass Glare Layer */
@@ -3627,116 +3805,331 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   6. BLURRED MEMORY REVEAL
+   6. THE LAXUU PARADOX: HABITS & CONTRASTS
    -------------------------------------------------------------------------- */
-.section-blurred-memory {
-  background: linear-gradient(180deg, var(--color-bg) 0%, #FBF6EF 100%);
-}
-
-.blurred-memory-wrapper {
-  max-width: 580px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.blurred-memory-card {
-  background: #FFFFFF;
-  border: 1px solid #EADBCE;
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  box-shadow: 0 15px 35px rgba(120, 53, 15, 0.08);
+.section-habits {
+  background: linear-gradient(180deg, var(--color-bg) 0%, #FFF8F5 50%, #FDF4F0 100%);
   position: relative;
-}
-
-.blurred-memory-img-frame {
-  position: relative;
-  width: 100%;
-  height: 380px;
-  border-radius: var(--radius-md);
   overflow: hidden;
-  background: #1C1917;
-  cursor: pointer;
 }
 
-.blurred-memory-img {
+.habits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.habit-card {
+  background: #FFFFFF;
+  border: 1px solid #F3E8E2;
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 1.85rem;
+  box-shadow: 0 10px 30px rgba(120, 53, 15, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.habit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 42px rgba(120, 53, 15, 0.12);
+}
+
+.habit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.25rem;
+  width: fit-content;
+}
+
+.badge-coke {
+  background: #FEE2E2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
+}
+
+.badge-lies {
+  background: #FEF3C7;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.badge-truce {
+  background: #D1FAE5;
+  color: #047857;
+  border: 1px solid #A7F3D0;
+}
+
+.habit-icon-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.habit-emoji {
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+.habit-icon-header h3 {
+  font-family: var(--font-serif);
+  font-size: 1.28rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.3;
+}
+
+.habit-comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.habit-direct-rant {
+  background: #FFF7ED;
+  border-left: 4px solid #EA580C;
+  border-radius: var(--radius-md);
+  padding: 1.2rem 1.35rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: #7C2D12;
+  font-weight: 500;
+  box-shadow: 0 2px 10px rgba(234, 88, 12, 0.06);
+  flex-grow: 1;
+}
+
+.comparison-block {
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius-md);
+  position: relative;
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.comparison-block.what-she-says {
+  background: #FFFBEB;
+  border-left: 3px solid #F59E0B;
+  color: #78350F;
+}
+
+.comparison-block.why-i-get-angry {
+  background: #FEF2F2;
+  border-left: 3px solid #EF4444;
+  color: #991B1B;
+}
+
+.comp-label {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+  opacity: 0.9;
+}
+
+.habit-interactive-box {
+  background: #FAF5F0;
+  border: 1px dashed #E5D5C5;
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.habit-counter-badge {
+  display: inline-block;
+  background: #DC2626;
+  color: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.35rem;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+}
+
+.habit-feedback-text {
+  font-size: 0.92rem;
+  color: #4B382A;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.45;
+}
+
+.habit-action-btn {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: blur(24px) brightness(0.85);
-  transform: scale(1.08);
-  transition: filter 1.3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.65rem 1.25rem;
+  font-size: 0.92rem;
+  background: #DC2626;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-.blurred-memory-card.is-revealed .blurred-memory-img {
-  filter: blur(0px) brightness(1);
-  transform: scale(1);
+/* Dinner Diet Breakdown Box */
+.habit-diet-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  text-align: left;
 }
 
-.blurred-memory-lock-overlay {
-  position: absolute;
-  inset: 0;
+.diet-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-left: 3px solid transparent;
+}
+
+.diet-item.bad {
+  background: #FEF2F2;
+  border-color: #EF4444;
+  color: #991B1B;
+}
+
+.diet-item.guilty {
+  background: #FFF7ED;
+  border-color: #EA580C;
+  color: #9A3412;
+}
+
+.diet-item.spicy {
+  background: #FEF3C7;
+  border-color: #D97706;
+  color: #B45309;
+}
+
+.diet-label {
+  font-weight: 700;
+}
+
+.diet-value {
+  font-weight: 600;
+}
+
+/* Specific Real Lies Cards */
+.real-lies-list {
+  position: relative;
+  min-height: 145px;
+}
+
+.real-lie-card {
+  background: #FFFFFF;
+  border: 1.5px solid #FDE68A;
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.25rem;
+  text-align: left;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.08);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.lie-badge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.lie-num-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: #FEF3C7;
+  color: #B45309;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.lie-emoji {
+  font-size: 1.25rem;
+}
+
+.lie-title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #92400E;
+  margin-bottom: 0.45rem;
+  line-height: 1.35;
+}
+
+.lie-reaction {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #573319;
+  margin: 0;
+}
+
+.lies-bottom-note {
+  font-size: 0.82rem;
+  color: #78350F;
+  font-weight: 600;
+  padding: 0.25rem 0;
+}
+
+.truce-stamp-box {
+  background: #FFFFFF;
+  border: 1px solid #E5D5C5;
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.25rem;
+  min-height: 78px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  background: rgba(41, 23, 12, 0.35);
-  backdrop-filter: blur(4px);
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+.truce-stamp-badge {
+  display: inline-block;
+  background: #047857;
   color: #FFFFFF;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-  z-index: 5;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.5rem;
 }
 
-.blurred-memory-card.is-revealed .blurred-memory-lock-overlay {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+.truce-stamp-box.truce-activated {
+  background: #ECFDF5;
+  border-color: #10B981;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.2);
 }
 
-.blurred-lock-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-
-.blurred-reveal-btn {
-  margin-top: 1.25rem;
-}
-
-.blurred-memory-caption-box {
-  margin-top: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  background: #FFFDF9;
-  border: 1px dashed #E5D5C5;
-  border-radius: var(--radius-sm);
-  opacity: 0;
-  transform: translateY(12px);
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.blurred-memory-card.is-revealed .blurred-memory-caption-box {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.blurred-caption-title {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #78350F;
-  margin-bottom: 0.35rem;
-}
-
-.blurred-caption-text {
-  font-size: 0.95rem;
-  color: #573319;
-  line-height: 1.6;
+.truce-stamp-box p {
+  font-size: 0.88rem;
+  color: #374151;
+  line-height: 1.5;
 }
 
 /* --------------------------------------------------------------------------
